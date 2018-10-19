@@ -1,0 +1,14 @@
+﻿<div class="top-head left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <h1>SI Río Bogotá<small>Conoce más acerca de la cuenca del río Bogotá</small></h1>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <a class="link-position" [routerLink]="['/login']" *ngIf="!usuario">Ingresar</a>
+                <a class="link-position" [routerLink]="['/login']" (click)="cerrarSesion()" *ngIf="usuario">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
+<nav-menu *ngIf="usuario"></nav-menu>

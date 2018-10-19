@@ -1,0 +1,68 @@
+﻿<header></header>
+<form ngNativeValidate>
+    <div class="container-fluid shadow">
+        <h4 class="pr-5 pl-5">Información de Usuario</h4>
+        <div class="input-group pt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Usuario</span>
+            </div>
+            <input type="text" required class="form-control" aria-label="Nombre de usuario" aria-describedby="usuario-default">
+        </div>
+        <div class="input-group mt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Contraseña - Confirmar Contraseña</span>
+            </div>
+            <input type="password" required aria-label="Telefono" class="form-control">
+            <input type="password" required aria-label="Celular" class="form-control">
+        </div>
+        <div class="input-group pt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Rol</span>
+            </div>
+            <div class="dropdown pl-1">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    -- Seleccione un rol --
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Administrador</a>
+                    <a class="dropdown-item" href="#">Usuario</a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h4 class="pr-5 pl-5">Datos Basicos</h4>
+        <div class="input-group mt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Primer y Segundo Nombre</span>
+            </div>
+            <input type="text" required aria-label="Primer Nombre" class="form-control">
+            <input type="text" aria-label="Segundo Nombre" class="form-control">
+        </div>
+        <div class="input-group mt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Primer y Segundo Apellido</span>
+            </div>
+            <input type="text" required aria-label="Primer Apellido" class="form-control">
+            <input type="text" aria-label="Segundo Apellido" class="form-control">
+        </div>
+        <hr />
+        <h4 class="pr-5 pl-5">Información de Contacto</h4>
+        <div class="input-group mt-3 pr-5 pl-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Correo</span>
+            </div>
+            <input type="email" required class="form-control" aria-label="Correo Electronico" aria-describedby="correo-default">
+        </div>
+        <div class="input-group mt-3 pr-5 pl-5 pb-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Telefono y Celular</span>
+            </div>
+            <input type="tel" required aria-label="Telefono" class="form-control">
+            <input type="tel" aria-label="Celular" class="form-control">
+        </div>
+        <div class="input-group mt-3 pr-5 pl-5 pb-4">
+            <input type="submit" value="Guardar" class="btn btn-success mr-5" />
+            <input type="reset" value="Limpiar" class="btn btn-danger" />
+        </div>
+    </div>
+</form>

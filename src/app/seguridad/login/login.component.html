@@ -1,0 +1,20 @@
+﻿<header></header>
+<form #userlogin="ngForm" name="formLogin" (ngSubmit)="ingresar(userlogin.value)" ngNativeValidate class="login-container">
+    <div class="form-group">
+        <label for="txtUsuario">Usuario</label>
+        <input type="text" class="form-control" id="txtUsuario" name="usuario" pattern="^[a-zA-Z0-9_]*$" required maxlength="15" ngModel aria-describedby="usuarioAyuda" placeholder="Ingrese el usuario">
+        <small id="usuarioAyuda" class="form-text text-muted">No debe superar los 15 caracteres.</small>
+    </div>
+    <div class="form-group">
+        <label for="txtContrasena">Contraseña</label>
+        <input type="password" class="form-control" id="txtContrasena" pattern="^[a-zA-Z0-9_]*$" required name="contrasena" maxlength="20" ngModel placeholder="Ingrese la contraseña">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="chkRecordarme">
+        <label class="form-check-label" for="chkRecordarme">Recordarme</label>
+    </div>
+    <div class="alert alert-danger" *ngIf="error" role="alert">
+        {{mensajeError}}
+    </div>
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+</form>

@@ -25,3 +25,30 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Docker configuration
+
+To genearate docker image run this command on a bash (including dot)
+
+    docker build -t rio-bogota .
+
+To run docker container in main mode run this command for windows
+
+    docker run -it -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota
+
+for linux user run
+
+    docker run -it -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota
+
+to run docker container in background mode run this command for windows
+
+    docker run -d -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota
+
+for linux user run
+
+    docker run -d -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota
+
+Stop and then remove the container once done:
+
+    docker stop rio-bogota-container
+    docker rm rio-bogota-container

@@ -1,0 +1,78 @@
+﻿<h1 class="text-center">Especies Focales</h1>
+
+<p class="text-justify">
+    Las especies focales son un conjunto de plantas que engloba las necesidades de una gama más amplia de especies,
+    y que ayuda a determinar los atributos espaciales, de composición y de manejo de un paisaje para mantener
+    poblaciones viables en el largo plazo.
+
+    El supuesto más importante del concepto es que las especies seleccionadas como focales deben encontrarse entre
+    las más vulnerables a la reducción poblacional a causa de la actividad humana y, por lo tanto, si se conservan
+    con un manejo adecuado del hábitat, las especies menos vulne- rables también estarán protegidas. Las plantas focales
+    se usan principalmente debido a que no es factible realizar estudios ecológicos (fenología, estructura poblacional y
+    estrategias de reproducción y propagación) de todas las plantas de una localidad.
+</p>
+
+<div class="card-columns">
+    <div *ngFor="let focal of especiesfocales" class="card w-75" style="width: 18rem;">
+        <div class="card-body">
+            <img class="card-img-top" src="{{focal.imagen}}" alt="Card image cap" width="340" height="210">
+            <h5 class="card-title"><strong>{{focal.especie}}</strong></h5>
+            <p class="card-text">{{ focal.nombre }}</p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                {{ focal.nombre }}
+            </button>
+        </div>
+        <br />
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLongTitle">{{ focal.nombre }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="{{focal.imagen}}" alt="Card image cap" width="340" height="210">
+                                    <h5 class="card-title"><strong>{{ focal.nombre}} <i>{{focal.especie}}</i></strong></h5>
+                                    <table>
+                                        <tr>
+                                            <td><p>Prioridad de conservación: {{ focal.prioridad }}</p></td>
+                                        </tr>
+                                    </table>
+                                    <p class="card-text text-justify">{{ focal.descripcion }}</p>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function initMap() {
+        var uluru = { lat: -25.363, lng: 131.044 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>

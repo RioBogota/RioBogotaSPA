@@ -1,0 +1,28 @@
+﻿<h1 class="text-center">Biodiversidad</h1>
+
+<p class="text-justify">
+    La biodiversidad o diversidad biológica es, según el Convenio Internacional sobre la Diversidad Biológica, el término por el que se hace referencia a la amplia variedad de seres vivos sobre la Tierra y los patrones naturales que la conforman, resultado de miles de millones de años de evolución según procesos naturales y también de la influencia creciente de las actividades del ser humano. La biodiversidad comprende igualmente la variedad de ecosistemas y las diferencias genéticas dentro de cada especie (diversidad genética) que permiten la combinación de múltiples formas de vida, y cuyas mutuas interacciones con el resto del entorno fundamentan el sustento de la vida sobre el mundo.
+
+
+    Los pinos canarios soportan el fuego en los grandes incendios debido a la adaptación milenaria a las emisiones volcánicas. En esta ocasión puede verse la corteza chamuscada de estos pinos, que pueden estar ardiendo durante meses y seguir creciendo mientras tanto. Un ejemplo de adaptación al medio que afecta negativamente a la biodiversidad del medio pero sólo a corto plazo, ya que sirve de planta pionera para el restablecimiento del bosque, como es la laurisilva en las áreas más favorecidas
+    El término «biodiversidad» es un calco del inglés «biodiversity». Este término, a su vez, es la contracción de la expresión «biological diversity» que se utilizó por primera vez en octubre de 1986 como título de una conferencia sobre el tema, el National Forum on BioDiversity, convocada por Walter G. Rosen, a quien se le atribuye la idea de la palabra.1
+
+    La Cumbre de la Tierra celebrada por Naciones Unidas en Río de Janeiro en 1992 reconoció la necesidad mundial de conciliar la preservación futura de la biodiversidad con el progreso humano según criterios de sostenibilidad o sustentabilidad promulgados en el Convenio internacional sobre la Diversidad Biológica que fue aprobado en Nairobi el 22 de mayo de 1994, fecha posteriormente declarada por la Asamblea General de la ONU como Día Internacional de la Biodiversidad. Con esta misma intención, el año 2010 fue declarado Año Internacional de la Diversidad Biológica por la 61.ª sesión de la Asamblea General de las Naciones Unidas en 2006, coincidiendo con la fecha del Objetivo Biodiversidad 2010.2
+
+    En el año 1994, la Asamblea de la Organización de las Naciones Unidas declaró el 22 de mayo como Día Mundial de la Diversidad Biológica.
+</p>
+
+<h2>Temáticas</h2>
+
+<div class="card-columns">
+	<div *ngFor="let item of tematicas" class="card w-75" style="width: 18rem;">		
+        <div class="card-body">
+            <img class="card-img-top" src="{{item.imagen}}" alt="Card image cap" width="340" height="210">
+                
+            <h5 class="card-title"><strong>{{item.text}}</strong></h5>
+            <p class="card-text">{{ (item.descripcion.length>180)? (item.descripcion | slice:0:180)+'...':(item.descripcion) }}</p>
+            <a href="{{item.redireccion}}" class="btn btn-primary btn-sm" id="b1">{{item.btn_text}}</a>            
+        </div>
+        <br/>
+    </div>
+</div>

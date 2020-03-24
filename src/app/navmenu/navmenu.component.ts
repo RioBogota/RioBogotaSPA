@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'nav-menu',
     templateUrl: './navmenu.component.html',
@@ -8,13 +8,13 @@ import { Http } from '@angular/http';
 export class NavMenuComponent {
     private usuario: any;
     private opciones: any;
-    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+    constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     }
 
     consultarOpciones = () => {
         let uri: String = 'api/Seguridad/opciones/' + this.usuario.idUsuario;
         this.http.get(this.baseUrl + uri).subscribe(result => {
-            this.opciones = result.json();
+            this.opciones = result;
             console.log(this.opciones);
         }, error => console.error(error));
     }

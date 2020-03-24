@@ -1,52 +1,83 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './navmenu/navmenu.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { CounterComponent } from './counter/counter.component';
 import { HomeComponent } from './home/home.component';
-import { BiodiversidadComponent } from './biodiversidad/biodiversidad.component';
-import { FocalesComponent } from './especies/focales/focales.component';
-import { LoginComponent } from './seguridad/login/login.component';
-import { UsuarioComponent } from './seguridad/usuario/usuario.component';
-import { RolComponent } from './seguridad/rol/rol.component';
-import { OpcionComponent } from './seguridad/opcion/opcion.component';
+import { SeguridadModule } from './modulos/seguridad/seguridad.module';
+import { SaeModule } from './modulos/sae/sae.module';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { NavMenuComponent } from './shared/navmenu/navmenu.component';
+import { SideMenuComponent } from './shared/side-menu/side-menu.component';
+import { PrincipalModule } from './modulos/principal/principal.module';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { CarouselComponent } from './principal/carousel/carousel.component';
+import { DetalleComponent } from './principal/noticias/detalle/detalle.component';
+import { OwlCarouselComponent } from './principal/owl-carousel/owl-carousel.component';
+import { OwlModule } from 'ngx-owl-carousel';
+import { CechModule } from './modulos/cech/cech.module';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
     declarations: [
-        AppComponent,
-        NavMenuComponent,
-        HeaderComponent,
+        
+        AppComponent,        
         FooterComponent,
-        CounterComponent,
+        HeaderComponent,
+        NavMenuComponent,
         HomeComponent,
-        BiodiversidadComponent,
-        FocalesComponent,
-        LoginComponent,
-        UsuarioComponent,
-        RolComponent,
-        OpcionComponent
+        SideMenuComponent,
+        CarouselComponent,
+        DetalleComponent,
+        OwlCarouselComponent,
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         FormsModule,
+        SeguridadModule,
+        PrincipalModule,
+        SaeModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatPaginatorModule,    
+        MatFormFieldModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatTabsModule,
+        MatTableModule,
+        OwlModule,
+        CechModule,
+        MatExpansionModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'biodiversidad', component: BiodiversidadComponent },
-            { path: 'focales', component: FocalesComponent},
-            { path: 'app/:idUsuario', component: AppComponent },
-            { path: 'login', component: LoginComponent },
-            { path: 'usuario', component: UsuarioComponent },
-            { path: 'rol', component: RolComponent },
-            { path: 'opcion', component: OpcionComponent }
+            { path: 'noticias/detalle/:id', component: DetalleComponent }
         ])
-    ]
+    ],
+    exports:[]
 })
 export class AppModuleShared {
 }

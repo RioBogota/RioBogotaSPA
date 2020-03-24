@@ -1,0 +1,21 @@
+<form name="formSoporte" (ngSubmit)="guardar()" ngNativeValidate>
+  <h3>Ingrese la información correspondiente al formulario de FAQ</h3>
+  <hr>
+  <ckeditor [editor]="Editor" name="descripcion" [(ngModel)]="soporte.descripcion"></ckeditor>
+  <hr>
+  <div class="col-6">
+    Ingrese la url de la imagen de la pagina de inicio:
+  </div>
+  <div class="file-field input-field">
+    <input matInput placeholder="Ingrese url de la imagen" required maxlength="500" minlength="4" type="text"
+      [(ngModel)]="soporte.imagenInicio" name="imagenInicio">
+  </div>
+  <div class="col-6">
+    Ingrese el texto del titulo de la pagina de inicio:
+  </div>
+  <div class="file-field input-field">
+    <input matInput placeholder="Ingrese texto de la pagina de inicio" required maxlength="500" minlength="4"
+      type="text" [(ngModel)]="soporte.textoInicio" name="textoInicio">
+  </div>
+  <button mat-fab color="primary" type="submit" name="guardarSoporte">Guardar</button>
+</form>

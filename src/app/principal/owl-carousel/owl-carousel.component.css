@@ -1,0 +1,39 @@
+.fondo{
+    /*background-image: url('/assets/PNG/noticias.png') no-repeat scroll center center / 80px 80px;*/
+    margin-left: 15%;
+    padding-top: 12%;
+    padding-bottom: 8%;  
+}
+
+@media (max-width: 575.98px) {
+  .img-carousel{
+    height: 40px;
+    padding-right: 0.5rem;
+    padding-left: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .img-carousel{
+    height: 50px;
+    padding-right: 0.5rem;
+    padding-left: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .img-carousel{
+    height: 70px;
+    padding-right: 0.5rem;
+    padding-left: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

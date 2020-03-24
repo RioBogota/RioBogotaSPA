@@ -1,0 +1,44 @@
+<form name="formUsuario" (ngSubmit)="guardar()" ngNativeValidate>
+  <mat-card-content>
+    <div *ngIf="!editarUsuario">
+      <h3>Cambiar contraseña</h3>
+      <hr>
+      <div class="row">
+        <div class="col-2">
+          <b>PASO </b>
+          <button mat-mini-fab color="accent" type="button" name="aceptar">1</button>
+        </div>
+        <div class="col-8">
+          <mat-form-field class="col-4">
+            <input matInput type="email" placeholder="Ingrese el correo electronico" name="correo" id="txtCorreo"
+              [(ngModel)]="usuario.correo">
+          </mat-form-field>
+          <button mat-fab color="primary" (click)="consultarUsuario()" type="button" name="aceptar">Aceptar</button>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div *ngIf="editarUsuario">
+      <div class="col-2">
+        <b>PASO </b>
+        <button mat-mini-fab color="accent" type="button" name="aceptar">2</button>
+      </div>
+      <hr>
+      <div class="row">
+        <mat-form-field class="col-4">
+          <input type="text" matInput placeholder="Ingrese su contraseña" [type]="hide ? 'password' : 'text'"
+            pattern="^[a-zA-Z0-9_]*$" required name="contrasena" maxlength="20" [(ngModel)]="usuario.contrasena">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <input type="text" matInput placeholder="Confirme su contraseña" [type]="hideConf ? 'password' : 'text'"
+            pattern="^[a-zA-Z0-9_]*$" required name="contrasenaConf" maxlength="20" [(ngModel)]="confirmar">
+          <mat-icon matSuffix (click)="hideConf = !hideConf">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <div class="col-4">
+          <button mat-fab color="primary" name="cambiar" type="submit">Cambiar contraseña</button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</form>

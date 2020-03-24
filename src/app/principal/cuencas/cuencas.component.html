@@ -1,0 +1,24 @@
+<div class="row cuenca">
+  <div class="col-3 text-justify">
+    <h1 class="display-4 text-center">{{titulo}}</h1>
+    <div [innerHTML]="descripcion"></div>
+  </div>
+  <div class="col" style="margin-right: 3%;">
+    <div *ngIf="router.url === '/cuencas/1'">
+        <iframe  scrolling="no" src="https://carcundinamarca.maps.arcgis.com/apps/webappviewer/index.html?id=9312054812fd45dda8793e76017aca79"
+        width="100%" height="700" frameborder="0"></iframe>
+    </div> 
+    <div *ngIf="router.url === '/cuencas/2'">
+      <iframe  scrolling="no" src="https://carcundinamarca.maps.arcgis.com/apps/webappviewer/index.html?id=52c472df48dc4fe082e492b3d4909f2a"
+      width="100%" height="800" frameborder="0"></iframe>
+    </div>  
+    <div *ngIf="router.url === '/cuencas/3'">
+      <!-- <iframe  scrolling="no" src="https://carcundinamarca.maps.arcgis.com/apps/webappviewer/index.html?id=9312054812fd45dda8793e76017aca79"
+      width="100%" height="600px" frameborder="0"></iframe> -->
+      <img src="../../assets/PNG/cuenca_baja.png" alt="" width="100%" height="800">
+    </div>       
+  </div>
+</div>  
+<br>
+
+

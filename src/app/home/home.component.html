@@ -1,243 +1,413 @@
-﻿<header></header>
-<section class="banner-sec">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card-deck">
-                    <div class="card" *ngFor="let noticia of noticias">
-                        <img class="card-img-top" src="http://orarbo.gov.co/apc-aa-files/comunidad/items/rio-bogota.jpg" alt="Card image cap">
-                        <div class="card-img-overlay"> <span class="badge badge-pill badge-danger">Nuevo</span> </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ noticia.titulo}}</h5>
-                            <p class="card-text">{{ noticia.descripcion }}</p>
-                            <p class="card-text"><small class="text-time"><em>{{ noticia.referencia }}</em></small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Slider de noticias-->
-            <div class="col-md-6 top-slider">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
+﻿<!--Sitios de interés-->
+<!--xs-->
+<div class="d-block d-sm-none">
+	<div class="text-center">
+		<a href="http://orarbo.gov.co/">
+			<img src="../../assets/PNG/orarbo.png" alt="" class="img-size">
+		</a>
+		<a routerLink="/cech/general">
+			<img src="../../assets/PNG/logo_cech.png" alt="" class="img-size" height="145px">
+		</a>
+	</div>
+</div>
+<!--Fin xs-->
+<!--Otros Dispositivos-->
+<div class="d-none d-sm-block">
+	<div class="row text-center">
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<a href="http://orarbo.gov.co/">
+				<img src="../../assets/PNG/orarbo.png" alt="" width="250px" height="110px">
+			</a>
+		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<a routerLink="/cech/general">
+				<img src="../../assets/PNG/logo_cech.png" alt="" width="175px" height="120px">
+			</a>
+		</div>
+	</div>
+</div>
+<!--Fin Otros Dispositivos-->
+<!--Fin sitios de interés-->
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <div class="news-block">
-                                <div class="news-media"><img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/politics1.jpg" alt=""></div>
-                                <div class="news-title">
-                                    <h2 class=" title-large"><a href="#">Ray madison may struggle to get best from Paul in a 4-2-3-1 formation</a></h2>
-                                </div>
-                                <div class="news-des">Condimentum ultrices mi est a arcu at cum a elementum per cum turpis dui vulputate vestibulum in vehicula montes vel. Mauris nam suspendisse consectetur mus...</div>
-                                <div class="time-text"><strong>2h ago</strong></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="news-block">
-                                <div class="news-media"><img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/sport1.jpg" alt=""></div>
-                                <div class="news-title">
-                                    <h2 class=" title-large"><a href="#">An Alternative Form of Mental Health Care Gains a Foothold</a></h2>
-                                </div>
-                                <div class="news-des">Condimentum ultrices mi est a arcu at cum a elementum per cum turpis dui vulputate vestibulum in vehicula montes vel. Mauris nam suspendisse consectetur mus...</div>
-                                <div class="time-text"><strong>2h ago</strong></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="news-block">
-                                <div class="news-media"><img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/health.jpg" alt=""></div>
-                                <div class="news-title">
-                                    <h2 class=" title-large"><a href="#">Key Republican Senator Says She Will Not Vote for former president!</a></h2>
-                                </div>
-                                <div class="news-des">Condimentum ultrices mi est a arcu at cum a elementum per cum turpis dui vulputate vestibulum in vehicula montes vel. Mauris nam suspendisse consectetur mus...</div>
-                                <div class="time-text"><strong>2h ago</strong></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--fin slider-->
-        </div>
-    </div>
+<!--Sentencia-->
+<!--xs-->
+<div class="d-block d-sm-none">
+	<div class="row sentencia">
+		<div class="col-xs-12 col-sm-12">
+			<h1 class="display-3 titulo text-center"><strong>LA SENTENCIA</strong></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 text-center">
+			<a routerLink="/sentencia" style="text-decoration: none;">
+				<img src="/assets/PNG/logo-sentencia.png" class="img-fluid img-sentencia" alt="">
+				<h6 class="text-center"><strong>VER</strong></h6>
+			</a>
+		</div>
+	</div>
+</div>
+<!--Fin xs-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+	<div class="row sentencia" id="Sentencia">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<h1 class="display-3 text-center titulo"><strong>LA SENTENCIA</strong></h1>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<p class="texto-sentencia text-justify">
+				<br>
+				El Objetivo del SÍRíoBogotá es gestionar la información referente 
+				a la cuenca hidrográfica del Río Bogotá, 
+				que permitirá a sus actores fortalecer la toma de decisiones, 
+				la participación ciudadana y la gobernanza en la cuenca.
+				<br><br>
+				El módulo de sentencia comprende todo lo relacionado al cumplimento 
+				y avance de las ordenes de la sentencia del río Bogotá Expediente 
+				AP- 25000-23-27-000-2001-90479-1.
+			</p>
+		</div>
+		<div class="col-md-3 offset-md-4" style="padding-top: 3rem;">
+				<a routerLink="/sentencia" style="text-decoration: none;">
+					<img src="/assets/PNG/logo-sentencia.png" class="img-fluid" alt="">
+					<h5 class="text-center"><strong>VER</strong></h5>
+				</a>
+			</div>
+	</div>	
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block">
+	<div data-spy="scroll" data-target=".navbar" data-offset="50">
+		<div class="row sentencia align-items-center">
+			<div class="col-lg-6">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<h1 class="display-3 text-center titulo"><strong>LA SENTENCIA</strong></h1>
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<p class="texto-sentencia text-justify">
+						<br>
+						El Objetivo del SÍRíoBogotá es gestionar la información referente 
+						a la cuenca hidrográfica del Río Bogotá,
+						que permitirá a sus actores fortalecer la toma de decisiones,
+						la participación ciudadana y la gobernanza en la cuenca.
+						<br><br>
+						El módulo de sentencia comprende todo lo relacionado al cumplimento
+						y avance de las ordenes de la sentencia del río Bogotá Expediente
+						AP- 25000-23-27-000-2001-90479-1.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-6 text-center">
+				<a routerLink="/sentencia" style="text-decoration: none;">
+					<img src="/assets/PNG/logo-sentencia.png" class="img-fluid img-sentencia" alt="">
+					<h5 class="text-center"><strong>VER</strong></h5>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Fin Resto resoluciones-->
+<!--fin Sentencia-->
 
-</section>
-<section class="section-01">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
-                <h3 class="heading-large">De interés</h3>
-                <div class="">
-                    <div class="col-lg-6 card">
-                        <div class="card">
-                            <img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/war.jpg" alt="">
-                            <div class="card-body">
-                                <div class="news-title">
-                                    <a href="#">
-                                        <h2 class=" title-small">Minorities Suffer From Unequal Pain Treatment</h2>
-                                    </a>
-                                </div>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p class="card-text"><small class="text-time"><em>3 mins ago</em></small></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 card">
-                        <div class="card">
-                            <img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/politics.jpg" alt="">
-                            <div class="card-body">
-                                <div class="news-title">
-                                    <a href="#">
-                                        <h2 class=" title-small">Minorities Suffer From Unequal Pain Treatment</h2>
-                                    </a>
-                                </div>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p class="card-text"><small class="text-time"><em>3 mins ago</em></small></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 card">
-                        <div class="card">
-                            <img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/movie.jpg" alt="">
-                            <div class="card-body">
-                                <div class="news-title">
-                                    <a href="#">
-                                        <h2 class=" title-small">Minorities Suffer From Unequal Pain Treatment</h2>
-                                    </a>
-                                </div>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p class="card-text"><small class="text-time"><em>3 mins ago</em></small></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 card">
-                        <div class="card">
-                            <img class="img-fluid" src="http://grafreez.com/wp-content/temp_demos/river/img/travel1.jpg" alt="">
-                            <div class="card-body">
-                                <div class="news-title">
-                                    <a href="#">
-                                        <h2 class=" title-small">Minorities Suffer From Unequal Pain Treatment</h2>
-                                    </a>
-                                </div>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p class="card-text"><small class="text-time"><em>3 mins ago</em></small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <aside class="col-lg-4 side-bar col-md-12">
-                <ul class="nav nav-tabs" role="tablist" id="myTab">
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Último</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Destacado</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Eventos</a> </li>
-                </ul>
+<!--Mapas-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+	<div class="col-md-12">
+		<h1 class="titulo-mapa text-center">CUENCA RÍO BOGOTÁ</h1>
+		<p class="texto-mapa text-center">A continuación visualice la información general del río Bogotá,
+			o seleccione la cuenca de su interés.</p>
+	</div>
+	<div class="col-md-12">
+		<mat-tab-group>
+			<mat-tab label="CUENCA GENERAL">
+				<iframe scrolling="no"
+					src="https://carcundinamarca.maps.arcgis.com/apps/webappviewer/index.html?id=50d74c693c0643be9a852cf48643dcb3"
+					width="100%" height="500px" frameborder="0" class="frame-mapa"> </iframe>
+			</mat-tab>
+			<mat-tab label="DISTRITO">
+				<iframe scrolling="no"
+					src="https://eab-sigue.maps.arcgis.com/apps/webappviewer/index.html?id=6ad170bd1cdc450b823bd22d0786431d"
+					width="100%" height="500px" frameborder="0" class="frame-mapa"> </iframe>
+			</mat-tab>
+		</mat-tab-group>
+		<br>
+	</div>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block">
+	<div data-spy="scroll" data-target=".navbar" data-offset="50">
+		<div class="col-lg-12" id="Cuenca">
+			<h1 class="titulo-mapa text-center">CUENCA RÍO BOGOTÁ</h1>
+			<p class="texto-mapa text-center">A continuación visualice la información general del río Bogotá,
+				o seleccione la cuenca de su interés.</p>
+		</div>
+		<div class="col-lg-12">
+			<mat-tab-group>
+				<mat-tab label="CUENCA GENERAL">
+					<iframe scrolling="no"
+						src="https://carcundinamarca.maps.arcgis.com/apps/webappviewer/index.html?id=50d74c693c0643be9a852cf48643dcb3"
+						width="100%" height="700px" frameborder="0" class="frame-mapa"> </iframe>
+				</mat-tab>
+				<mat-tab label="DISTRITO">
+					<iframe scrolling="no"
+						src="https://eab-sigue.maps.arcgis.com/apps/webappviewer/index.html?id=6ad170bd1cdc450b823bd22d0786431d"
+						width="100%" height="700px" frameborder="0" class="frame-mapa"> </iframe>
+				</mat-tab>
+			</mat-tab-group>
+			<br>
+		</div>
+	</div>
+</div>
+<!--Fin Resto resoluciones-->
+<!--Fin mapas-->
 
-                <!-- Tab panes -->
-                <div class="tab-content sidebar-tabing" id="nav-tabContent">
-                    <div class="tab-pane active" id="home" role="tabpanel">
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/sport2.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Key Republicans sign letter warning against candidate</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/lifestyle.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Obamacare Appears to Be Making People Healthier</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/food1.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Key Republicans sign letter warning against candidate</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="profile" role="tabpanel">
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/movie.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Key Republicans sign letter warning against candidate</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/auto.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">‘S.N.L.’ to Lose Two Longtime Cast Members</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/business1.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Obamacare Appears to Be Making People Healthier</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="messages" role="tabpanel">
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/food.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Key Republicans sign letter warning against candidate</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/business.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">‘S.N.L.’ to Lose Two Longtime Cast Members</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="#"> <img class="d-flex mr-3" src="http://grafreez.com/wp-content/temp_demos/river/img/sport1.jpg" alt="Generic placeholder image"></a>
-                            <div class="media-body">
-                                <div class="news-title">
-                                    <h2 class="title-small"><a href="#">Key Republicans sign letter warning against candidate</a></h2>
-                                </div>
-                                <div class="news-auther"><span class="time">1h ago</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="video-sec">
-                    <h4 class="heading-small">Último video</h4>
-                    <div class="video-block">
-                        <div class="embed-responsive embed-responsive-4by3">
-                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-    </div>
-</section>
+<!--Multimedia-->
+<!--xs - sm-->
+<div class="d-block d-sm-none">
+	<div class="fondo-multimedia">
+		<h2 class="text-center" style="color: #fff">EL GRAN RÍO</h2>
+		<div class="col-xs-12 col-sm-12">
+			<a routerLink="/multimedia/2">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header text-left header-multimedia" style="background-color: #071353;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">play_circle_outline</i>
+							VIDEOS
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/videos_galeria.PNG" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			<a routerLink="/multimedia/1">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header header-multimedia" style="background-color: #839D41;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">collections</i> IMÁGENES
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/Fondo_9.jpg" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			<a href="https://carcundinamarca.maps.arcgis.com/apps/Cascade/index.html?appid=6376f09ad9bc43feb6c1ba582d665030"
+				target="_blank">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header header-multimedia" style="background-color: #318BA7;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">layers</i> EXPLORACIÓN
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/story_map.PNG" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<!--Fin xs - sm-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+	<div class="row fondo-multimedia" id="Galeria">
+		<div class="col-md-12">
+			<h2 class="text-center" style="color: #fff">EL GRAN RÍO</h2>
+		</div>
+		<div class="col-md-4">
+			<a routerLink="/multimedia/2">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header text-left header-multimedia" style="background-color: #071353;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">play_circle_outline</i>
+							VIDEOS
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/videos_galeria.PNG" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a routerLink="/multimedia/1">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header header-multimedia" style="background-color: #839D41;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">collections</i> IMÁGENES
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/Fondo_9.jpg" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a href="https://carcundinamarca.maps.arcgis.com/apps/Cascade/index.html?appid=6376f09ad9bc43feb6c1ba582d665030"
+				target="_blank">
+				<div class="card z-depth-5 card-multimedia">
+					<div class="card-header header-multimedia" style="background-color: #318BA7;">
+						<h5 class="texto-multimedia text-center">
+							<i class="material-icons" style="vertical-align: middle;">layers</i> EXPLORACIÓN
+						</h5>
+					</div>
+					<div class="card-body text-center">
+						<img src="../../assets/PNG/story_map.PNG" class="img-fluid img-multimedia" alt="">
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block">
+	<div data-spy="scroll" data-target=".navbar" data-offset="50">
+		<div class="row fondo-multimedia" id="Galeria">
+			<div class="col-lg-12">
+				<h1 class="text-center" style="color: #fff">EL GRAN RÍO</h1>
+			</div>
+			<div class="col-lg-4">
+				<a routerLink="/multimedia/2" style="text-decoration: none;">
+					<div class="card z-depth-5 card-multimedia">
+						<div class="card-header text-left header-multimedia" style="background-color: #071353;">
+							<h5 class="texto-multimedia text-center">
+								<i class="material-icons" style="vertical-align: middle;">play_circle_outline</i>
+								VIDEOS
+							</h5>
+						</div>
+						<div class="card-body text-center">
+							<img src="../../assets/PNG/videos_galeria.PNG" class="img-fluid img-multimedia" alt="">
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4">
+				<a routerLink="/multimedia/1" style="text-decoration: none;">
+					<div class="card z-depth-5 card-multimedia">
+						<div class="card-header header-multimedia" style="background-color: #839D41;">
+							<h5 class="texto-multimedia text-center">
+								<i class="material-icons" style="vertical-align: middle;">collections</i> IMÁGENES
+							</h5>
+						</div>
+						<div class="card-body text-center">
+							<img src="../../assets/PNG/Fondo_9.jpg" class="img-fluid img-multimedia" alt="">
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4">
+				<a href="https://carcundinamarca.maps.arcgis.com/apps/Cascade/index.html?appid=6376f09ad9bc43feb6c1ba582d665030"
+					target="_blank" style="text-decoration: none;">
+					<div class="card z-depth-5 card-multimedia">
+						<div class="card-header header-multimedia" style="background-color: #318BA7;">
+							<h5 class="texto-multimedia text-center">
+								<i class="material-icons" style="vertical-align: middle;">layers</i> EXPLORACIÓN
+							</h5>
+						</div>
+						<div class="card-body text-center">
+							<img src="../../assets/PNG/story_map.PNG" class="img-fluid img-multimedia" alt="">
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Fin resto resoluciones-->
+<!--Fin multimedia-->
+
+<!--Noticias-->
+<!--xs - sm-->
+<div class="d-block d-sm-none">
+	<div class="row noticias-imagen">
+		<div class="col-12">
+			<h2 class="text-center">NOTICIAS</h2>
+		</div>
+		<div class="card-deck card-size">
+			<div class="col-12" *ngFor="let noticia of noticias">
+				<a routerLink="/noticias/detalle/{{noticia.idNoticia}}" style="text-decoration: none; color: #656668;">
+					<img class="card-img-top img-noticia" [src]="noticia.multimediaNoticia[0].url" alt="Card image cap">
+					<div class="card-body">
+						<h6 class="card-title texto-noticia">{{ noticia.titulo}}</h6>
+						<div class="card-text text-justify texto-noticia" [innerHTML]="noticia.descripcion"></div>
+						<p class="card-text"><small class="text-time"><em>{{ noticia.referencia }}</em></small>
+						</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<mat-paginator style="background-color: transparent;" #paginator [length]="length" [pageSize]="pageSize"
+			[pageSizeOptions]="pageSizeOptions" (page)="paginar($event)">
+		</mat-paginator>
+	</div>
+</div>
+<!--Fin xs - sm-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+	<div class="row noticias-imagen">
+		<div class="col-12">
+			<h2 class="text-center">NOTICIAS</h2>
+		</div>
+		<div class="card-deck card-size">
+			<div class="col-4" *ngFor="let noticia of noticias">
+				<a routerLink="/noticias/detalle/{{noticia.idNoticia}}" style="text-decoration: none; color: #656668;">
+					<img class="card-img-top img-noticia" [src]="noticia.multimediaNoticia[0].url" alt="Card image cap">
+					<div class="icono-mas">
+						<img src="/assets/PNG/ICONO-DE-MAS-FOTOGRAFIAS.png" alt="" width="30" height="30">
+					</div>
+					<div class="card-body">
+						<h6 class="card-title texto-noticia">{{ noticia.titulo}}</h6>
+						<div class="card-text text-justify texto-noticia" [innerHTML]="noticia.descripcion"></div>
+						<p class="card-text"><small class="text-time"><em>{{ noticia.referencia }}</em></small>
+						</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-12 text-center">
+			<mat-paginator style="background-color: transparent;" #paginator [length]="length" [pageSize]="pageSize"
+				[pageSizeOptions]="pageSizeOptions" (page)="paginar($event)">
+			</mat-paginator>
+		</div>
+	</div>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block">
+	<div data-spy="scroll" data-target=".navbar" data-offset="50">
+		<div class="row noticias-imagen" id="Noticias">
+			<div class="col-12">
+				<h1 class="text-center">NOTICIAS</h1>
+			</div>
+			<div class="card-deck card-size">
+				<div class="col-3" *ngFor="let noticia of noticias">
+					<a routerLink="/noticias/detalle/{{noticia.idNoticia}}" style="text-decoration: none; color: #656668;">
+						<img class="card-img-top img-noticia" [src]="noticia.multimediaNoticia[0].url" alt="Card image cap">
+						<div class="icono-mas">
+							<img src="/assets/PNG/ICONO-DE-MAS-FOTOGRAFIAS.png" alt="" width="30" height="30">
+						</div>
+						<div class="card-body">
+							<h6 class="card-title texto-noticia">{{ noticia.titulo}}</h6>
+							<div class="card-text text-justify texto-noticia" [innerHTML]="noticia.descripcion"></div>
+							<p class="card-text"><small class="text-time"><em>{{ noticia.referencia }}</em></small>
+							</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-12 text-center">
+				<mat-paginator style="background-color: transparent;" #paginator [length]="length" [pageSize]="pageSize"
+					[pageSizeOptions]="pageSizeOptions" (page)="paginar($event)">
+				</mat-paginator>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Fin resto resoluciones-->
+<!--Fin Noticias-->

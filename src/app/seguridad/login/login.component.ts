@@ -1,6 +1,8 @@
-﻿import { Component, Inject } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
+import { AppService } from 'src/app/services/app.service';
+import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
 
 @Component({
     selector: 'login',
@@ -8,23 +10,53 @@ import { Http } from '@angular/http';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    private usuario: any;
-    private error: boolean = false;
-    private mensajeError: string | null = null;
-    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string, private router: Router) {
-        //this.usuario = new Usuario();
+    hide = true;
+    public usuario: IDUsuarioNavigation;
+    public error: Boolean = false;
+    public mensajeError: string | null = null;
+    constructor(private router: Router, private loginService: TokenInterceptorService, private appService: AppService) {
     }
+
     ingresar = (data: any) => {
+        this.mensajeError = '';
         this.error = false;
-        let uri: String = 'api/Seguridad/usuario/' + data.usuario + '/' + data.contrasena;
-        this.http.get(this.baseUrl + uri).subscribe(result => {
-            this.usuario = result.json();
-            //this.router.navigate(["/app", this.usuario.idUsuario]);
-            sessionStorage.setItem("usuario", JSON.stringify(this.usuario));
-            this.router.navigate(["/home"]);
+        this.loginService.getLogin(data.usuario.toUpperCase(), data.contrasena).subscribe(result => {
+            this.usuario = result;
+            sessionStorage.setItem('usuario', JSON.stringify(this.usuario));
+            this.appService.checkUserInfo.emit(this.usuario);
+            this.obtenerToken(data);
         }, error => {
-            this.mensajeError = JSON.parse(error._body).mensaje;
+            console.error(error);
+            if (error && error.status === 404) {
+                this.mensajeError = 'No se encontro el usuario o la contraseña, cambie los parametros de ingreso e intente nuevamente.';
+                return;
+            }
+            if (error && error.message) {
+                this.mensajeError = error.message;
+                return;
+            }
+            this.mensajeError = error;
             this.error = true;
         });
+    }
+
+    cerrarSesion = () => {
+        sessionStorage.clear();
+        this.appService.checkUserOptions.emit([]);
+        this.appService.checkUserInfo.emit(undefined);
+    }
+
+    obtenerToken = (data: any) => {
+        this.loginService.getToken(data.usuario, data.contrasena).subscribe(res => {
+            sessionStorage.setItem('token', res.token);            
+            this.router.navigate(['/home']);
+        }, error => {
+            console.error(error);
+        });
+
+    }
+
+    ngOnInit(){
+        this.cerrarSesion()
     }
 }

@@ -1,0 +1,19 @@
+<!-- <div class="row" style="margin-left: 1rem; margin-right: 1.5rem;"> -->
+  <h1>{{modulo.titulo}}</h1>
+  <p class="text-justify">{{modulo.descripcion}}</p>
+
+  <div class="row justify-content-center" style="margin-left: 1rem; margin-right: 1rem;" *ngIf="documentos && documentos.length">
+    <div class="col-2 text-center" *ngFor="let documento of documentos">
+      <a [href]="'https://docs.google.com/uc?id='+documento.id+'&export=download'" target="_blank">
+        <p class="text-center"><small class="text-muted">Modificado: {{documento.modifiedTime | date: 'dd/MM/yyyy'}}</small></p>
+        <img src="../../assets/PNG/logo-pdfs.png" class="img-fluid" alt="">
+        <p class="text-center">{{documento.name}}</p>
+      </a>
+    </div>
+  </div>
+<!-- </div> -->
+<div class="row justify-content-center">
+  <p>
+    <!-- <a routerLink="/cech/documentos/cargar">CARGAR DOCUMENTOS</a> |  -->
+  <a routerLink="/cech/general">VOLVER AL CECH</a></p>
+</div>

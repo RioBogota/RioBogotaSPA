@@ -1,0 +1,14 @@
+<div class="row margen-noticia justify-content-center">
+    <h2 class="text-center">{{ noticia.titulo}}</h2>
+</div>
+<div class="row margen-noticia">
+    <div class="col-md- col-lg-7">
+        <div [innerHTML]="noticia.descripcion" class="text-justify"></div>
+        <p><small class="text-time"><em>{{ noticia.referencia }}</em></small></p>
+    </div>
+    <div class="col text-center">
+        <p>Galeria de imagenes</p>
+        <img *ngFor="let imagen of noticia.multimediaNoticia" class="img-fluid" [src]="imagen.url">
+    </div>
+</div>  
+

@@ -1,0 +1,42 @@
+<div class="row" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+  <div class="col-md-3 col-lg-3 site1"></div>
+
+
+  <div class="col-md-6 col-lg-6">
+    <h1 class="text-center"><strong>MAPA DEL SITIO</strong></h1>
+    <hr>
+    <div *ngFor="let componente of componentes" class="text-justify">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p><strong>{{componente.descripcion}}</strong></p>
+            </mat-panel-title>
+            <mat-panel-description>
+              <p>Click para {{panelOpenState ? 'cerrar' : 'abrir'}}</p>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let modulo of componente.modulo" class="list-group">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <p><strong>{{modulo.descripcion}}</strong></p>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <p>Click para {{panelOpenState ? 'cerrar' : 'abrir'}}</p>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let micrositio of modulo.micrositio" class="list-group">
+                  <a *ngIf="micrositio.idMicrositio !== 23" [routerLink]="'/multiple/'+ micrositio.idMicrositio" class="list-group-item list-group-item-action">{{micrositio.descripcion}}</a>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>            
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-lg-3 site3"></div>
+</div>

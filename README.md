@@ -30,23 +30,23 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 To genearate docker image run this command on a bash (including dot)
 
-    docker build -t rio-bogota .
+    docker build -t rio-bogota-spa .
 
 To run docker container in main mode run this command for windows
 
-    docker run -it -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota
+    docker run -it -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota-spa
 
 for linux user run
 
-    docker run -it -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota
+    docker run -it -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --rm rio-bogota-spa
 
 to run docker container in background mode run this command for windows
 
-    docker run -d -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota
+    docker run -d -v %cd%:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota-spa
 
 for linux user run
 
-    docker run -d -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota
+    docker run -d -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 --name rio-bogota-container rio-bogota-spa
 
 Stop and then remove the container once done:
 

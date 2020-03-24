@@ -1,0 +1,31 @@
+<div class="container-fluid container-noticias">
+
+    <h4>Consultar Noticias</h4>
+    <!-- <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Buscar</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" [(ngModel)]="filtro" (input)="filtrar()" aria-describedby="inputGroup-sizing-default">
+      </div> -->
+      <div class="text-right">
+          <button class="btn btn-success" (click)="agregarNuevo()">Agregar noticia</button>
+      </div>
+      <br>
+      
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let noticia of noticias">
+          <th scope="row">{{noticia.titulo}}</th>
+          <td>{{noticia.descripcion}}</td>
+          <td><a routerLink="/noticias/editar/{{noticia.idNoticia}}">Editar</a></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

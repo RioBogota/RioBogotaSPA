@@ -1,0 +1,73 @@
+/* * { 
+  box-sizing: border-box; 
+} */
+p { 
+  margin-top: 8rem;
+  font-size: 1rem;
+  color: #777;
+} 
+#carousel { 
+  perspective: 2000px; 
+  background: transparent; 
+  padding-top: 10%; 
+  font-size:0; 
+  margin-bottom: -4%; 
+}
+figure#spinner { 
+  transform-style: preserve-3d; 
+  height: 300px; 
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50% -400px;
+  transition: 1s; 
+} 
+figure#spinner figure { 
+  width: 30%; 
+  max-width: 700px; 
+  position: absolute; 
+  left: 38%;
+  transform-origin: 50% 50% -400px;
+  outline:1px solid transparent; 
+  overflow: hidden;
+  transition: 1s;
+}
+figure#spinner figure.focus { 
+  width: 26%; 
+  left: 37%; 
+  margin-top: -3rem; 
+} 
+figure#spinner figure img { 
+  width: 100%; 
+} 
+figcaption { 
+  position: absolute; 
+  top: 100%; 
+  width: 100%; 
+  padding: .3rem; 
+  z-index: 2; 
+  font-size: 1.1rem; 
+  background: rgba(0, 0, 0, 0); 
+  transition: .6s; 
+}
+figure#spinner figure.current:hover figcaption,
+figure#spinner figure.current.caption figcaption
+{ 
+  top: 90%; 
+  background: rgba(0, 0, 0, 0.5); 
+  bottom: 0; 
+} 
+div#carousel ~ span { 
+  color: #fff; 
+  margin: 5%; 
+  display: inline-block; 
+  text-decoration: none; 
+  font-size: 2rem; 
+  transition: 0.6s color; 
+  position: relative; 
+  margin-top: -6rem; 
+  border-bottom: none; 
+  line-height: 0; 
+}
+div#carousel ~ span:hover { 
+  color: #888; 
+  cursor: pointer; 
+}

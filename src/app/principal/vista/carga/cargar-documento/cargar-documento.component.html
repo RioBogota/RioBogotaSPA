@@ -1,0 +1,31 @@
+<div class="row" style="margin-left: 1rem; margin-right: 1.5rem;">
+  <h1>Cargar documentos</h1>
+
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <form action="#">
+      <div>
+        <label>Seleccione el sitio al que desea agregar el documento</label>
+        <select [(ngModel)]="sitio" name="selectSitio" class="form-control">
+          <option *ngFor="let sitio of sitios" [ngValue]="sitio">{{sitio.descripcion}}</option>
+        </select>
+      </div>
+      <div class="file-field input-field">
+        <label for="txtnombreDocumento">Ingrese el nombre del archivo</label>
+        <input type="text" name="nombre" required minlength="150" [(ngModel)]="documento.nombreDocumento">
+      </div>
+      <div class="file-field input-field">
+        <label for="txtnombreDocumento">Ingrese una corta descripción del archivo</label>
+        <input name="descripcion" type="text" required minlength="25" maxlength="100" [(ngModel)]="documento.descripcionDocumento">
+      </div>
+      <div class="file-field input-field">
+        <div class="btn btn-primary">
+          <span>Subir archivo</span>
+          <input (change)="seleccionarArchivo($event)" [disabled]="!documento.nombreDocumento || !documento.descripcionDocumento" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Seleccione un archivo para cargar">
+          <mat-spinner *ngIf="cargando"></mat-spinner>
+        </div>
+      </div>
+    </form>
+  </div>

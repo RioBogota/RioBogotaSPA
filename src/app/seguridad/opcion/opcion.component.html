@@ -1,22 +1,46 @@
-﻿<header></header>
-<form ngNativeValidate>
-    <div class="container-fluid shadow">
-        <h4 class="pr-5 pl-5">Rol de Usuario</h4>
-        <div class="input-group pt-3 pr-5 pl-5">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Nombre de la Opción</span>
-            </div>
-            <input type="text" required class="form-control" aria-label="Nombre de la opción" aria-describedby="usuario-default">
-        </div>
-        <div class="input-group pt-3 pr-5 pl-5">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Descripción de la Opción</span>
-            </div>
-            <textarea class="form-control" aria-label="Descripcion"></textarea>
-        </div>
-        <div class="input-group mt-3 pr-5 pl-5 pb-4">
-            <input type="submit" value="Guardar" class="btn btn-success mr-5" />
-            <input type="reset" value="Limpiar" class="btn btn-danger" />
-        </div>
-    </div>
+﻿<form ngNativeValidate name="formOpciones" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+	<h4>Agregar opcion</h4>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<input type="text" required class="form-control" minlength="4" maxlength="50" aria-label="Nombre de la opción"
+				aria-describedby="usuario-default" name="nombre" [(ngModel)]="opcion.nombre" placeholder="Nombre Opción">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<input type="url" required class="form-control" minlength="4" maxlength="50" aria-label="Ruta de la opción"
+				aria-describedby="usuario-default" name="ruta" [(ngModel)]="opcion.ruta" placeholder="URL">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+			<label for="exampleFormControlTextarea1">Descripción de la Opción</label>
+			<textarea class="form-control" name="descripcion" [(ngModel)]="opcion.descripcion" aria-label="Descripcion"
+				rows="3"></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group form-check col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<input type="checkbox" class="form-check-input" id="exampleCheck1" name="subopcion" [(ngModel)]="esSubopcion"
+				aria-label="Subopcion" aria-describedby="subopcion-default">
+			<label class="form-check-label" for="exampleCheck1">¿Es una subopcion del menu?</label>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" *ngIf="esSubopcion">
+			<label for="select-rol">Seleccione una opción padre</label>
+			<select name="roles" id="select-rol" class="form-control" [(ngModel)]="opcion.idOpcionPadre">
+				<option [value]="opcion.idOpcion" *ngFor="let opcion of opciones">{{opcion.nombre}}</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<label for="select-rol">Seleccione rol asociado a opción</label>
+			<select name="roles" id="select-rol" class="form-control" [(ngModel)]="opcion.opcionRol[0].idRol">
+				<option [value]="rol.idRol" *ngFor="let rol of roles">{{rol.nombre}}</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col">
+			<input type="submit" value="Guardar" (click)="guardar()" class="btn btn-success mr-5" />
+			<input type="reset" value="Limpiar" class="btn btn-danger" />
+		</div>
+	</div>
 </form>

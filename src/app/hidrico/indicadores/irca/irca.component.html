@@ -1,0 +1,50 @@
+<div class="row" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+
+	<!-- <div class="col-md-12 col-lg-12">
+		<mat-form-field>
+		  <mat-label>Escoja una opción</mat-label>
+		  <mat-select  [(ngModel)]="selectedValue">
+		    <mat-option *ngFor="let opcion of opciones" [value]="opcion">
+		      {{ opcion }}
+		    </mat-option>
+		  </mat-select>
+		</mat-form-field>			
+		<button (click)="consultarIndicador()" class="btn btn-sm btn-primary" style="margin-left: 2rem;">Consultar</button>		
+	</div> -->
+
+	<div class="table-responsive">
+		<table class="table table-bordered text-center">
+			<thead>
+			  <tr style="font-size: 14px;">
+			    <th class="align-middle" rowspan="2">Municipio</th>
+			    <th class="align-middle" rowspan="2">índice de desempeño integral municipal MDM 2017</th>
+			    <th class="align-middle" colspan="3">Población: Proyección DANE 2018</th>
+			    <th class="align-middle" colspan="4">Magnitud de Inversión Estimada</th>
+			    <th class="align-middle" colspan="2">Indicadores</th>
+			    <th class="align-middle" rowspan="2">Metros cúbicos de agua producida medida al año (m3) 2017</th>
+			    <th class="align-middle" colspan="3">Viviendas conectadas al servicio de acueducto</th>
+			  </tr>
+			  <tr style="font-size: 12px; color: gray; font-weight: bold;">
+			    <td>Municipal</td>
+			    <td>Cabecera</td>
+			    <td>Resto</td>
+			    <td>PTARs con financiación mediante convenios CAR - municipios ($ dic2018)</td>
+			    <td>Valores presupuestados - Planes Maestros de Alcantarillado ($ dic2018)</td>
+			    <td>PSMV y PGIRS Inversión Estimada ($ dic2018)</td>
+			    <td>Total estimado Magnitud de Inversión</td>
+			    <td>IRCA (%) 2018/td>
+			    <td>Nivel de Riesgo</td>
+			    <td>Cobertura Municipal Acueducto (%)</td>
+			    <td>Cobertura urbana Acueducto (%)</td>
+			    <td>Cobertura rural Acueducto (%)</td>
+			  </tr>
+			</thead>
+			<tbody *ngIf="indicadores">
+				<tr *ngFor="let indicador of indicadores">
+					<td>{{ indicador.llave }}</td>
+					<td *ngFor="let valor of indicador.valores">{{ valor.valor }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

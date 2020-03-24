@@ -1,0 +1,234 @@
+@media (min-width: 992px) {
+  .texto-componente{
+    color: #308CA6;
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .img-principal-componente{
+    background-color: #E7E7E7;
+    box-shadow: 20px 20px 50px 10px #f2f2f2 inset;  
+    height: 25rem; 
+    padding-top: 2rem;
+  }
+
+  .texto-subsitio{
+    background-color: #E7E7E7; 
+    padding-right: 0.6rem;
+    color: #308CA6;
+    padding-top: 0.7rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .borde-modulo{
+    border-top: #308CA6 solid 0.3rem; 
+    border-bottom: #308CA6 solid 0.3rem;
+  }
+
+  .btn-gray{
+    background-color: #E7E7E7;
+    color: #308CA6 !important;
+    margin-right: 0.5rem;
+  }
+
+  .outside{
+    position: relative;
+  }
+
+  .inside{
+    position: absolute;
+    bottom: 0;
+  }
+  .btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-icon {
+    height: 80%;
+  }
+  .btn-title {
+    background-color: #308CA6;
+    color: white;
+    height: 20%;
+    text-align-last: center;
+    font-size: large;
+    width: 101%;
+    text-transform: uppercase;
+    padding-top: 0.6rem;
+  }
+  .btn-micrositio {
+    border: 0.4rem solid #308CA6;
+    width: 20rem;
+    margin: 3rem;
+    height: 16rem;
+  }
+  .img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .texto-componente{
+    color: #308CA6;
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .img-principal-componente{
+    background-color: #E7E7E7;
+    box-shadow: 20px 20px 50px 10px #f2f2f2 inset;  
+    height: 25rem; 
+    padding-top: 2rem;
+  }
+
+  .texto-subsitio{
+    background-color: #E7E7E7; 
+    padding-right: 0.6rem;
+    color: #308CA6;
+    padding-top: 0.7rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .borde-modulo{
+    border-top: #308CA6 solid 0.3rem; 
+    border-bottom: #308CA6 solid 0.3rem;
+  }
+
+  .btn-gray{
+    background-color: #E7E7E7;
+    color: #308CA6 !important;
+    margin-right: 0.5rem;
+  }
+
+  .outside{
+    position: relative;
+  }
+
+  .inside{
+    position: absolute;
+    bottom: 0;
+  }
+  .btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-icon {
+    height: 80%;
+  }
+  .btn-title {
+    background-color: #308CA6;
+    color: white;
+    height: 20%;
+    text-align-last: center;
+    font-size: large;
+    width: 101%;
+    text-transform: uppercase;
+    padding-top: 0.6rem;
+  }
+  .btn-micrositio {
+    border: 0.4rem solid #308CA6;
+    width: 20rem;
+    margin: 3rem;
+    height: 20rem;
+    margin-top: 1.5rem;
+  }
+  .img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding-top: 2.5rem;
+  }
+
+  .img-borde-modulo{
+    height: 5rem;
+    width: 6rem;
+    margin-left: -1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .texto-componente{
+    color: #308CA6;
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .img-principal-componente{
+    background-color: #E7E7E7;
+    box-shadow: 20px 20px 50px 10px #f2f2f2 inset;  
+    height: 35rem; 
+    padding-top: 2rem;
+  }
+
+  .texto-subsitio{
+    background-color: #E7E7E7; 
+    padding-right: 0.6rem;
+    color: #308CA6;
+    padding-top: 0.7rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .borde-modulo{
+    border-top: #308CA6 solid 0.3rem; 
+    border-bottom: #308CA6 solid 0.3rem;
+  }
+
+  .btn-gray{
+    background-color: #E7E7E7;
+    color: #308CA6 !important;
+    margin-right: 0.5rem;
+  }
+
+  .outside{
+    position: relative;
+  }
+
+  .inside{
+    position: absolute;
+    bottom: 0;
+  }
+  .btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-icon {
+    height: 80%;
+  }
+  .btn-title {
+    background-color: #308CA6;
+    color: white;
+    height: 20%;
+    text-align-last: center;
+    font-size: large;
+    width: 101%;
+    text-transform: uppercase;
+    padding-top: 0.6rem;
+  }
+  .btn-micrositio {
+    border: 0.4rem solid #308CA6;
+    width: 20rem;
+    margin: 3rem;
+    height: 20rem;
+    margin-top: 1.5rem;
+  }
+  .img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding-top: 2.5rem;
+  }
+
+  .img-borde-modulo{
+    height: 5rem;
+    width: 6rem;
+    margin-left: 0.2rem;
+  }
+}

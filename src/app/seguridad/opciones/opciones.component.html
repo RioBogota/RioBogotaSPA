@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Opcion</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Ruta</th>
+      <!-- <th scope="col">Accion</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let opcion of opciones">
+      <th scope="row">{{opcion.nombre}}</th>
+      <td>{{opcion.descripcion}}</td>
+      <td>{{opcion.ruta}}</td>
+      <!-- <td><a routerLink="/opcion/editar/{{opcion.idOpcion}}">Editar</a></td> -->
+    </tr>
+  </tbody>
+</table>

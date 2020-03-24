@@ -1,4 +1,16 @@
 ﻿.login-container {
-    padding-top: 10rem;
     padding-bottom:3rem;
+    margin-bottom: 1rem;
+}
+
+form {
+    border: 1px solid gray;
+    padding: 1rem;  
+}
+
+.login{
+    margin-top: 4%;
+}
+.error {
+color: red;
 }

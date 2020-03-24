@@ -1,0 +1,27 @@
+<h4>Consultar Usuarios</h4>
+<div class="input-group mb-3" style="display: table-cell;">
+    <span class="input-group-text" id="inputGroup-sizing-default">Buscar</span>
+  <input type="text" class="form-control" aria-label="Default" [(ngModel)]="filtro" (input)="filtrar()"
+    aria-describedby="inputGroup-sizing-default">
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre de usuario</th>
+        <th scope="col">Primer Nombre</th>
+        <th scope="col">Primer Apellido</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <th scope="row">{{usuario.usuario1}}</th>
+        <td>{{usuario.primerNombre}}</td>
+        <td>{{usuario.primerApellido}}</td>
+        <td><a routerLink="/usuario/{{usuario.idUsuario}}" class="editar">Editar</a> &nbsp;<span class="eliminar"
+            (click)="eliminar(usuario.idUsuario)">Eliminar</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

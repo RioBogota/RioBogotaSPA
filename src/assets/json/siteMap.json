@@ -1,0 +1,201 @@
+[
+    {
+        "id": 1,
+        "modulo": "Ecosistemas Estrategicos",
+        "opciones": [
+            {
+                "id": 1,
+                "titulo": "Areas Protegidas",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 2,
+                "titulo": "Suelos",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 3,
+                "titulo": "Biodiversidad",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 4,
+                "titulo": "Gestion del riesgo",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 5,
+                "titulo": "Aire",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "modulo": "Recurso Hidrico",
+        "opciones": [
+            {
+                "id": 6,
+                "titulo": "Calidad del Agua",
+                "multiple": true,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 7,
+                "titulo": "Vertimientos",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 8,
+                "titulo": "SIRH",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 9,
+                "titulo": "ERA",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 10,
+                "titulo": "Oferta",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 11,
+                "titulo": "Demanda",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 12,
+                "titulo": "Riesgos Asociados al recurso hidrico",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 13,
+                "titulo": "Obras - Adecuación Hidrica",
+                "multiple": true,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 23,
+                "titulo": "Concesiones & Expedientes (SAE)",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false,
+                "ruta": "/sae/consulta"
+            }
+
+        ]
+    },
+    {
+        "id": 3,
+        "modulo": "Educación y participación",
+        "opciones": [
+            {
+                "id": 14,
+                "titulo": "Educación y participación",
+                "multiple": true,
+                "cartografia": false,
+                "documento": false
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "modulo": "Ordenamiento ambiental territorial",
+        "opciones": [
+            {
+                "id": 15,
+                "titulo": "Instrumentos de planificación",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 16,
+                "titulo": "POMCA",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 17,
+                "titulo": "Ordenamiento",
+                "multiple": false,
+                "documento": false
+            },
+            {
+                "id": 18,
+                "titulo": "Articulación POT-POMCA",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "modulo": "Gestión Institucional",
+        "opciones": [
+            {
+                "id": 19,
+                "titulo": "Indicadores de seguimiento",
+                "multiple": false,
+                "documento": false
+            },
+            {
+                "id": 20,
+                "titulo": "Gestion Entidades del CECH",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false,
+                "ruta": "/cech/general"
+                
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "modulo": "Económico-Financiero",
+        "opciones": [
+            {
+                "id": 21,
+                "titulo": "Fuentes de financiación",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            },
+            {
+                "id": 22,
+                "titulo": "Actividades Economicas de la cuenca",
+                "multiple": false,
+                "cartografia": false,
+                "documento": false
+            }
+        ]
+    }
+]

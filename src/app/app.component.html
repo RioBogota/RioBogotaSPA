@@ -1,6 +1,53 @@
-﻿<div class='container'>     
-
-    <router-outlet></router-outlet>
-
-    <footer></footer>
+﻿<div>
+  <i class="material-icons menu-icon" (click)="sidenav.toggle()">menu</i>
 </div>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" position="end">
+    <mat-list *ngIf="!usuario" style="margin-top: 5rem;">
+      <a mat-list-item routerLink="/home" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>home</mat-icon> Inicio
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>person</mat-icon>Ingresar
+      </a>
+    </mat-list>
+    <mat-list *ngIf="usuario" style="margin-top: 5rem;">
+      <div *ngFor="let opcion of opcionesPadre; let indice = index">
+        <h3 mat-subheader>{{ opcion.nombre }}</h3>
+        <!-- <mat-list-item>                     -->
+        <h5 mat-line *ngFor="let hijo of opcionesPadre[indice].hijos">
+          <a mat-list-item routerLink="/{{hijo.ruta}}" (click)="sidenav.toggle()">
+            <mat-icon mat-list-icon>fingerprint </mat-icon>{{hijo.nombre}}
+          </a>
+        </h5>
+        <!-- </mat-list-item> -->
+        <mat-divider></mat-divider>
+      </div>
+      <mat-list-item>
+        <h5 mat-line *ngIf="usuario">
+          <a mat-list-item routerLink="/login" (click)="sidenav.toggle()">
+            <mat-icon mat-list-icon>exit_to_app</mat-icon>Cerrar Sesión
+          </a>
+        </h5>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <nav-menu></nav-menu>  
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5rem;">
+      <header></header>
+      <router-outlet></router-outlet>
+      <app-owl-carousel style="padding-left: 2rem;"
+        *ngIf="router.url && (router.url === '/home' || router.url === '/home#Cuenca' || router.url === '/home#Componentes' || router.url === '/home#Noticias' || router.url === '/home#Sentencia' || router.url === '/home#Entidades' || router.url === '/home#Galeria')">
+      </app-owl-carousel>
+      <footer></footer>
+      <div class="d-none d-lg-block">
+        <a [ngClass]="{'show-scroll': showScroll}" (click)="scrollToTop()" class="scroll-to-top">
+          <img src="../../assets/PNG/back_to_top.png" alt="" width="50px" height="50px"
+            class="rounded-circle shadow mb-3 rounded">
+        </a>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

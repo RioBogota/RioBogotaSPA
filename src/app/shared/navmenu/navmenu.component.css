@@ -1,0 +1,171 @@
+@media (max-width: 575.98px) {
+  .navbar-size {
+    background-color: #E6E6E6;
+    height: 55px;
+    border-bottom: none !important;
+  }
+
+  .img-size{
+    width: 65px;
+    height: 80px;
+    margin-top: -6px;
+  }
+
+  .border-size{
+    margin-top: -1rem;
+    width: 130px;
+  }
+
+  .navs-left{
+    z-index: 2; 
+    position: absolute; 
+    left: 8rem; 
+    width:26rem ; 
+    margin-top: 1rem;
+  }
+
+  .navs-right{
+    z-index: 2; 
+    position: absolute; 
+    right: 8rem; 
+    width:28rem; 
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .navbar-size {
+    background-color: #E6E6E6;
+    height: 80px;
+    border-bottom: none !important;
+  }
+
+  .img-size{
+    width: 90px;
+    height: 110px;
+    margin-top: -3px;
+  }
+
+  .border-size{
+    width: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .img-size{
+    width: 90px;
+    height: 115px;
+  }
+
+  .border-size{
+    margin-top: -0.5rem;
+    width: 190px;
+  }
+
+  .navs-left{
+    z-index: 2; 
+    position: absolute; 
+    left: 8rem; 
+    width:26rem ; 
+    margin-top: 1rem;
+  }
+
+  .navs-right{
+    z-index: 2; 
+    position: absolute; 
+    right: 8rem; 
+    width:28rem; 
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .img-size{
+    width: 95px;
+    height: 120px;
+  }
+
+  .border-size{
+    width: 230px;
+  }
+
+  .navbar-options{
+    color: #071353; 
+    font-size: 18px;
+    text-decoration: none;
+  }
+
+  .navs-left{
+    z-index: 2; 
+    position: absolute; 
+    left: 8rem; 
+    width:26rem ; 
+    margin-top: 1rem;
+  }
+
+  .navs-right{
+    z-index: 2; 
+    position: absolute; 
+    right: 8rem; 
+    width:28rem; 
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .img-size{
+    width: 100px;
+    height: 120px;
+    margin-top: 8px;
+  }
+
+  .border-size{
+    margin-top: -0.1rem;
+    width: 230px;
+  }
+
+  .navs-left{
+    z-index: 2; 
+    position: absolute; 
+    left: 8rem; 
+    width:26rem ; 
+    margin-top: 1rem;
+  }
+
+  .navs-right{
+    z-index: 2; 
+    position: absolute; 
+    right: 8rem; 
+    width:28rem; 
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .img-size{
+    width: 100px;
+    height: 120px;
+    margin-top: 8px;
+  }
+
+  .border-size{
+    margin-top: -0.1rem;
+    width: 230px;
+  }
+
+  .navs-left{
+    z-index: 2; 
+    position: absolute; 
+    left: 15rem; 
+    width:26rem ; 
+    margin-top: 1rem;
+  }
+
+  .navs-right{
+    z-index: 2; 
+    position: absolute; 
+    right: 20rem; 
+    width:28rem; 
+    margin-top: 1rem;
+  }
+}

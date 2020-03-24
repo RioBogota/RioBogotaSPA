@@ -1,0 +1,30 @@
+  <div class="row" style="margin-left: 1rem; margin-right: 1.5rem;">
+    <h1>Cargar Documentos</h1>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <form action="#">
+      <div class="file-field input-field">
+        <label for="txtNombreArchivo">Ingrese el nombre del archivo</label>
+        <input  type="text" name="nombre" required minlength="150"
+          [(ngModel)]="nombreArchivo">
+      </div>
+      <div class="file-field input-field">
+          <label for="txtNombreArchivo">Ingrese una corta descripción del archivo</label>
+          <input name="descripcion" type="text" required minlength="250"
+            [(ngModel)]="descripcionArchivo">
+        </div>
+        <div class="file-field input-field">
+            <div class="btn btn-primary">
+              <span>Subir archivo</span>
+              <input (change)="seleccionarArchivo($event)" [disabled]="!nombreArchivo || !descripcionArchivo" type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Seleccione un archivo para cargar">
+            </div>
+          </div>
+    </form>
+  </div>
+
+<div class="row justify-content-center">
+  <p><a routerLink="/cech/general">VOLVER AL CECH</a></p>
+</div>

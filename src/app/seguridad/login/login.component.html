@@ -1,20 +1,30 @@
-﻿<header></header>
-<form #userlogin="ngForm" name="formLogin" (ngSubmit)="ingresar(userlogin.value)" ngNativeValidate class="login-container">
-    <div class="form-group">
-        <label for="txtUsuario">Usuario</label>
-        <input type="text" class="form-control" id="txtUsuario" name="usuario" pattern="^[a-zA-Z0-9_]*$" required maxlength="15" ngModel aria-describedby="usuarioAyuda" placeholder="Ingrese el usuario">
-        <small id="usuarioAyuda" class="form-text text-muted">No debe superar los 15 caracteres.</small>
-    </div>
-    <div class="form-group">
-        <label for="txtContrasena">Contraseña</label>
-        <input type="password" class="form-control" id="txtContrasena" pattern="^[a-zA-Z0-9_]*$" required name="contrasena" maxlength="20" ngModel placeholder="Ingrese la contraseña">
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="chkRecordarme">
-        <label class="form-check-label" for="chkRecordarme">Recordarme</label>
-    </div>
-    <div class="alert alert-danger" *ngIf="error" role="alert">
-        {{mensajeError}}
-    </div>
-    <button type="submit" class="btn btn-primary">Ingresar</button>
-</form>
+﻿<div class="d-flex justify-content-center login-container">
+  <mat-card class="col-5 text-center" tabindex="0">
+    <mat-card-content>
+      <form #userlogin="ngForm" name="formLogin" (ngSubmit)="ingresar(userlogin.value)" ngNativeValidate>
+        <div class="file-field input-field">
+          <input matInput placeholder="Ingrese su nombre de usuario" id="txtUsuario" name="usuario"
+            pattern="^[a-zA-Z0-9_]*$" required maxlength="15" ngModel aria-describedby="usuarioAyuda">
+        </div>
+        <div class="file-field input-field" style="display: flex;">
+          <input matInput placeholder="Ingrese su contraseña" [type]="hide ? 'password' : 'text'"
+            pattern="^[a-zA-Z0-9_.]*$" required name="contrasena" maxlength="20" ngModel>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+        <div class="d-flex justify-content-center">
+          <mat-checkbox id="chkRecordarme" color="primary">Recordarme!</mat-checkbox>
+        </div>
+        <div class="d-flex justify-content-center">
+          <a routerLink="/usuario/cambiar/correo">He olvidado mi contraseña</a>
+        </div>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Ingresar</button>
+        <div>
+          <span class="error">
+            {{mensajeError}}
+          </span>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

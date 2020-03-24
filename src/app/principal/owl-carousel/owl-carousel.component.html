@@ -1,0 +1,35 @@
+<!--xs - sm -->
+<div class="d-block d-sm-none">
+  <owl-carousel #owlElement [options]="opcionesResBaja" [items]="images"
+    [carouselClasses]="['owl-theme', 'row', 'sliding']" id="entidades">
+    <div class="item" *ngFor="let image of images;let i = index">
+
+      <img [src]="image" alt=""  class="img-carousel" [style.width]="getWidth(image)">
+    </div>
+  </owl-carousel>
+</div>
+<!--Fin xs - sm-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+  <owl-carousel #owlElement [options]="opcionesResMedia" [items]="images"
+    [carouselClasses]="['owl-theme', 'row', 'sliding']" id="entidades">
+    <div class="item" *ngFor="let image of images;let i = index">
+
+      <img [src]="image" alt="" class="img-carousel" [style.width]="getWidth(image)">
+    </div>
+  </owl-carousel>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block">
+  <div data-spy="scroll" data-target=".navbar" data-offset="50">
+    <owl-carousel #owlElement [options]="opcionesResAlta" [items]="images"
+      [carouselClasses]="['owl-theme', 'row', 'sliding']" id="entidades">
+      <div class="item" *ngFor="let image of images;let i = index">
+
+        <img [src]="image" alt="" class="img-carousel" [style.width]="getWidth(image)">
+      </div>
+    </owl-carousel>
+  </div>
+</div>
+<!--Fin resto resoluciones-->

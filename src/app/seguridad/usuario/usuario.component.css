@@ -1,2 +1,14 @@
-﻿body {
+﻿.invalid {
+    border-bottom-color: red;
+    border-bottom-width: 3px;
 }
+
+/*.input-group>.input-group-prepend>.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    min-width: 17rem;
+}
+
+form {
+    margin-top: 3%;
+} */

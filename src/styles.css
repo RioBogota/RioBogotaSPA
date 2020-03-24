@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@font-face {
+    font-family: cocogoose;
+    src: url(assets/fonts/Cocogoose-Pro-Thin-trial.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: cocogoose;
+    src: url(assets/fonts/Cocogoose-Pro-Italic-trial.ttf) format('truetype');
+    font-weight: bold;
+}
+
+body {
+    background: #ffffff;
+    height: 100%;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+    font-family: 'cocogoose', 'Montserrat', sans-serif !important;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}

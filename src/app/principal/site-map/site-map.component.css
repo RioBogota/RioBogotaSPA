@@ -1,0 +1,13 @@
+.site1{
+    background-image: url('/assets/PNG/sitemap1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.site3{
+    background-image: url('/assets/PNG/sitemap3.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

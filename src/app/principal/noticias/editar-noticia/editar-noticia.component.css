@@ -1,0 +1,25 @@
+.previsualizar-archivo {
+    padding-left: 3rem;
+    border: 1px green solid;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 500px;
+  }
+
+  .previsualizar {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+  }
+
+  span#inputGroup-sizing-default {
+    min-width: 10rem;
+}
+
+.container-noticias{
+    margin-top: 3%;
+}

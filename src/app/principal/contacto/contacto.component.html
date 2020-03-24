@@ -1,0 +1,180 @@
+<!--xs - sm -->
+<div class="d-block d-sm-none">
+  <h2 class="text-center">Contáctanos</h2>
+  
+  <form name="formContacto" (ngSubmit)="guardar()" ngNativeValidate>
+    <div class="col-12 form-group">
+      <!-- nombre -->
+      <div class="input-field">
+        <input matInput placeholder="Primer Nombre" name="txtprimernombre" type="text" required maxlength="150"
+          minlength="4" [(ngModel)]="contacto.primerNombre">
+      </div>
+      <div class="input-field">
+        <input matInput placeholder="Segundo Nombre" type="text" name="txtsegundonombre"
+          [(ngModel)]="contacto.segundoNombre">
+      </div>
+      <div class="input-field">
+        <input matInput placeholder="Primer Apellido" type="text" required maxlength="150" minlength="4"
+          name="txtprimerapellido" [(ngModel)]="contacto.primerApellido">
+      </div>
+      <div class="input-field">
+        <input matInput placeholder="Segundo Apellido" type="text" name="txtsegundoapellido"
+          [(ngModel)]="contacto.segundoApellido">
+      </div>
+      <!-- email -->
+      <div class="input-field">
+        <input matInput placeholder="Telefono" type="tel" name="txttelefono" [(ngModel)]="contacto.telefono">
+      </div>
+      <div class="input-field">
+        <input matInput placeholder="Celular" type="tel" name="txtcelular" required minlength="10"
+          [(ngModel)]="contacto.celular">
+      </div>
+      <div class="input-field">
+        <input matInput placeholder="Correo Electronico" type="email" name="txtcorreo" required
+          [(ngModel)]="contacto.correo">
+      </div>
+    </div>
+    <!-- Tipo solicitud -->
+    <mat-form-field class="col-12">
+      <mat-select placeholder="Tipo de solicitud" name="opcion-contacto" [(ngModel)]="contacto.idTipoContacto">
+        <mat-option *ngFor="let tipo of tiposContacto" [value]="tipo.idTipoContacto">
+          {{tipo.descripcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>   
+    
+    <mat-form-field class="col-12">
+      <textarea matInput placeholder="¿Qué quieres decirnos?" name="txtdescripcion" required minlength="100"
+        [(ngModel)]="contacto.descripcion"></textarea>
+    </mat-form-field>
+
+    <div class="row justify-content-center">
+      <button mat-fab color="primary" type="submit" name="btnenviar">Enviar</button>
+    </div>
+  </form>
+</div>
+<!--Fin xs - sm-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none margen-contacto">
+    <h2 class="text-center">Contáctanos</h2>
+  
+    <form name="formContacto" (ngSubmit)="guardar()" ngNativeValidate>
+      <div class="col-12">
+        <!-- nombre -->
+        <div class="input-field">
+          <input matInput placeholder="Primer Nombre" name="txtprimernombre" type="text" required maxlength="150"
+            minlength="4" [(ngModel)]="contacto.primerNombre">
+        </div>
+        <div class="input-field">
+          <input matInput placeholder="Segundo Nombre" type="text" name="txtsegundonombre"
+            [(ngModel)]="contacto.segundoNombre">
+        </div>
+        <div class="input-field">
+          <input matInput placeholder="Primer Apellido" type="text" required maxlength="150" minlength="4"
+            name="txtprimerapellido" [(ngModel)]="contacto.primerApellido">
+        </div>
+        <div class="input-field">
+          <input matInput placeholder="Segundo Apellido" type="text" name="txtsegundoapellido"
+            [(ngModel)]="contacto.segundoApellido">
+        </div>
+        <!-- email -->
+        <div class="input-field">
+          <input matInput placeholder="Telefono" type="tel" name="txttelefono" [(ngModel)]="contacto.telefono">
+        </div>
+        <div class="input-field">
+          <input matInput placeholder="Celular" type="tel" name="txtcelular" required minlength="10"
+            [(ngModel)]="contacto.celular">
+        </div>
+        <div class="input-field">
+          <input matInput placeholder="Correo Electronico" type="email" name="txtcorreo" required
+            [(ngModel)]="contacto.correo">
+        </div>
+      </div>
+      <!-- Tipo solicitud -->
+      <mat-form-field class="col-12">
+        <mat-select placeholder="Tipo de solicitud" name="opcion-contacto" [(ngModel)]="contacto.idTipoContacto">
+          <mat-option *ngFor="let tipo of tiposContacto" [value]="tipo.idTipoContacto">
+            {{tipo.descripcion}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>   
+      
+      <mat-form-field class="col-12">
+        <textarea matInput placeholder="¿Qué quieres decirnos?" name="txtdescripcion" required minlength="100"
+          [(ngModel)]="contacto.descripcion"></textarea>
+      </mat-form-field>
+  
+      <div class="row justify-content-center">
+        <button mat-fab color="primary" type="submit" name="btnenviar">Enviar</button>
+      </div>
+    </form>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block margen-contacto">
+  <h1 class="titulo-contacto">Contáctanos</h1>
+  <form name="formContacto" (ngSubmit)="guardar()" ngNativeValidate class="col-12">
+    <!-- nombre -->
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Primer Nombre" name="txtprimernombre" type="text" required maxlength="150"
+          minlength="4" [(ngModel)]="contacto.primerNombre">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Segundo Nombre" type="text" name="txtsegundonombre"
+          [(ngModel)]="contacto.segundoNombre">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Primer Apellido" type="text" required maxlength="150" minlength="4"
+          name="txtprimerapellido" [(ngModel)]="contacto.primerApellido">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Segundo Apellido" type="text" name="txtsegundoapellido"
+          [(ngModel)]="contacto.segundoApellido">
+      </div>
+    </div>
+    <!-- email -->
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Telefono" type="tel" name="txttelefono" [(ngModel)]="contacto.telefono">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col-12">
+        <input matInput placeholder="Celular" type="tel" name="txtcelular" required minlength="10"
+          [(ngModel)]="contacto.celular">
+      </div>      
+    </div>
+    <!-- Tipo solicitud -->
+    <div class="row">
+      <mat-form-field class="col-12">
+          <mat-select placeholder="Tipo de solicitud" name="opcion-contacto" [(ngModel)]="contacto.idTipoContacto">
+            <mat-option *ngFor="let tipo of tiposContacto" [value]="tipo.idTipoContacto">
+              {{tipo.descripcion}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+      <div class="input-field col-12">
+          <input matInput placeholder="Correo Electronico" type="email" name="txtcorreo" required
+            [(ngModel)]="contacto.correo">
+        </div>
+    </div>
+      <div class="row">
+        <mat-form-field class="col-12">
+          <textarea matInput placeholder="¿Qué quieres decirnos?" name="txtdescripcion" required minlength="100"
+            [(ngModel)]="contacto.descripcion"></textarea>
+        </mat-form-field>
+      </div>
+    <div class="row justify-content-center">
+      <button mat-fab color="primary" type="submit" name="btnenviar">Enviar</button>
+    </div>
+  </form>
+</div>

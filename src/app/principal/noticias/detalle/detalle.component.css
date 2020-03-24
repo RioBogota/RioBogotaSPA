@@ -1,0 +1,21 @@
+@media (min-width: 1200px) {
+    .detalle-noticia {
+        margin-top: 3%;
+    }
+    
+    .margen-noticia{
+        margin: 0.5rem;
+        padding-top: 1.5rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .detalle-noticia {
+        margin-top: 3%;
+    }
+    
+    .margen-noticia{
+        margin: 1.5rem;
+        padding-top: 2rem;
+    }
+}

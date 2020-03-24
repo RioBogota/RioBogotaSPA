@@ -1,0 +1,44 @@
+<form name="formAgregarRol" ngNativeValidate style="margin-left: 0.5rem; margin-right: 0.5rem;">
+  <h3>Crear Rol</h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+      <input type="text" required class="form-control" minlength="5" maxlength="15" aria-label="Nombre Rol"
+        name="nombreRol" aria-describedby="rol-default" placeholder="Nombre Rol"
+        [(ngModel)]="rol.nombre">
+    </div>
+    <div class="form-group form-check col-xs-12 col-sm-12 col-md-5 col-lg-5">
+      <input type="checkbox" [(ngModel)]="rol.apruebaDocumentos" class="form-check-input" id="exampleCheck1" name="validaMicrositio"
+        aria-label="" aria-describedby="">
+      <label class="form-check-label" for="exampleCheck1">¿Administra Datos?</label>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <h4>Lista Opciones Menú</h4>
+    <div class="row">
+      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let opcion of opciones">
+        <div>{{opcion.nombre | limitTo: 18}}</div>
+        <app-switch title='sitio' (seleccion)="seleccionarValores($event, opcion)" 
+        [modelo]="opcion.seleccionado">
+        </app-switch>
+      </span>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="rol.apruebaDocumentos">
+    <h4>Lista Micrositios</h4>
+    <div class="row">
+      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let sitio of modulos">
+        <div>{{sitio.descripcion | limitTo: 18}}</div>
+        <app-switch title='sitio' (seleccion)="seleccionarValores($event, sitio)" [modelo]="sitio.seleccionado">
+        </app-switch>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <input type="submit" value="Guardar" (click)="guardar()" class="btn btn-success mr-5" />
+      <input type="reset" value="Limpiar" class="btn btn-danger" />
+    </div>
+  </div>
+</form>

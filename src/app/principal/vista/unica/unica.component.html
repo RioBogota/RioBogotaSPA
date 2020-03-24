@@ -1,0 +1,81 @@
+<mat-spinner *ngIf="!componente" style="margin: 0 auto;"></mat-spinner>
+<!--xs - sm -->
+<div class="d-block d-sm-none">
+  <h3 class="text-center">ESTAMOS TRABAJANDO PARA DARTE UNA MEJOR EXPERIENCIA DE USUARIO</h3>
+</div>
+<!--Fin xs - sm-->
+<!--md-->
+<div class="d-none d-md-block d-lg-none">
+  <h3 class="text-center">ESTAMOS TRABAJANDO PARA DARTE UNA MEJOR EXPERIENCIA DE USUARIO</h3>
+</div>
+<!--Fin md-->
+<!--Resto de resoluciones-->
+<div class="d-none d-lg-block" *ngIf="componente" style="margin-top: -3rem;">
+  <div class="row" style="margin-bottom: 0;">
+    <div class="col-lg-3 img-principal-componente">
+      <img src="../../assets/PNG/logo-componente-prin.png" alt="" class="img-fluid text-center">
+    </div>
+    <div class="col-lg-9">
+      <h1 class="texto-componente">
+        {{componenteTitulo ? componenteTitulo[0] : 'Cargando'}}
+        <br>
+        <span style="font-size: 7rem;">{{componenteTitulo[1]?.toUpperCase()}}</span>
+        <br>
+        <span style="font-size: 7rem;">{{componenteTitulo[2]?.toUpperCase()}}</span>
+        <br>
+        <span style="font-size: 7rem;">{{componenteTitulo[3]?.toUpperCase()}}</span>
+      </h1>
+    </div>
+  </div>
+  <div class="row" *ngFor="let modulo of componente[0].modulo; let indice = index" style="height: 50rem;">
+    <div class="col-lg-3 borde-modulo outside">
+      <div class="row">
+        <div class="col-12">
+          <div class="row" style="margin-right: -3rem;">
+            <div class="col-3" style="background-color: #308CA6; height: 5rem;">
+              <img src="../../assets/PNG/r-ordenamiento.png" class="img-borde-modulo" alt="">
+            </div>
+            <div class="col-9" style="margin-left: -1rem;">
+              <p class="text-right texto-subsitio"><b>
+                  <h5><strong>{{modulo?.titulo?.toUpperCase()}}</strong></h5>
+                </b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <p class="text-justify">{{modulo.texto}}</p>
+      </div>
+      <div class="col-12 inside">
+        <a class="btn btn-gray" (click)="seleccionarModulo(indice, modulo)">Mapa</a>
+        <a class="btn btn-gray" (click)="mostrarSitios(modulo)">Temáticas</a>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="borde-modulo" style="height: 50rem; padding-top: 1rem; padding-bottom: 1rem; overflow: auto;">
+        <div *ngIf="modulo.mostrar" class="btn-container">
+          <span *ngFor="let micrositio of modulo.micrositio" >
+            <div *ngIf="micrositio.titulo" class="btn-micrositio">
+                <a *ngIf="micrositio.idMicrositio !== 55" [routerLink]="'/multiple/'+ micrositio.idMicrositio">
+                  <div class="btn-icon">
+                      <img src="../../assets/PNG/logo-componente-prin.png" alt="" class="img-fluid img-center" style="max-width: 60%;">
+                  </div>
+                  <div class="btn-title text-center">{{micrositio.titulo}}</div>
+                </a>
+                <a *ngIf="micrositio.idMicrositio === 55" href="https://www.car.gov.co/vercontenido/3691" target="_blank">
+                  <div class="btn-icon">
+                      <img src="../../assets/PNG/logo-componente-prin.png" alt="" class="img-fluid img-center" style="max-width: 60%;">
+                  </div>
+                  <div class="btn-title text-center">{{micrositio.titulo}}</div>
+                </a>
+            </div>
+            
+          </span>
+        </div>
+        <hr>
+        <iframe scrolling="no" *ngIf="modulo?.mapaMicrositio?.length && idMicrositio <= 0 && !modulo.mostrar"
+          [src]="modulo.mapaMicrositio[0].urlMapa" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>

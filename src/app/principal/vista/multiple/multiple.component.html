@@ -1,0 +1,66 @@
+<div class="row" id="Cuenca" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+  <div class="col-md-12 col-lg-12">
+    <h2>{{modulo.titulo}}</h2>
+    <p class="text-justify">
+      {{modulo.texto}}
+    </p>
+  </div>
+  <div class="row col-md-12 justify-content-center" *ngIf="urlMapa2">
+    <div class="col-md-2 col-lg-2 text-center"
+      style="background-color: #318BA7; border-radius: 15px; border: 10px solid #318BA7; overflow-y: scroll; padding: 2% 0 2% 0; height: 700px;">
+      <div style="padding: 0 0 10% 0;" *ngFor="let mapa of modulo.mapaMicrositio">
+        <a href="#">
+          <img [src]="mapa.imagenMiniaturaUrl" class="z-depth-5" alt="" width="170px" height="120px">
+        </a>
+      </div>
+    </div>
+    <div class="col-md-10 col-lg-10 text-center" style="border-radius: 15px; border: 10px solid #318BA7;">
+      <iframe scrolling="no" [src]="urlMapa2" width="100%" height="100%" frameborder="0"> </iframe>
+    </div>
+  </div>
+</div>
+<div *ngIf="modulo && modulo.video && modulo.video.length">
+  <h3>Videos Relacionados</h3>
+  <iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen *ngFor="let video of modulo.video" [src]="video.url"></iframe>
+</div>
+<!-- Enlace -->
+<div class="row" *ngIf="modulo?.subsitioIdPadreNavigation?.length >= 1 || modulo?.subsitioIdHijoNavigation?.length >= 1">
+  <div class="col-md-12 col-lg-12 text-center">
+    <h2><strong>Ver Componentes del Módulo</strong></h2>
+    <div *ngIf="modulo?.subsitioIdPadreNavigation?.length >= 1">
+      <div *ngFor="let padre of padres">
+        <a *ngIf="padre.idPadre !== 23"
+          [routerLink]="'/multiple/'+ padre.idPadre">{{ padre.idPadreNavigation.descripcion }}</a>
+      </div>
+    </div>
+    <div *ngIf="modulo?.subsitioIdHijoNavigation?.length >= 1">
+      <div *ngFor="let subsitio of hijos">
+        <a *ngIf="subsitio.idHijo !== 23 && subsitio.idHijo !== 81"
+          [routerLink]="'/multiple/'+ subsitio.idHijo">{{ subsitio.idHijoNavigation.descripcion }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Documentos-->
+<div class="row" *ngIf="documentos?.length">
+  <div class="col-md-12 col-lg-12 text-center">
+    <h2><strong>Ver Documentos</strong></h2>
+    <p>
+      Para más información encuentre aquí los documentos relacionados.
+    </p>
+  </div>
+</div>
+<div class="row justify-content-center" style="margin-left: 1rem; margin-right: 1rem;" *ngIf="documentos?.length">
+  <div class="col-2" *ngFor="let documento of documentos">
+    <a [href]="'https://docs.google.com/uc?id='+documento.id+'&export=download'" target="_blank">
+      <p class="text-center"><small class="text-muted">Modificado: {{documento.modifiedTime | date: 'dd/MM/yyyy'}}</small></p>
+      <img src="../../assets/PNG/logo-pdfs.png" class="img-fluid img-doc" alt="">
+      <p class="text-center">{{documento.name}}</p>
+    </a>
+  </div>
+</div>
+
+
+<app-irca *ngIf="idUrl == 19"></app-irca>
+<app-financiero *ngIf="idUrl == 20"></app-financiero>

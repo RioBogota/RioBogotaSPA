@@ -1,0 +1,23 @@
+@media (min-width: 1200px) {
+    .titulo-contacto {
+        margin-left: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .margen-contacto{
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .titulo-contacto {
+        margin-left: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .margen-contacto{
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+}

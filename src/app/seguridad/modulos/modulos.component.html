@@ -1,0 +1,122 @@
+<div style="margin-left: 0.5rem; margin-right: 0.5rem;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h1>Módulos</h1>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="subopcion" [(ngModel)]="adminSitio"
+      aria-label="Subopcion" aria-describedby="subopcion-default">
+    <label class="form-check-label" for="exampleCheck1">Deseo Administrar un sitio principal.</label>
+  </div>
+  <div *ngIf="!adminSitio">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <label for="moduloSelect">Seleccione un Módulo</label>
+          <select class="form-control" id="moduloSelect" [(ngModel)]="modulo" (change)="precargarSeleccionados()">
+            <option [ngValue]="mod" *ngFor="let mod of modulos">
+              {{mod.descripcion}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input type="text" id="titulo" required class="form-control" minlength="4" maxlength="50"
+            aria-describedby="titulo" name="nombre" [(ngModel)]="modulo.titulo"
+            placeholder="Ingrese un titulo para el modulo">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <label for="texto">Descripción del Módulo</label>
+          <textarea class="form-control" style="height: 100px !important;" id="texto" [(ngModel)]="modulo.texto"
+            aria-label="texto"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h3>Asociar Micrositios</h3>
+    </div>
+    <hr>
+    <div class="row" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let sitio of modulos">
+        <div [title]="sitio.descripcion">{{sitio.descripcion | limitTo: 18}}</div>
+        <app-switch (seleccion)="seleccionarValores($event, sitio)" [modelo]="sitio.seleccionado" title='sitio'>
+        </app-switch>
+      </span>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+        <button (click)="agregarMapa()" class="btn btn-primary">Agregar Mapa</button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5"
+        *ngFor="let mapa of modulo.mapaMicrositio; let indice = index;">
+        <div class="alert alert-dismissible fade show">
+          <button type="button" class="close" (click)="eliminarMapa(indice)" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <input type="text" id="cartografia" [(ngModel)]="mapa.urlMapa" placeholder="Ingrese URL cartografía">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+        <button (click)="agregarVideo()" class="btn btn-primary">Agregar Video</button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" *ngFor="let video of modulo.video; let indice = index;">
+        <div class="alert alert-dismissible fade show">
+          <button type="button" class="close" (click)="eliminarVideo(indice)" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <input type="text" id="titulo" [(ngModel)]="video.titulo" placeholder="Ingrese el titulo del video">
+          <input type="text" id="descripcion" [(ngModel)]="video.descripcion"
+            placeholder="Ingrese la descripcion del video">
+          <input type="text" id="video" [(ngModel)]="video.url" placeholder="Ingrese URL del video">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <input type="text" required class="form-control" aria-describedby="titulo" name="nombre" id="titulo"
+          [(ngModel)]="modulo.idCarpeta" placeholder="Ingrese ID de carpeta Google Drive">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="submit" value="Guardar" (click)="guardar()" class="btn btn-success mr-5" />
+        <input type="reset" value="Limpiar" class="btn btn-danger" />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="adminSitio">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <label for="moduloSelect">Seleccione un Módulo</label>
+          <select class="form-control" id="moduloSelect" [(ngModel)]="sitio">
+            <option [ngValue]="mod" *ngFor="let mod of sitios">
+              {{mod.descripcion}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <label>Titulo</label>
+          <input type="text" [(ngModel)]="sitio.titulo">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <label>Texto</label>
+          <textarea [(ngModel)]="sitio.texto"></textarea>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="sitio?.mapaMicrositio?.length">
+          <label>URL del Mapa</label>
+          <input type="text" [(ngModel)]="sitio.mapaMicrositio[0].urlMapa">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col">
+          <input type="submit" value="Guardar" (click)="guardarSitio()" class="btn btn-success mr-5" />
+          <input type="reset" value="Limpiar" class="btn btn-danger" />
+        </div>
+      </div>
+  </div>
+</div>

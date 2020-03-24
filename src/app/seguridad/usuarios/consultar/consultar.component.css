@@ -1,0 +1,25 @@
+.eliminar {
+    color: red;
+    cursor: pointer;
+}
+
+.eliminar:hover{
+    text-decoration: underline;
+}
+
+.editar {
+    color: darkblue;
+    cursor: pointer;
+}
+
+.editar:hover{
+    text-decoration: underline;
+}
+
+a {
+    color: white;
+}
+
+h4 {
+    margin-top: 3%;
+}

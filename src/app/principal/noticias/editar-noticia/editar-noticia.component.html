@@ -1,0 +1,79 @@
+<div class="container-fluid container-noticias">
+  <form name="formNoticia" ngNativeValidate>
+    <div class="container-fluid shadow">
+      <h4 class="pr-5 pl-5">Detalle de la noticia</h4>
+      <div class="col-12 text-right">
+        Activar/ Desactivar Noticia <app-switch (seleccion)="cambiarValorNoticia($event)" [modelo]="noticia.activa"></app-switch>
+      </div>
+      <div class="input-group pt-3 pr-5 pl-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Tipo de noticia</span>
+        </div>
+        <select name="tiposnoticias" id="tiposNoticias" [disabled]="!noticia.activa" [(ngModel)]="noticia.idTipoNoticia">
+          <option [value]="tipo.idTipoNoticia" *ngFor="let tipo of tiposNoticias">{{tipo.descripcion}}</option>
+        </select>
+      </div>
+      <div class="input-group pt-3 pr-5 pl-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
+        </div>
+        <input type="text" required class="form-control" minlength="5" aria-label="Titulo" name="titulo"
+        [(ngModel)]="noticia.titulo" aria-describedby="usuario-default" [disabled]="!noticia.activa">
+      </div>
+      <div class="input-group pt-3 pr-5 pl-5">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Fecha noticia</span>
+        </div>
+        <input type="date" required class="form-control" minlength="5" aria-label="Titulo" name="fechaPublicacion"
+          [(ngModel)]="noticia.fechaPublicacion" aria-describedby="usuario-default" [disabled]="!noticia.activa">
+      </div>
+    <div class="pr-5 pl-5">
+      <h5 >Ingrese la noticia</h5>
+    </div>
+    <div class="pr-5 pl-5">
+      <ckeditor [editor]="Editor" name="descripcion" [(ngModel)]="noticia.descripcion" [disabled]="!noticia.activa"></ckeditor>
+    </div>
+
+    <div class="input-group pt-3 pr-5 pl-5">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Referencia</span>
+      </div>
+      <input type="text" required class="form-control" minlength="5" aria-label="Referencia" name="referencia"
+        [(ngModel)]="noticia.referencias" aria-describedby="usuario-default" [disabled]="!noticia.activa">
+    </div>
+    <hr>
+    <h4 class="pr-5 pl-5">Archivos Multimedia</h4>
+    <div class="form-group row pr-5 pl-5" *ngFor="let multimedia of noticia.multimediaNoticia; let indice = index">
+      <div class="col-3">Activar/ Desactivar Multimedia</div>
+      <div class="col-1">
+        <app-switch (seleccion)="cambiarValorMultimedia($event, multimedia)" [modelo]="multimedia.activa"></app-switch>
+      </div>
+      <div class="input-group col-8" style="margin-bottom: 1rem;">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Tipo de archivo</span>
+        </div>
+        <select name="tiposMultimedias" id="tiposMultimedias" [(ngModel)]="multimedia.idTipoMultimedia" [disabled]="!noticia.activa || !multimedia.activa">
+          <option [value]="tipo.idTipoMultimedia" *ngFor="let tipo of tiposMultimedias">{{tipo.nombre}}</option>
+        </select>
+      </div>
+      <div class="input-group col-12">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Archivo</span>
+        </div>
+        <input type="text" required class="form-control" minlength="5" aria-label="Archivo" name="archivo{{indice}}"
+            [(ngModel)]="multimedia.url" aria-describedby="archivo-default" [disabled]="!noticia.activa || !multimedia.activa">
+      </div>
+      <br>
+      <h5 class="pr-1 pl-1 previsualizar" *ngIf="multimedia.idTipoMultimedia == 1 && multimedia.activa">Previsualizacion Archivo</h5>
+      <div class="input-group col-3 previsualizar-archivo previsualizar" style="padding: 0;" *ngIf="multimedia.idTipoMultimedia == 1  && multimedia.activa">
+        <img [src]="multimedia.url" class="center" width="500" height="500" />
+      </div>
+    </div>
+    <div class="pr-5 pl-5">
+      <input type="button" class="btn btn-default mr-5" (click)="agregarMultimedia()" value="Agregar Otro Archivo Multimedia">
+      <input type="submit" name="guardar" value="Guardar" (click)="guardar()" class="btn btn-success mr-5" />
+    </div>
+    <br>
+    </div>
+  </form>
+</div>

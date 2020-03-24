@@ -1,0 +1,93 @@
+<mat-tab-group>
+  <mat-tab label="Predios">
+    <div class="row justify-content-center">
+      <mat-paginator [length]="totalPredios" [pageSize]="paginaPredios.cantidadRegistros"
+        [pageSizeOptions]="pageSizeOptionsPredios" (page)="paginarPredios($event)">
+      </mat-paginator>
+    </div>
+    <br>
+    <div class="container-fluid table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID Expediente</th>
+            <th scope="col">Fuente</th>
+            <th scope="col">Caudal</th>
+            <th scope="col">Título Minero</th>
+            <th scope="col">Municipio</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Subfuente</th>
+            <th scope="col">Vereda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let predio of predios">
+            <td>{{predio.idExpediente}}</td>
+            <td>{{predio.fuente}}</td>
+            <td>{{predio.infoTecnicaCaudal}}</td>
+            <td>{{predio.infoTecnicaTituloMinero}}</td>
+            <td>{{predio.municipio}}</td>
+            <td>{{predio.nombre}}</td>
+            <td>{{predio.subFuente}}</td>
+            <td>{{predio.vereda}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </mat-tab>
+  <!-------------------------------------------------------->
+  <mat-tab label="Resoluciones">
+    <div class="row justify-content-center">
+      <mat-paginator [length]="totalResoluciones" [pageSize]="paginaResoluciones.cantidadRegistros"
+        [pageSizeOptions]="pageSizeOptionsResoluciones" (page)="paginarResoluciones($event)">
+      </mat-paginator>
+    </div>
+    <br>
+    <div class="container-fluid table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">ID Resolución</th>
+            <th scope="col">Documento</th>
+            <th scope="col"># Documento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resolucion of resoluciones">
+            <td>{{resolucion.fechaDocumento}}</td>
+            <td>{{resolucion.idResolucion}}</td>
+            <td>{{resolucion.descDocumento}}</td>
+            <td>{{resolucion.numeroDocumento}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-tab>
+  <!---------------------------------------------------------->
+  <mat-tab label="Tramites">
+      <div class="row justify-content-center">
+          <mat-paginator [length]="totalTramites" [pageSize]="paginaTramites.cantidadRegistros" [pageSizeOptions]="pageSizeOptionsTramites"
+            (page)="paginarTramites($event)">
+          </mat-paginator>
+        </div>
+    <br>
+    <div class="container-fluid table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tramite of tramites">
+            <td>{{tramite.nombre}}</td>
+            <td>{{tramite.usuarios}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-tab>
+</mat-tab-group>

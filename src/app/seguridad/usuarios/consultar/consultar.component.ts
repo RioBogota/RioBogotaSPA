@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
-import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-consultar',
   templateUrl: './consultar.component.html',
   styleUrls: ['./consultar.component.css']
 })
-export class ConsultarComponent implements OnInit {
+export class ConsultarComponent extends Base implements OnInit {
 
   usuarios: any;
   copia: any;
   filtro: string
-  constructor(private seguridadService: TokenInterceptorService) { }
+  constructor(private seguridadService: TokenInterceptorService) { 
+    super();
+  }
 
   filtrar = () => {
     this.usuarios = this.copia.filter(x => x.usuario1.toUpperCase()
@@ -22,7 +24,7 @@ export class ConsultarComponent implements OnInit {
   }
 
   eliminar = (idUsuario: Number) => {
-    this.seguridadService.eliminarUsuarioEspecifico(idUsuario).subscribe((result) => {
+    this.unsubscribeOndestroy(this.seguridadService.eliminarUsuarioEspecifico(idUsuario).subscribe((result) => {
       this.usuarios.forEach((usuario, indice) => {
         if (usuario.idUsuario === idUsuario) {
           this.usuarios.splice(indice, 1);
@@ -31,16 +33,15 @@ export class ConsultarComponent implements OnInit {
       });
     }, (error) => {
       console.error(error);
-    });
+    }));
   }
 
   ngOnInit() {
-    this.seguridadService.getUsuarios().subscribe((result) => {
+   this.unsubscribeOndestroy(this.seguridadService.getUsuarios().subscribe((result) => {
       this.usuarios = result;
       this.copia = this.usuarios.slice()
     }, (error) => {
 
-    });
+    }));
   }
-
 }

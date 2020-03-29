@@ -3,13 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { DomSanitizer, SafeScript } from '@angular/platform-browser';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-multiple',
   templateUrl: './multiple.component.html',
   styleUrls: ['./multiple.component.css']
 })
-export class MultipleComponent implements OnInit {
+export class MultipleComponent extends Base implements OnInit {
   public modulo: any = {};
   public urlMapa2: SafeScript;
   public documentos: any = [];
@@ -29,23 +30,25 @@ export class MultipleComponent implements OnInit {
   }
 
   constructor(private router: ActivatedRoute, private seguridadService: TokenInterceptorService, private sanitizer: DomSanitizer, private principalService: PrincipalService) {
+    super();
     this.init();
   }
 
   init() {
-    this.router.url.subscribe(urlResult => {
+    //TODO remove ensted observables
+    this.unsubscribeOndestroy(this.router.url.subscribe(urlResult => {
       if (urlResult[0].path !== 'multiple')
         return;
 
-      this.router.params.subscribe(result => {
+      this.unsubscribeOndestroy(this.router.params.subscribe(result => {
         this.idUrl = result.id;
         this.cargarDatos(result.id);
-      });
-    });
+      }));
+    }));
   }
 
   cargarDatos = (id: number) => {
-    this.principalService.getChild(id).subscribe(modulo => {
+    this.unsubscribeOndestroy(this.principalService.getChild(id).subscribe(modulo => {
       this.mostrarUrl(modulo.video);
       this.modulo = modulo;
       if (modulo.subsitioIdPadreNavigation)
@@ -53,19 +56,19 @@ export class MultipleComponent implements OnInit {
       if (modulo.subsitioIdHijoNavigation)
         this.hijos = modulo.subsitioIdHijoNavigation.filter(hijo => hijo)
       if (modulo.idCarpeta) {
-        this.principalService.consultarDocumentos(this.modulo.idCarpeta).subscribe(documentos => {
+        this.unsubscribeOndestroy(this.principalService.consultarDocumentos(this.modulo.idCarpeta).subscribe(documentos => {
           this.documentos = documentos;
         }, error => {
           console.error(error);
           if (error.status !== 404)
             alert('Se produjo un error al consultar los documentos del modulo');
-        })
+        }));
       }
       this.urlMapa2 = undefined;
       if (this.modulo && this.modulo.mapaMicrositio && this.modulo.mapaMicrositio.length) {
         this.mostrarMapa(this.modulo.mapaMicrositio[0].urlMapa);
       }
-    });
+    }));
   }
 
   mostrarMapa = (url: string) => {

@@ -1,5 +1,6 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, OnDestroy } from '@angular/core';
 import { HidricoService } from 'src/app/services/hidrico/hidrico.service'
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-irca',
@@ -7,7 +8,7 @@ import { HidricoService } from 'src/app/services/hidrico/hidrico.service'
   styleUrls: ['./irca.component.css']
 })
 
-export class IrcaComponent implements OnInit {
+export class IrcaComponent extends Base implements OnInit {
 
   public indicadores: any;
   public pagina: number = 1;
@@ -15,6 +16,7 @@ export class IrcaComponent implements OnInit {
   selectedValue;
 
   constructor(private hidricoService: HidricoService) {
+    super();
     this.opciones = ['Vigentes', 'Históricos', 'Todos']
   }
 
@@ -62,7 +64,7 @@ export class IrcaComponent implements OnInit {
 
   consultarIndicador() {
     if (this.selectedValue === 'Vigentes') {
-      this.hidricoService.getDnpVigentes(this.pagina).subscribe(
+      this.unsubscribeOndestroy(this.hidricoService.getDnpVigentes(this.pagina).subscribe(
         result => {
           this.indicadores = result;
           //this.indicadores = this.transformarIndicador(result)
@@ -70,32 +72,31 @@ export class IrcaComponent implements OnInit {
         }, error => {
           console.error(error);
         }
-      );
+      ));
       return;
     }
 
     if (this.selectedValue === 'Históricos') {
-      this.hidricoService.getDnpHistorico(this.pagina).subscribe(
+      this.unsubscribeOndestroy(this.hidricoService.getDnpHistorico(this.pagina).subscribe(
         result => {
           this.indicadores = result;
           console.log(this.indicadores)
         }, error => {
           console.error(error);
         }
-      );
+      ));
       return;
     }
 
     if (this.selectedValue === 'Todos') {
-      this.hidricoService.getDnpAll(this.pagina).subscribe(
+      this.unsubscribeOndestroy(this.hidricoService.getDnpAll(this.pagina).subscribe(
         result => {
           this.indicadores = [];
           this.indicadores = this.groupBy(result, 'idMunicipioNavigation')
-          console.log(this.indicadores);
         }, error => {
           console.error(error);
         }
-      );
+      ));
       return;
     }
 

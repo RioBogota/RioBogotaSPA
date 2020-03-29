@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeScript } from '@angular/platform-browser';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { ActivatedRoute } from '@angular/router';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-unica',
   templateUrl: './unica.component.html',
   styleUrls: ['./unica.component.css']
 })
-export class UnicaComponent implements OnInit {
+export class UnicaComponent extends Base implements OnInit {
 
   public componente: any;
   public urlMapa: SafeScript;
@@ -17,7 +18,7 @@ export class UnicaComponent implements OnInit {
   public idMicrositio: number = -1;
   public componenteTitulo: any;
 
-  public imgModulo: Array <string> = [
+  public imgModulo: Array<string> = [
     '../../assets/PNG/r-aire.png',
     '../../assets/PNG/r-hidrico.png',
     '../../assets/PNG/r-suelo.png',
@@ -30,19 +31,21 @@ export class UnicaComponent implements OnInit {
     private router: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private principalService: PrincipalService) {
-    this.router.params.subscribe(ruta => {
-      this.principalService.getSiteMap().subscribe(result => {
+    super();
+    //TODO remove nested observables
+    this.unsubscribeOndestroy(this.router.params.subscribe(ruta => {
+      this.unsubscribeOndestroy(this.principalService.getSiteMap().subscribe(result => {
         let tempComponente = result.filter((componente => componente.idComponente === parseInt(ruta.id)));
         tempComponente[0].modulo.forEach(mod => {
-            this.mostrarMapa(mod.mapaMicrositio);
-            this.mostrarVideos(mod.video);
-          });
+          this.mostrarMapa(mod.mapaMicrositio);
+          this.mostrarVideos(mod.video);
+        });
 
         this.componente = tempComponente;
         this.componenteTitulo = this.componente[0].descripcion.split(" ", 4)
         console.log(this.componenteTitulo)
-      });
-    })
+      }));
+    }));
   }
 
   mostrarSitios(modulo) {
@@ -70,7 +73,7 @@ export class UnicaComponent implements OnInit {
 
   }
 
-  mostrarMicrositio = (id:number) =>{
+  mostrarMicrositio = (id: number) => {
     this.idMicrositio = id;
   }
 

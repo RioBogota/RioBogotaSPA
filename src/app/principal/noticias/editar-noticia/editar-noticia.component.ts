@@ -4,13 +4,14 @@ import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-editar-noticia',
   templateUrl: './editar-noticia.component.html',
   styleUrls: ['./editar-noticia.component.css']
 })
-export class EditarNoticiaComponent implements OnInit {
+export class EditarNoticiaComponent extends Base implements OnInit {
   public noticia: any;
   public tiposNoticias: any;
   public tiposMultimedias: any;
@@ -18,6 +19,7 @@ export class EditarNoticiaComponent implements OnInit {
   public Editor = ClassicEditor;
   public texto: any;
   constructor(private router: ActivatedRoute, private servicionoticias: PrincipalService, private sanitizer: DomSanitizer) {
+    super();
     this.noticia = {
       "titulo": null,
       "descripcion": null,
@@ -37,26 +39,27 @@ export class EditarNoticiaComponent implements OnInit {
     };
     this.tiposNoticias = [];
     this.tiposMultimedias = [];
-    this.servicionoticias.getallTiposNoticias().subscribe(response => {
+    this.unsubscribeOndestroy(this.servicionoticias.getallTiposNoticias().subscribe(response => {
       this.tiposNoticias = response;
-    }, error => { console.error(error); });
+    }, error => { console.error(error); }));
 
-    this.servicionoticias.getallTiposMultimedias().subscribe(response => {
+    this.unsubscribeOndestroy(this.servicionoticias.getallTiposMultimedias().subscribe(response => {
       this.tiposMultimedias = response;
     }, error => {
       console.error(error);
-    });
-    this.router.params.subscribe(result => {
+    }));
+    //TODO remove nested observables
+    this.unsubscribeOndestroy(this.router.params.subscribe(result => {
       if (result.id) {
         this.editar = true;
-        this.servicionoticias.getNoticiaEspecifica(result.id).subscribe(result => {
+        this.unsubscribeOndestroy(this.servicionoticias.getNoticiaEspecifica(result.id).subscribe(result => {
           this.noticia = result;
           this.noticia.fechaPublicacion = result.fechaPublicacion.split('T')[0];
-        }, error => { console.error(error); alert('Se presento un error al consultar noticias'); });
+        }, error => { console.error(error); alert('Se presento un error al consultar noticias'); }));
       }
     }, error => {
       console.error(error);
-    })
+    }));
   }
 
   cambiarValorMultimedia = ($event, multimedia) => {
@@ -71,22 +74,20 @@ export class EditarNoticiaComponent implements OnInit {
     const usuario: any = sessionStorage.usuario ? JSON.parse(sessionStorage.usuario) : undefined;
     this.noticia.idUsuario = usuario.idUsuario;
     if (this.editar) {
-      this.servicionoticias.editarNoticia(this.noticia).subscribe(response => {
-        console.log(response);
+      this.unsubscribeOndestroy(this.servicionoticias.editarNoticia(this.noticia).subscribe(response => {
         alert('Noticia guardada correctamente');
       }, error => {
         alert('Se produjo un error al guardar la noticia');
         console.error(error);
-      });
+      }));
       return;
     }
-    this.servicionoticias.guardarNoticia(this.noticia).subscribe(response => {
-      console.log(response);
+    this.unsubscribeOndestroy(this.servicionoticias.guardarNoticia(this.noticia).subscribe(response => {
       alert('Noticia guardada correctamente');
     }, error => {
       alert('Se produjo un error al guardar la noticia');
       console.error(error);
-    });
+    }));
   }
 
   agregarMultimedia = () => {

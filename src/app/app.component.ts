@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { TokenInterceptorService } from './services/auth/token-interceptor.service';
 import { AppService } from './services/app.service';
 import { Router } from '@angular/router';
+import { Base } from './shared/base';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class AppComponent {
+export class AppComponent extends Base {
     showScroll: boolean;
     showScrollHeight = 300;
     hideScrollHeight = 10;
@@ -21,6 +22,7 @@ export class AppComponent {
     sceneView: any;
 
     constructor(private usuarioOpcService: TokenInterceptorService, private appService: AppService, public router: Router) { 
+        super();
         this.opcionesPadre = [{hijos: []}]
     }
 
@@ -54,8 +56,7 @@ export class AppComponent {
     //obtener opciones del menú//
     obtenerOpciones = () => {
         this.usuario = sessionStorage.usuario ? JSON.parse(sessionStorage.usuario) : undefined;
-        this.usuarioOpcService.getOpciones(this.usuario).subscribe(
-            
+       this.unsubscribeOndestroy(this.usuarioOpcService.getOpciones(this.usuario).subscribe(      
             result => {
                 var opcionesPadre = result
                 this.opcionesPadre = opcionesPadre.filter(x => x.idOpcionPadre == null);
@@ -67,17 +68,16 @@ export class AppComponent {
             error => {
                 console.error(error)
             }
-        )
+        ));
     }
 
     ngOnInit(){
         if(this.usuario){
             this.obtenerOpciones()
         }
-        this.appService.checkUserInfo.subscribe(result => {
+        this.unsubscribeOndestroy(this.appService.checkUserInfo.subscribe(result => {
             this.obtenerOpciones()
-        }, error => {})
-
+        }, error => {}));
     }
 
     

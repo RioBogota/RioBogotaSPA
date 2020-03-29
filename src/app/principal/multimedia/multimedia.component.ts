@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SafeScript, DomSanitizer } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Base } from 'src/app/shared/base';
 export interface DialogData {
   imagen: string;
 }
@@ -12,7 +13,7 @@ export interface DialogData {
   styleUrls: ['./multimedia.component.css']
 })
 
-export class MultimediaComponent implements OnInit {
+export class MultimediaComponent extends Base implements OnInit {
 
   public id: string;
   public urlSegura: SafeScript;
@@ -61,7 +62,9 @@ export class MultimediaComponent implements OnInit {
     { url: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/MCJEKbBioB0') }
   ];
 
-  constructor(private router: ActivatedRoute, private sanitizer: DomSanitizer, public dialog: MatDialog) { }
+  constructor(private router: ActivatedRoute, private sanitizer: DomSanitizer, public dialog: MatDialog) { 
+    super();
+  }
 
   openDialog(imagen:string): void {
     const dialogRef = this.dialog.open(ImagenesModal, {
@@ -71,11 +74,11 @@ export class MultimediaComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.router.params.subscribe(result => {
+    this.unsubscribeOndestroy(this.router.params.subscribe(result => {
       this.id = result.id;
     }, error => {
       console.error(error);
-    });
+    }));
   }
 
 }

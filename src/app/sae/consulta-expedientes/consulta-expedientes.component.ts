@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SAEService } from 'src/app/services/sae/sae.service';
 import { Pagina } from 'src/app/modelos/pagina';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-consulta-expedientes',
   templateUrl: './consulta-expedientes.component.html',
   styleUrls: ['./consulta-expedientes.component.css']
 })
-export class ConsultaExpedientesComponent implements OnInit {
+export class ConsultaExpedientesComponent extends Base implements OnInit {
   public predios: any = [];
   public resoluciones: any = [];
   public tramites: any = [];
@@ -25,7 +26,8 @@ export class ConsultaExpedientesComponent implements OnInit {
   public pageSizeOptionsTramites: number[];
   public totalTramites: number;
   public pageSizeTramites: number;
-  constructor(private saeService: SAEService) { 
+  constructor(private saeService: SAEService) {
+    super();
     this.paginaPredios = new Pagina();
     this.paginaPredios.numeroPagina = 0;
     this.paginaPredios.cantidadRegistros = 20;
@@ -46,29 +48,29 @@ export class ConsultaExpedientesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
-consultarPredios = () => {
-  this.saeService.getPredios(this.paginaPredios).subscribe(result => {
-    this.totalPredios = result.totalRegistros;
-    this.pageSizePredios = result.totalRegistros / this.paginaPredios.cantidadRegistros;
-    this.predios = result.resultados;
-  }, error => { console.error(error) });
-}
-consultarResoluciones = () => {
-  this.saeService.getResoluciones(this.paginaResoluciones).subscribe(result => {
-    this.totalResoluciones = result.totalRegistros;
-    this.pageSizeResoluciones = result.totalRegistros / this.paginaResoluciones.cantidadRegistros;
-    this.resoluciones = result.resultados;
-  }, error => { console.error(error) });
-}
-consultarTramites = () => {
-  this.saeService.getTramites(this.paginaTramites).subscribe(result => {
-    this.totalTramites = result.totalRegistros;
-    this.pageSizeTramites = result.totalTramites / this.paginaTramites.cantidadRegistros;
-    this.tramites = result.resultados;
-  }, error => { console.error(error) });
-}
+  consultarPredios = () => {
+    this.unsubscribeOndestroy(this.saeService.getPredios(this.paginaPredios).subscribe(result => {
+      this.totalPredios = result.totalRegistros;
+      this.pageSizePredios = result.totalRegistros / this.paginaPredios.cantidadRegistros;
+      this.predios = result.resultados;
+    }, error => { console.error(error) }));
+  }
+  consultarResoluciones = () => {
+    this.unsubscribeOndestroy(this.saeService.getResoluciones(this.paginaResoluciones).subscribe(result => {
+      this.totalResoluciones = result.totalRegistros;
+      this.pageSizeResoluciones = result.totalRegistros / this.paginaResoluciones.cantidadRegistros;
+      this.resoluciones = result.resultados;
+    }, error => { console.error(error) }));
+  }
+  consultarTramites = () => {
+    this.unsubscribeOndestroy(this.saeService.getTramites(this.paginaTramites).subscribe(result => {
+      this.totalTramites = result.totalRegistros;
+      this.pageSizeTramites = result.totalTramites / this.paginaTramites.cantidadRegistros;
+      this.tramites = result.resultados;
+    }, error => { console.error(error) }));
+  }
 
 
   paginarPredios = (event) => {

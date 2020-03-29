@@ -1,36 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-modulos',
   templateUrl: './modulos.component.html',
   styleUrls: ['./modulos.component.css']
 })
-export class ModulosComponent implements OnInit {
+export class ModulosComponent extends Base implements OnInit {
   public modulos: any[];
   public sitios = [];
   public modulo: any = {};
   public sitio: any = {};
   public hijos: boolean;
   public adminSitio: boolean;
-  constructor(private seguridadService: TokenInterceptorService, private principalService: PrincipalService) { }
+  constructor(private seguridadService: TokenInterceptorService, private principalService: PrincipalService) {
+    super();
+   }
 
   ngOnInit() {
-    this.seguridadService.getModulos().subscribe((result) => {
+    this.unsubscribeOndestroy(this.seguridadService.getModulos().subscribe((result) => {
       this.modulos = result.filter((data) => {
         return data.idMicrositio !== 23;
       });
       this.modulo = this.modulos[0];
       this.precargarSeleccionados();
-    });
-    this.principalService.getSiteMap().subscribe(result => {
+    }));
+    this.unsubscribeOndestroy(this.principalService.getSiteMap().subscribe(result => {
       result.forEach(componente => {
         componente.modulo.forEach(modulo => {
           this.sitios.push(modulo);
         });
       });
-    });
+    }));
   }
 
   
@@ -52,11 +55,11 @@ export class ModulosComponent implements OnInit {
   }
   
   guardarSitio() {
-    this.seguridadService.updateSitio(this.sitio).subscribe(() => {
+    this.unsubscribeOndestroy(this.seguridadService.updateSitio(this.sitio).subscribe(() => {
       alert('Informacion guardada exitosamente');
     }, (error)  => {
       alert('Se produjo un error al guardar el registro, intente nuevamente');
-    })
+    }));
   }
 
   guardar() {
@@ -66,11 +69,11 @@ export class ModulosComponent implements OnInit {
         this.modulo.subsitioIdHijoNavigation.push({ idHijo: micrositio.idMicrositio, idPadre: this.modulo.idMicrositio })
       }
     })
-    this.seguridadService.updateModulo(this.modulo).subscribe(() => {
+    this.unsubscribeOndestroy(this.seguridadService.updateModulo(this.modulo).subscribe(() => {
       alert('Modulo actualizado correctamente');
     }, () => {
       alert('Se produjo un error al actualizar el modulo.');
-    });
+    }));
   }
 
   seleccionarValores(event, propiedad) {

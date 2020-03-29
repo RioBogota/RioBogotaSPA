@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Base } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-cuencas',
   templateUrl: './cuencas.component.html',
   styleUrls: ['./cuencas.component.css']
 })
-export class CuencasComponent implements OnInit {
+export class CuencasComponent extends Base implements OnInit {
   public titulo: string;
   public descripcion: string;
   constructor(private routerId: ActivatedRoute, public router: Router) {
-    this.routerId.params.subscribe(result => {
+    super();
+    this.unsubscribeOndestroy(this.routerId.params.subscribe(result => {
       if (result.id) {
         this.obtenerCuenca(result.id);
         return;
       }
     }, error => {
       console.error(error);
-    });
+    }));
   }
 
   obtenerCuenca = (idCuenca: string) => {

@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
+import { Base } from 'src/app/shared/base';
 
 @Component({
 	selector: 'app-admin-info',
 	templateUrl: './admin-info.component.html',
 	styleUrls: ['./admin-info.component.css']
 })
-export class AdminInfoComponent implements OnInit {
+export class AdminInfoComponent extends Base implements OnInit {
 
 	public documentos: any;
 	public estado: any;
 	public importando = false;
 	constructor(private principalService: PrincipalService) {
-		this.principalService.verDocumentos().subscribe(result => {
+		super();
+		this.unsubscribeOndestroy(this.principalService.verDocumentos().subscribe(result => {
 			for (var i = 0; i < result.length; i++) {
 				let document = result[i];
 				document.aprobado = true;
@@ -23,7 +25,7 @@ export class AdminInfoComponent implements OnInit {
 			this.documentos = result;
 		}, error => {
 			error.log
-		});
+		}));
 
 	}
 
@@ -33,12 +35,12 @@ export class AdminInfoComponent implements OnInit {
 			documento.idEstado = 2;
 		}
 		this.importando = true;
-		this.principalService.actualizarEstadoDoc(documento).subscribe(result => {
+		this.unsubscribeOndestroy(this.principalService.actualizarEstadoDoc(documento).subscribe(result => {
 			this.estado = result;
 			this.importando = false;
 		}, () => {
 			this.importando = false;
-		})
+		}));
 	}
 
 	ngOnInit() {

@@ -3,24 +3,27 @@ import { Router } from '@angular/router';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { AppService } from 'src/app/services/app.service';
 import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
+import { Base } from 'src/app/shared/base';
 
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent extends Base {
     hide = true;
     public usuario: IDUsuarioNavigation;
     public error: Boolean = false;
     public mensajeError: string | null = null;
     constructor(private router: Router, private loginService: TokenInterceptorService, private appService: AppService) {
+        super();
     }
 
     ingresar = (data: any) => {
         this.mensajeError = '';
         this.error = false;
-        this.loginService.getLogin(data.usuario.toUpperCase(), data.contrasena).subscribe(result => {
+        // TODO remove nested observables
+        this.unsubscribeOndestroy(this.loginService.getLogin(data.usuario.toUpperCase(), data.contrasena).subscribe(result => {
             this.usuario = result;
             sessionStorage.setItem('usuario', JSON.stringify(this.usuario));
             this.appService.checkUserInfo.emit(this.usuario);
@@ -37,7 +40,7 @@ export class LoginComponent {
             }
             this.mensajeError = error;
             this.error = true;
-        });
+        }));
     }
 
     cerrarSesion = () => {
@@ -47,16 +50,16 @@ export class LoginComponent {
     }
 
     obtenerToken = (data: any) => {
-        this.loginService.getToken(data.usuario, data.contrasena).subscribe(res => {
-            sessionStorage.setItem('token', res.token);            
+        this.unsubscribeOndestroy(this.loginService.getToken(data.usuario, data.contrasena).subscribe(res => {
+            sessionStorage.setItem('token', res.token);
             this.router.navigate(['/home']);
         }, error => {
             console.error(error);
-        });
+        }));
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.cerrarSesion()
     }
 }

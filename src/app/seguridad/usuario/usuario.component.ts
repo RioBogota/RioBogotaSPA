@@ -3,6 +3,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { IDRolNavigation, IDUsuarioNavigation, RolUsuario } from 'src/app/modelos/Seguridad';
 import { ActivatedRoute } from '@angular/router';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 @Component({
 	selector: 'usuario',
 	templateUrl: './usuario.component.html',
@@ -18,7 +19,7 @@ export class UsuarioComponent extends Base {
 	public entidades: any;
 	entidadUsuario;
 
-	constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute) {
+	constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute, private appService: AppService) {
 		super();
 		//this.entidades = ["CAR", "SDA", "Gobernación"];
 		this.usuario = new IDUsuarioNavigation();
@@ -50,10 +51,10 @@ export class UsuarioComponent extends Base {
 			this.entidades.forEach(element => {
 				this.entidadUsuario = element.idEntidad
 			});
-		}, 
-		error => {
-			console.error(error)
-		}));
+		},
+			error => {
+				console.error(error)
+			}));
 	}
 
 	upper = (obj: any) => {
@@ -79,11 +80,11 @@ export class UsuarioComponent extends Base {
 			this.rolUsuario = filtrados[0];
 		}, (error) => {
 			console.error(error);
-		}));		
+		}));
 	}
 
 
-	
+
 	guardar = () => {
 		let usuarioRol: RolUsuario = new RolUsuario();
 		usuarioRol.idRol = this.rolUsuario.idRol;
@@ -93,12 +94,20 @@ export class UsuarioComponent extends Base {
 
 		if (!this.editar) {
 			this.unsubscribeOndestroy(this.seguridadService.guardarUsuario(this.upper(this.usuario)).subscribe((result) => {
-				alert("Usuario guardado exitosamente");
-			}, (error) => { console.error(error); }));
+				this.appService.success("Usuario guardado exitosamente");
+			}, (error) => {
+				this.appService.error('Se produjo un error al guardar el usuario, intente nuevamente mas tarde.');
+				console.error(error);
+			}));
 			return;
 		}
 		this.usuario.rolUsuario[0].idUsuario = this.usuario.idUsuario;
-		this.unsubscribeOndestroy(this.seguridadService.actualizarUsuario(this.usuario).subscribe(response => { alert("usuario actualizado exitosamente") }, error => { console.error(error) }));
+		this.unsubscribeOndestroy(this.seguridadService.actualizarUsuario(this.usuario).subscribe(response => {
+			this.appService.success("usuario actualizado exitosamente");
+		}, error => {
+			this.appService.error('Se produjo un error al actualizar el usuario, intente nuevamente mas tarde.');
+			console.error(error)
+		}));
 	}
 
 	validar = () => {

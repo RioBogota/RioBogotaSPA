@@ -3,6 +3,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { Router } from '@angular/router';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-cargar-documento',
@@ -15,7 +16,7 @@ export class CargarDocumentoComponent extends Base implements OnInit {
   public documento: any = {};
   public sitio: any;
   public cargando: boolean;
-  constructor(private securityService: TokenInterceptorService, private principalService: PrincipalService, private router: Router) {
+  constructor(private securityService: TokenInterceptorService, private principalService: PrincipalService, private router: Router, private appService: AppService) {
     super();
   }
 
@@ -28,7 +29,7 @@ export class CargarDocumentoComponent extends Base implements OnInit {
       this.sitios = result;
       this.sitio = this.sitios[0];
     }, () => {
-      alert('Se produjo un error al obtener los sitios a los que tiene acceso el usuario.');
+      this.appService.error('Se produjo un error al obtener los sitios a los que tiene acceso el usuario.');
     }));
   }
 
@@ -45,11 +46,11 @@ export class CargarDocumentoComponent extends Base implements OnInit {
       this.documento.idMicrositio = this.sitio.idMicrositio;
       this.unsubscribeOndestroy(this.securityService.guardarInformacionDocumento(this.documento).subscribe(() => {
         this.cargando = false;
-        alert('Documento guardado exitosamente.');
+        this.appService.success('Documento guardado exitosamente.');
         this.router.navigate(['/']);
-      }, () => { this.cargando = false; alert('Se produjo un error al guardar la informacion del archivo.') }));
+      }, () => { this.cargando = false; this.appService.error('Se produjo un error al guardar la informacion del archivo.') }));
     },
-      error => { this.cargando = false; console.error(error); alert('Se produjo un error al cargar el archivo.') }));
+      error => { this.cargando = false; console.error(error); this.appService.error('Se produjo un error al cargar el archivo.') }));
   }
 
 }

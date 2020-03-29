@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-modulos',
@@ -15,7 +16,7 @@ export class ModulosComponent extends Base implements OnInit {
   public sitio: any = {};
   public hijos: boolean;
   public adminSitio: boolean;
-  constructor(private seguridadService: TokenInterceptorService, private principalService: PrincipalService) {
+  constructor(private seguridadService: TokenInterceptorService, private principalService: PrincipalService, private appService: AppService) {
     super();
    }
 
@@ -56,9 +57,9 @@ export class ModulosComponent extends Base implements OnInit {
   
   guardarSitio() {
     this.unsubscribeOndestroy(this.seguridadService.updateSitio(this.sitio).subscribe(() => {
-      alert('Informacion guardada exitosamente');
+      this.appService.success('Informacion guardada exitosamente');
     }, (error)  => {
-      alert('Se produjo un error al guardar el registro, intente nuevamente');
+      this.appService.error('Se produjo un error al guardar el registro, intente nuevamente');
     }));
   }
 
@@ -70,9 +71,9 @@ export class ModulosComponent extends Base implements OnInit {
       }
     })
     this.unsubscribeOndestroy(this.seguridadService.updateModulo(this.modulo).subscribe(() => {
-      alert('Modulo actualizado correctamente');
+      this.appService.success('Modulo actualizado correctamente');
     }, () => {
-      alert('Se produjo un error al actualizar el modulo.');
+      this.appService.error('Se produjo un error al actualizar el modulo.');
     }));
   }
 

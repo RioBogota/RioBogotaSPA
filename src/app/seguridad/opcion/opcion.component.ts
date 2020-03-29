@@ -3,6 +3,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { IDRolNavigation, Opcion, OpcionRol } from 'src/app/modelos/Seguridad';
 import { ActivatedRoute } from '@angular/router';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
     selector: 'opcion',
@@ -15,7 +16,7 @@ export class OpcionComponent extends Base {
     private todasOpciones: Array<Opcion>;
     public opciones: Array<Opcion>;
     public esSubopcion: Boolean;
-    constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute) {
+    constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute, private appService: AppService) {
         super();
         this.opcion = new Opcion();
         this.opcion.opcionRol = new Array<OpcionRol>();
@@ -52,8 +53,9 @@ export class OpcionComponent extends Base {
 
     guardar = () => {
         this.unsubscribeOndestroy(this.seguridadService.guardarOpcion(this.opcion).subscribe((result) => {
-            alert("Opcion Guardada Exitosamente");
+            this.appService.success('Opción guardada exitosamente');
         }, (error) => {
+            this.appService.error('Se produjo un error al guardar la opcion');
             console.error(error);
         }));
     }

@@ -4,6 +4,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { DomSanitizer, SafeScript } from '@angular/platform-browser';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-multiple',
@@ -29,7 +30,8 @@ export class MultipleComponent extends Base implements OnInit {
     this.cargarDatos(this._idMicrositio);
   }
 
-  constructor(private router: ActivatedRoute, private seguridadService: TokenInterceptorService, private sanitizer: DomSanitizer, private principalService: PrincipalService) {
+  constructor(private router: ActivatedRoute, private seguridadService: TokenInterceptorService,
+    private sanitizer: DomSanitizer, private principalService: PrincipalService, private appService: AppService) {
     super();
     this.init();
   }
@@ -60,8 +62,9 @@ export class MultipleComponent extends Base implements OnInit {
           this.documentos = documentos;
         }, error => {
           console.error(error);
-          if (error.status !== 404)
-            alert('Se produjo un error al consultar los documentos del modulo');
+          if (error.status !== 404) {
+            this.appService.error('Se produjo un error al consultar los documentos del modulo');
+          }
         }));
       }
       this.urlMapa2 = undefined;

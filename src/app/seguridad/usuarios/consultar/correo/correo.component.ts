@@ -3,6 +3,7 @@ import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { Router } from '@angular/router';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-correo',
@@ -17,14 +18,14 @@ export class CorreoComponent extends Base implements OnInit {
   public hide: boolean = true;
   public hideConf: boolean = true;
 
-  constructor(private seguridadService: TokenInterceptorService, private router: Router) {
+  constructor(private seguridadService: TokenInterceptorService, private router: Router, private appService: AppService) {
     super();
     this.usuario = new IDUsuarioNavigation();
   }
 
   consultarUsuario = () => {
     if (this.confirmar !== this.usuario.contrasena) {
-      alert('Las dos contraseñas deben ser iguales');
+      this.appService.error('Las dos contraseñas deben ser iguales');
       return;
     }
     this.unsubscribeOndestroy(this.seguridadService.getUsuarioCorreo(this.usuario.correo).subscribe(result => {
@@ -32,7 +33,7 @@ export class CorreoComponent extends Base implements OnInit {
       this.usuario.contrasena = '';
       this.editarUsuario = true;
     }, error => {
-      alert(`No se puede obtener informacion del usuario. Intente con otro correo electronico.`);
+      this.appService.error(`No se puede obtener informacion del usuario. Intente con otro correo electronico.`);
       console.error(error);
       this.editarUsuario = false;
     }));
@@ -40,10 +41,10 @@ export class CorreoComponent extends Base implements OnInit {
 
   guardar = () => {
     this.unsubscribeOndestroy(this.seguridadService.actualizarUsuario(this.usuario).subscribe(result => {
-      alert(`Contraseña cambiada exitosamente.`);
+      this.appService.success(`Contraseña cambiada exitosamente.`);
       this.router.navigate(['login']);
     }, error => {
-      alert(`Se produjo un error al actualizar el usuario ${this.usuario.usuario1}`);
+      this.appService.error(`Se produjo un error al actualizar el usuario ${this.usuario.usuario1}`);
       console.error(error);
     }));
   }

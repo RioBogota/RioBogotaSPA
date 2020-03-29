@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
+import { AppService } from 'src/app/services/app.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AgregarComponent implements OnInit {
     }
   public opciones:any;
 
-  constructor(private seguridadService: TokenInterceptorService) {
+  constructor(private seguridadService: TokenInterceptorService, private appService: AppService) {
     this.rol = {
       nombre: '',
       apruebaDocumentos: false,
@@ -73,9 +74,10 @@ export class AgregarComponent implements OnInit {
     })
     console.log(this.rol.opcionRol)
     this.seguridadService.saveRol(this.rol).subscribe(result => {
-      alert('Rol guardado exitosamente')
+      this.appService.success('Rol guardado exitosamente')
     },
     error => {
+      this.appService.error('Se produjo un error al guardar el rol');
       console.error(error)
     })    
   }

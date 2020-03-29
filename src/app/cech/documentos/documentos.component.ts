@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CechService } from 'src/app/services/CECH/cech.service';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-documentos',
@@ -12,7 +13,7 @@ export class DocumentosComponent extends Base implements OnInit {
 
   public documentos: any;
   public modulo: any = {};
-  constructor(private principalService: PrincipalService) {
+  constructor(private principalService: PrincipalService, private appService: AppService) {
     super();
   }
 
@@ -25,8 +26,9 @@ export class DocumentosComponent extends Base implements OnInit {
           this.documentos = documentos;
         }, error => {
           console.error(error);
-          if (error.status !== 404)
-            alert('Se produjo un error al consultar los documentos');
+          if (error.status !== 404) {
+            this.appService.error('Se produjo un error al consultar los documentos');
+          }
         }));
       }
     }));

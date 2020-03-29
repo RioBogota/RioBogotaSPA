@@ -5,6 +5,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-editar-noticia',
@@ -18,7 +19,7 @@ export class EditarNoticiaComponent extends Base implements OnInit {
   public editar: Boolean;
   public Editor = ClassicEditor;
   public texto: any;
-  constructor(private router: ActivatedRoute, private servicionoticias: PrincipalService, private sanitizer: DomSanitizer) {
+  constructor(private router: ActivatedRoute, private servicionoticias: PrincipalService, private sanitizer: DomSanitizer, private appService: AppService) {
     super();
     this.noticia = {
       "titulo": null,
@@ -55,7 +56,7 @@ export class EditarNoticiaComponent extends Base implements OnInit {
         this.unsubscribeOndestroy(this.servicionoticias.getNoticiaEspecifica(result.id).subscribe(result => {
           this.noticia = result;
           this.noticia.fechaPublicacion = result.fechaPublicacion.split('T')[0];
-        }, error => { console.error(error); alert('Se presento un error al consultar noticias'); }));
+        }, error => { console.error(error); this.appService.error('Se presento un error al consultar noticias'); }));
       }
     }, error => {
       console.error(error);
@@ -75,17 +76,17 @@ export class EditarNoticiaComponent extends Base implements OnInit {
     this.noticia.idUsuario = usuario.idUsuario;
     if (this.editar) {
       this.unsubscribeOndestroy(this.servicionoticias.editarNoticia(this.noticia).subscribe(response => {
-        alert('Noticia guardada correctamente');
+        this.appService.success('Noticia guardada correctamente');
       }, error => {
-        alert('Se produjo un error al guardar la noticia');
+        this.appService.error('Se produjo un error al guardar la noticia');
         console.error(error);
       }));
       return;
     }
     this.unsubscribeOndestroy(this.servicionoticias.guardarNoticia(this.noticia).subscribe(response => {
-      alert('Noticia guardada correctamente');
+      this.appService.success('Noticia guardada correctamente');
     }, error => {
-      alert('Se produjo un error al guardar la noticia');
+      this.appService.error('Se produjo un error al guardar la noticia');
       console.error(error);
     }));
   }

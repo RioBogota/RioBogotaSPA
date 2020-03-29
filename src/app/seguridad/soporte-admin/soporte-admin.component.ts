@@ -3,6 +3,7 @@ import { Soporte } from 'src/app/modelos/soporte';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Base } from 'src/app/shared/base';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-soporte-admin',
@@ -12,7 +13,7 @@ import { Base } from 'src/app/shared/base';
 export class SoporteAdminComponent extends Base implements OnInit {
   public soporte: Soporte;
   public Editor = ClassicEditor;
-  constructor(private soporteService: TokenInterceptorService) {
+  constructor(private soporteService: TokenInterceptorService, private appService: AppService) {
     super();
     this.soporte = new Soporte();
     this.unsubscribeOndestroy(this.soporteService.obtenerInformacionInicio().subscribe(result => {
@@ -27,10 +28,10 @@ export class SoporteAdminComponent extends Base implements OnInit {
 
   guardar = () => {
     this.unsubscribeOndestroy(this.soporteService.guardarInformacionInicio(this.soporte).subscribe(respuesta => {
-      alert('Informacion guardada exitosamente');
+      this.appService.success('Informacion guardada exitosamente');
     }, error => {
       console.error(error);
-      alert('no se puede guardar la informacion, intente nuevamente');
+      this.appService.error('no se puede guardar la informacion, intente nuevamente');
     }));
   }
 }

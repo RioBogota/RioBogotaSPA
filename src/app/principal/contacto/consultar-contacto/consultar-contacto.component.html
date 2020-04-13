@@ -1,0 +1,32 @@
+<h3>Consultar información de PQR's</h3>
+<br>
+<div class="table-responsive" *ngIf="contactos && contactos.length">
+    <table class="table table-bordered text-center">
+        <thead>
+          <tr style="font-size: 14px;">
+            <th class="align-middle">Primer Nombre</th>
+            <th class="align-middle">Segundo Nombre</th>
+            <th class="align-middle">Primer Apellido</th>
+            <th class="align-middle">Segundo Apellido</th>
+            <th class="align-middle">Telefono</th>
+            <th class="align-middle">Celular</th>
+            <th class="align-middle">Correo</th>
+            <th class="align-middle">Fecha</th>
+            <th class="align-middle">Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contacto of contactos">
+                <td>{{ contacto.primerNombre }}</td>
+                <td>{{ contacto.segundoNombre }}</td>
+                <td>{{ contacto.primerApellido }}</td>
+                <td>{{ contacto.segundoApellido }}</td>
+                <td>{{ contacto.telefono }}</td>
+                <td>{{ contacto.celular }}</td>
+                <td>{{ contacto.correo }}</td>
+                <td>{{ contacto.fecha }}</td>
+                <td>{{ contacto.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

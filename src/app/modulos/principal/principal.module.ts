@@ -29,6 +29,7 @@ import { CommonRioBogModule } from '../common/common.module';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { IrcaComponent } from 'src/app/hidrico/indicadores/irca/irca.component';
 import { FinancieroComponent } from '../../cech/indicadores/financiero/financiero.component';
+import { ConsultarContactoComponent } from '../../principal/contacto/consultar-contacto/consultar-contacto.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { FinancieroComponent } from '../../cech/indicadores/financiero/financier
       { path: 'cuencas/:id', component: CuencasComponent },
       { path: 'sentencia', component: SentenciaComponent },
       { path: 'contacto', component: ContactoComponent },
+      { path: 'contacto/get', component: ConsultarContactoComponent },
       { path: 'soporte', component: SoporteComponent },
       { path: 'multimedia/:id', component: MultimediaComponent },
       { path: 'unica/:id', component: UnicaComponent },
@@ -76,7 +78,7 @@ declarations: [
   SiteMapComponent, 
   CargarDocumentoComponent, 
   IrcaComponent, 
-  FinancieroComponent
+  FinancieroComponent, ConsultarContactoComponent
 ],
   entryComponents: [ImagenesModal]
 })

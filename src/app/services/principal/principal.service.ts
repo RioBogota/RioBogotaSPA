@@ -16,6 +16,11 @@ export class PrincipalService {
     return this.http.get(this.baseUrl + uri);
   }
 
+  getContacto(): Observable<any> {
+    const uri = `api/Principal/contacto/get`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
   getChild = (idHijo:number): Observable<any> => {
     const uri = `api/Seguridad/micrositio/${idHijo}`;
     return this.http.get(this.baseUrl + uri);

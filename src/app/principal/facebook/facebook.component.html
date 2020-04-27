@@ -1,0 +1,9 @@
+<h1>Iniciar transmision de Facebook Live</h1>
+<hr>
+<h3>Agregar URL del video</h3>
+<input type="text"  [(ngModel)]="facebook.urlVideo">
+<hr>
+<h3>Empezar a transmitir</h3>
+<app-switch (seleccion)="cambiarValorTransmision($event)" [modelo]="facebook.transmitiendo"></app-switch>
+<hr>
+<button mat-fab color="primary" type="submit" (click)="actualizarTransmision()">Guardar</button>

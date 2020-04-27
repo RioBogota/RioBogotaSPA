@@ -30,6 +30,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { IrcaComponent } from 'src/app/hidrico/indicadores/irca/irca.component';
 import { FinancieroComponent } from '../../cech/indicadores/financiero/financiero.component';
 import { ConsultarContactoComponent } from '../../principal/contacto/consultar-contacto/consultar-contacto.component';
+import { FacebookComponent } from '../../principal/facebook/facebook.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { ConsultarContactoComponent } from '../../principal/contacto/consultar-c
       { path: 'unica/:id', component: UnicaComponent },
       { path: 'multiple/:id', component: MultipleComponent },
       { path: 'site/map', component: SiteMapComponent },
-      { path: 'documento/sitio/carga', component: CargarDocumentoComponent}
+      { path: 'documento/sitio/carga', component: CargarDocumentoComponent},
+      { path: 'facebook', component: FacebookComponent}
     ])
   ],
 declarations: [
@@ -78,7 +80,7 @@ declarations: [
   SiteMapComponent, 
   CargarDocumentoComponent, 
   IrcaComponent, 
-  FinancieroComponent, ConsultarContactoComponent
+  FinancieroComponent, ConsultarContactoComponent, FacebookComponent
 ],
   entryComponents: [ImagenesModal]
 })

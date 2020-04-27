@@ -81,6 +81,16 @@ export class PrincipalService {
     return this.http.get(this.baseUrl + uri);
   }
 
+  editarFacebookVideo = (facebookVideo: any): Observable<any> => {
+    const uri = `api/Principal/facebook`;
+    return this.http.put(this.baseUrl + uri, facebookVideo);
+  }
+
+  consultarFacebookVideo = (): Observable<any> => {
+    const uri = `api/Principal/facebook`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
   guardarDocumento = (data: FormData, descripcion: string, idCarpeta: string) => {
     const uri = `api/Principal/documentos/${idCarpeta}?descripcion=${descripcion}`;
     return this.http.post(this.baseUrl+ uri, data);

@@ -5,24 +5,33 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeScript } from '@angular/platform-browser';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { Soporte } from 'src/app/modelos/soporte';
+import { PrincipalService } from 'src/app/services/principal/principal.service';
+import { Base } from '../base';
 @Component({
     selector: 'header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent extends Base {
     public usuario: IDUsuarioNavigation;
     public abrir: Boolean;
     public urlImagen: SafeScript;
     public soporte: Soporte;
-    constructor(private appService: AppService, public router: Router, private sanitizer: DomSanitizer, private soporteService: TokenInterceptorService) {
-        this.soporteService.obtenerInformacionInicio().subscribe(result => {
+    public facebook: any = {};
+    constructor(private appService: AppService, public router: Router, private sanitizer: DomSanitizer, private soporteService: TokenInterceptorService, private principalService: PrincipalService) {
+        super();
+        this.unsubscribeOndestroy(this.principalService.consultarFacebookVideo().subscribe(result => {
+            result.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(result.urlVideo)
+            this.facebook = result;
+        }, error => console.error(error)));
+
+        this.unsubscribeOndestroy(this.soporteService.obtenerInformacionInicio().subscribe(result => {
             this.soporte = result;
             this.urlImagen = this.sanitizer.bypassSecurityTrustResourceUrl(this.soporte.imagenInicio);
         }, error => {
             this.soporte = new Soporte();
             console.error(error);
-        });
+        }));
     }
 
     ngOnInit() {

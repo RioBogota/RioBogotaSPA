@@ -1,4 +1,56 @@
-﻿.btn-cuenca {
+﻿.tarjetas-transmitiendo {
+  top: 4.6rem;
+}
+.emitiendo {
+  width: 15px;
+  height: 15px;
+  border-radius: 60%;
+  background-color: white;
+  animation: example 0.8s infinite;
+  animation-direction: alternate;
+  position: relative;
+  top: 2.5rem;
+  left: 4rem;
+}
+
+@keyframes example {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: lawngreen;
+  }
+}
+
+.facebook-container {
+  background-color: #4267B2;
+  padding: 2rem;
+  border-radius: 0 1rem 1rem 1rem;
+  height: 50rem;
+}
+
+.facebook-container div:first-child {
+  min-height: 30rem;
+  background-color: white;
+  padding: 1rem 0 1rem 0;
+  border-radius: 1rem;
+}
+
+.facebook-title {
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 3rem;
+  color: white;
+  margin-left: 3rem;
+}
+
+.facebook-title-container {
+  width: 30rem;
+  background-color: #4267B2;
+  border-radius: 1rem 1rem 0 0;
+}
+
+
+.btn-cuenca {
     background-color: #354A91;
     color: #fff;
 }

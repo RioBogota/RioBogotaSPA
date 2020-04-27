@@ -1,6 +1,26 @@
-﻿<!--Componentes-->
-<div class="row justify-content-center" style="margin-top: -5rem;"
-  *ngIf="router.url && (router.url === '/home' || router.url === '/home#Cuenca' || router.url === '/home#Componentes' || router.url === '/home#Noticias' || router.url === '/home#Sentencia' || router.url === '/home#Entidades' || router.url === '/home#Galeria')">
+﻿<div class="d-block" *ngIf="facebook?.transmitiendo && router.url && (router.url === '/home' || 
+router.url === '/home#Cuenca' || router.url === '/home#Componentes' || 
+router.url === '/home#Noticias' || router.url === '/home#Sentencia' || 
+router.url === '/home#Entidades' || router.url === '/home#Galeria')">
+  <div class="row text-center">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="facebook-title-container">
+        <div class="emitiendo">
+        </div>
+        <div class="facebook-title">Facebook Live</div>
+      </div>
+      <div class="facebook-container">
+        <div>
+          <iframe [src]="facebook.urlVideo" width="900" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Componentes-->
+<div class="row justify-content-center" style="margin-top: -5rem;" *ngIf="!facebook?.transmitiendo && router.url && (router.url === '/home' || router.url === '/home#Cuenca' || 
+  router.url === '/home#Componentes' || router.url === '/home#Noticias' || 
+  router.url === '/home#Sentencia' || router.url === '/home#Entidades' || router.url === '/home#Galeria')">
   <div *ngIf="urlImagen" class="img-principal">
     <img [src]="urlImagen" alt="" class="img-fluid" width="100%" height="731.8px">
     <h1 class="card-img-overlay texto-principal">
@@ -8,7 +28,7 @@
         SISTEMA DE INFORMACIÓN<br>
         DEL RÍO BOGOTÁ
       </strong>
-    </h1>    
+    </h1>
   </div>
   <div *ngIf="!urlImagen" class="img-principal">
     <img src="../../assets/PNG/cuenca_PTAR_salitre.jpg" alt="" class="img-fluid" width="100%" height="100%">
@@ -19,37 +39,42 @@
       </strong>
     </h1>
   </div>
-  <div class="row card-img-overlay iconos-front text-center">
-      <a routerLink="/unica/1" class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/ambiental.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-      <a routerLink="/unica/2" class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/financiero.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-      <a href="http://www.orarbo.gov.co/" target="_blank" class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/educacion.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-      <a routerLink="/unica/4" class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/politico.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-      <a routerLink="/unica/5" class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/proyectos.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-      <a class="iconos-componentes hover01" style="height: 45px;">
-        <figure>
-          <img src="../../assets/PNG/indicadores.png" alt="" class="img-thumbnail iconos-componentes">
-        </figure>
-      </a>
-  </div>
 </div>
 <!--Fin Componentes-->
+<!-- tarjetas -->
+<div *ngIf="router.url && (router.url === '/home' || router.url === '/home#Cuenca' || 
+router.url === '/home#Componentes' || router.url === '/home#Noticias' || 
+router.url === '/home#Sentencia' || router.url === '/home#Entidades' || router.url === '/home#Galeria')"
+class="row tarjetas-transmitiendo card-img-overlay iconos-front text-center">
+  <a routerLink="/unica/1" class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/ambiental.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+  <a routerLink="/unica/2" class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/financiero.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+  <a href="http://www.orarbo.gov.co/" target="_blank" class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/educacion.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+  <a routerLink="/unica/4" class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/politico.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+  <a routerLink="/unica/5" class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/proyectos.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+  <a class="iconos-componentes hover01" style="height: 45px;">
+    <figure>
+      <img src="../../assets/PNG/indicadores.png" alt="" class="img-thumbnail iconos-componentes">
+    </figure>
+  </a>
+</div>
+<!-- fin tarjetas -->

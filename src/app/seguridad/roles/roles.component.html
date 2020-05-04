@@ -2,12 +2,22 @@
   <thead>
     <tr>
       <th scope="col">Rol</th>
+      <th scope="col">Administra documentos</th>
+      <th scope="col">Opciones</th>
       <!-- <th scope="col">Accion</th> -->
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let rol of roles">
-      <th scope="row">{{rol.nombre}}</th>
+      <th scope="row">{{rol[0].nombre}}</th>
+      <th scope="row">{{rol[0].apruebaDocumentos ? 'Si' : 'No'}}</th>
+      <th scope="row">
+        <span *ngFor="let opcion of rol">
+          <span *ngIf="!opcion.opcionRol[0].idOpcionNavigation.ruta">{{opcion.opcionRol[0].idOpcionNavigation.nombre}}</span>
+          <a *ngIf="opcion.opcionRol[0].idOpcionNavigation.ruta" [routerLink]="['/' + opcion.opcionRol[0].idOpcionNavigation.ruta]"> 
+            {{opcion.opcionRol[0].idOpcionNavigation.nombre}}
+          </a> , </span>
+      </th>
       <!-- <td><a routerLink="/">Editar</a></td> -->
     </tr>
   </tbody>

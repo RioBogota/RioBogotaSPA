@@ -48,8 +48,11 @@ export class UsuarioComponent extends Base {
 		//Se obtienen entidades
 		this.unsubscribeOndestroy(this.seguridadService.getEntities().subscribe(result => {
 			this.entidades = result
+			this.entidadUsuario = this.entidades[0].idEntidad
 			this.entidades.forEach(element => {
-				this.entidadUsuario = element.idEntidad
+				if (this.editar && element.idEntidad === this.usuario.idEntidad) {
+					this.entidadUsuario = element.idEntidad;
+				}
 			});
 		},
 			error => {

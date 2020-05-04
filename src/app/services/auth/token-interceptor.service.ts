@@ -11,6 +11,13 @@ export class TokenInterceptorService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
+  groupBy = (xs, key) => {
+    return xs.reduce((rv, x) => {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  };
+
   guardarInformacionInicio = (soporte: Soporte): Observable<any> => {
     return this.http.put(`${this.baseUrl}api/Principal/inicio/actualizar`, soporte);
   }

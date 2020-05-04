@@ -6,8 +6,8 @@
   <span style="margin-right: 2rem;">
     <mat-form-field>
       <mat-select placeholder="Filtrar por rol" [(ngModel)]="selectedFilterRol" multiple>
-        <mat-option *ngFor="let rol of roles" [value]="rol.nombre">
-          {{rol.nombre}}
+        <mat-option *ngFor="let rol of roles" [value]="rol[0].nombre">
+          {{rol[0].nombre}}
         </mat-option>
       </mat-select>
     </mat-form-field>

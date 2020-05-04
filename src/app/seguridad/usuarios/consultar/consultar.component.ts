@@ -76,7 +76,8 @@ export class ConsultarComponent extends Base implements OnInit {
 
   consultarRoles() {
     this.unsubscribeOndestroy(this.seguridadService.getRoles().subscribe(
-      result => { this.roles = result; },
+      result => {   let obj = this.seguridadService.groupBy(result, ['idRol']);
+      this.roles = Object.values(obj); },
       error => {
         console.error(error);
         this.appService.error('Se produjo un error al consultar el filtro de roles.')

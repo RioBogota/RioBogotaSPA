@@ -16,19 +16,12 @@ export class RolesComponent extends Base implements OnInit {
 
   ngOnInit() {
     this.unsubscribeOndestroy(this.seguridadService.getRoles().subscribe((result) => {
-      let obj = this.groupBy(result, ['idRol']);
+      let obj = this.seguridadService.groupBy(result, ['idRol']);
       this.roles = Object.values(obj);
     }, (error) => {
       this.appService.error('Se produjo un error al consultar los roles')
       console.error(error);
     }));
   }
-
-  groupBy = (xs, key) => {
-    return xs.reduce((rv, x) => {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, {});
-  };
 
 }

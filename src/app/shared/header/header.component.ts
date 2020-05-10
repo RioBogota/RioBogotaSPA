@@ -27,7 +27,8 @@ export class HeaderComponent extends Base {
 
         this.unsubscribeOndestroy(this.soporteService.obtenerInformacionInicio().subscribe(result => {
             this.soporte = result;
-            this.urlImagen = this.sanitizer.bypassSecurityTrustResourceUrl(this.soporte.imagenInicio);
+            if (this.soporte.imagenInicio.trim().length > 0)
+                this.urlImagen = this.sanitizer.bypassSecurityTrustResourceUrl(this.soporte.imagenInicio);
         }, error => {
             this.soporte = new Soporte();
             console.error(error);

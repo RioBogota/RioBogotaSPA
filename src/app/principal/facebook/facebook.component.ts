@@ -22,11 +22,9 @@ export class FacebookComponent extends Base implements OnInit {
 
   castTag(url: string): string {
     if(!url) {
-      this.appService.error('No es una etiqueta de video valida, ingrese a facebook -> videos en vivo -> compartir -> insertar');
       return null;
     }
     if(url.indexOf('<iframe') === -1 && url.indexOf('src="') === -1) {
-      this.appService.error('No es una etiqueta de video valida, ingrese a facebook -> videos en vivo -> compartir -> insertar');
       return null;
     }
     return url.split('src="')[1].split('"')[0];
@@ -42,11 +40,7 @@ export class FacebookComponent extends Base implements OnInit {
   }
 
   actualizarTransmision() {
-    const url = this.castTag(this.facebook.urlVideo);
-    if(!url) {
-      return;
-    }
-    this.facebook.urlVideo = url;
+    this.facebook.urlVideo = this.castTag(this.facebook.urlVideo);
     this.unsubscribeOndestroy(this.principalService.editarFacebookVideo(this.facebook).subscribe(result => this.appService.success('Informacion actualizada exitosamente')
       , error => {
         this.appService.error('Se produjo un error al actualizar la informacion del video.');

@@ -10,8 +10,8 @@ import { Base } from 'src/app/shared/base';
 export class AdminInfoComponent extends Base implements OnInit {
 
 	public documentos: any;
+	private documentosCopia: any;
 	public estado: any;
-	public importando = false;
 	constructor(private principalService: PrincipalService) {
 		super();
 		this.unsubscribeOndestroy(this.principalService.verDocumentos().subscribe(result => {
@@ -22,11 +22,35 @@ export class AdminInfoComponent extends Base implements OnInit {
 					document.aprobado = false;
 				}
 			}
+
 			this.documentos = result;
+			this.documentosCopia = result;
 		}, error => {
 			error.log
 		}));
+	}
 
+	private _selectedFilterEstado: string[];
+	get selectedFilterEstado(): string[] {
+		return this._selectedFilterEstado;
+	}
+	set selectedFilterEstado(value: string[]) {
+		this._selectedFilterEstado = value;
+		this.filtrarEstado(value);
+	}
+
+	public estados = [{ nombre: 'No Aprobado/No Importado', idEstado: 1 }, { nombre: 'Aprobado/Importado', idEstado: 2 }]
+
+	filtrarEstado(value) {
+		if (!value) {
+			this.documentos = this.documentosCopia;
+			return;
+		}
+		if (!value.length) {
+			this.documentos = this.documentosCopia;
+			return;
+		}
+		this.documentos = this.documentosCopia.filter(x => value.includes(x.idEstado))
 	}
 
 	cambiarEstado(documento) {
@@ -34,12 +58,12 @@ export class AdminInfoComponent extends Base implements OnInit {
 		if (documento.aprobado) {
 			documento.idEstado = 2;
 		}
-		this.importando = true;
+		documento.importando = true;
 		this.unsubscribeOndestroy(this.principalService.actualizarEstadoDoc(documento).subscribe(result => {
 			this.estado = result;
-			this.importando = false;
+			documento.importando = false;
 		}, () => {
-			this.importando = false;
+			documento.importando = false;
 		}));
 	}
 

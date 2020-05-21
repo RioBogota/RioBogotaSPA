@@ -22,7 +22,7 @@ export class IrcaComponent extends Base implements OnInit {
 
 
   ngOnInit() {
-    this.selectedValue = 'Todos';
+    this.selectedValue = 'Vigentes';
     this.consultarIndicador();
   }
 
@@ -47,15 +47,13 @@ export class IrcaComponent extends Base implements OnInit {
     let arreglo = [];
     let objeto = indicadores.reduce(
       (objectsByKeyValue, indicador) => {
-        const value = indicador[llave].nombre
-
+        const value = objectsByKeyValue[llave].nombre
         if (!arreglo.some(valor => valor.llave == value)) {
           arreglo.push({ llave: value, valores: [{ valor: objectsByKeyValue.valor }] })
         }
         else {
           arreglo[arreglo.length - 1].valores.push({ valor: objectsByKeyValue.valor })
         }
-        //objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(indicador.valor)
         return indicador
       }
     )
@@ -66,9 +64,8 @@ export class IrcaComponent extends Base implements OnInit {
     if (this.selectedValue === 'Vigentes') {
       this.unsubscribeOndestroy(this.hidricoService.getDnpVigentes(this.pagina).subscribe(
         result => {
-          this.indicadores = result;
-          //this.indicadores = this.transformarIndicador(result)
-          console.log(result)
+          this.indicadores = [];
+          this.indicadores = this.groupBy(result, 'idMunicipioNavigation')
         }, error => {
           console.error(error);
         }
@@ -79,8 +76,8 @@ export class IrcaComponent extends Base implements OnInit {
     if (this.selectedValue === 'Históricos') {
       this.unsubscribeOndestroy(this.hidricoService.getDnpHistorico(this.pagina).subscribe(
         result => {
-          this.indicadores = result;
-          console.log(this.indicadores)
+          this.indicadores = [];
+          this.indicadores = this.groupBy(result, 'idMunicipioNavigation')
         }, error => {
           console.error(error);
         }

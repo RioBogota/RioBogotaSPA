@@ -11,6 +11,10 @@
       <a mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>person</mat-icon>Ingresar
       </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/registro/crear']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>person</mat-icon>Registrarse
+      </a>
     </mat-list>
     <mat-list *ngIf="usuario" style="margin-top: 5rem;">
       <div *ngFor="let opcion of opcionesPadre; let indice = index">

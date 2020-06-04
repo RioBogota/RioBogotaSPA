@@ -39,6 +39,7 @@ import { AgregarComponent } from '../../seguridad/roles/agregar/agregar.componen
     RouterModule.forChild([
       { path: 'login', component: LoginComponent },
       { path: 'usuario', component: UsuarioComponent },
+      { path: 'registro/crear', component: UsuarioComponent },
       { path: 'usuario/:id', component: UsuarioComponent },
       { path: 'roles/consultar', component: RolesComponent },
       { path: 'opcion', component: OpcionComponent },

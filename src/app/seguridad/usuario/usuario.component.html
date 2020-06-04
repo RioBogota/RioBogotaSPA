@@ -2,8 +2,9 @@
   <h4>Información de Usuario</h4>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-      <input type="text" required [class]="valido ? 'form-control' : 'form-control invalid'" minlength="5" maxlength="15" aria-label="Nombre de usuario"
-        name="nombreUsuario" [(ngModel)]="usuario.usuario1" aria-describedby="usuario-default" placeholder="Usuario">
+      <input type="text" required [class]="valido ? 'form-control' : 'form-control invalid'" minlength="5"
+        maxlength="15" aria-label="Nombre de usuario" name="nombreUsuario" [(ngModel)]="usuario.usuario1"
+        aria-describedby="usuario-default" placeholder="Usuario">
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <input type="password" required
@@ -23,13 +24,19 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
-      <label for="select-rol">Seleccione un Rol</label>
-      <select name="roles" id="select-rol" [(ngModel)]="rolUsuario" name="rolUsuario" class="form-control">
+      <label
+        for="selectRol">{{ !ocultarRol ? 'Seleccione un Rol' : 'Trabaja en una entidad del CECH?' }}
+      </label>
+      <div *ngIf="ocultarRol" class="form-check">
+        <app-switch (seleccion)="esTrabajador($event)" [modelo]="trabajaEntidad"></app-switch>
+      </div>
+      <select *ngIf="!ocultarRol" name="roles" id="selectRol" [(ngModel)]="rolUsuario" name="rolUsuario"
+        class="form-control">
         <option [ngValue]="rol" *ngFor="let rol of roles">{{rol.nombre}}</option>
       </select>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
-      <label for="select-entidad">Seleccione una Entidad</label>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group" *ngIf="trabajaEntidad">
+      <label for="select-entidad">Entidad en la que trabaja</label>
       <select name="entidades" id="select-entidad" [(ngModel)]="entidadUsuario" class="form-control">
         <option *ngFor="let entidad of entidades" [ngValue]="entidad.idEntidad">{{ entidad.descripcion }}</option>
       </select>
@@ -79,10 +86,10 @@
     </div>
   </div>
 </form>
-    
-    
-    <form>
-    
-  
-    
-    </form>
+
+
+<form>
+
+
+
+</form>

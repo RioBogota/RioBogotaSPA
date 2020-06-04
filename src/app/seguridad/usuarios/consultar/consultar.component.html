@@ -40,7 +40,7 @@
         <td>{{usuario.primerNombre}}</td>
         <td>{{usuario.primerApellido}}</td>
         <td>{{usuario.rolUsuario[0]?.idRolNavigation?.nombre}}</td>
-        <td>{{usuario.idEntidadNavigation.descripcion}}</td>
+        <td>{{usuario.idEntidadNavigation?.descripcion}}</td>
         <td><a routerLink="/usuario/{{usuario.idUsuario}}" class="editar">Editar</a> &nbsp;<span class="eliminar"
             (click)="eliminar(usuario.idUsuario)">Eliminar</span></td>
       </tr>

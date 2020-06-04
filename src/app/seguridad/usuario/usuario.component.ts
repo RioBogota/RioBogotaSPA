@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor.service';
 import { IDRolNavigation, IDUsuarioNavigation, RolUsuario } from 'src/app/modelos/Seguridad';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Base } from 'src/app/shared/base';
 import { AppService } from 'src/app/services/app.service';
 import { md5 } from 'src/app/shared/md5';
@@ -19,8 +19,9 @@ export class UsuarioComponent extends Base {
 	public editar: Boolean;
 	public entidades: any;
 	entidadUsuario;
-
-	constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute, private appService: AppService) {
+	public ocultarRol = true;
+	public trabajaEntidad = false;
+	constructor(private seguridadService: TokenInterceptorService, private router: ActivatedRoute, private appService: AppService, private route: Router) {
 		super();
 		//this.entidades = ["CAR", "SDA", "Gobernación"];
 		this.usuario = new IDUsuarioNavigation();
@@ -73,9 +74,15 @@ export class UsuarioComponent extends Base {
 		return obj;
 	}
 
+	esTrabajador(event) {
+		this.trabajaEntidad = event;
+	}
+
 	ngOnInit() {
 		this.unsubscribeOndestroy(this.seguridadService.getRoles().subscribe((result) => {
+			this.ocultarRol = false;
 			this.roles = result;
+			this.trabajaEntidad = true;
 			if (!this.rolUsuario) {
 				this.rolUsuario = this.roles[0];
 				return;
@@ -84,6 +91,12 @@ export class UsuarioComponent extends Base {
 			this.rolUsuario = filtrados[0];
 		}, (error) => {
 			console.error(error);
+			if (error.status === 401) {
+				this.ocultarRol = true;
+				return;
+			}
+			this.ocultarRol = false;
+			this.appService.error('Se presento un error al obtener los roles')
 		}));
 	}
 
@@ -91,15 +104,23 @@ export class UsuarioComponent extends Base {
 
 	guardar = () => {
 		let usuarioRol: RolUsuario = new RolUsuario();
-		usuarioRol.idRol = this.rolUsuario.idRol;
-		this.usuario.rolUsuario[0] = usuarioRol;
-
+		if (!this.ocultarRol) {
+			usuarioRol.idRol = this.rolUsuario.idRol;
+			this.usuario.rolUsuario[0] = usuarioRol;
+		}
+		else {
+			usuarioRol.idRol = 37;
+			if (!this.trabajaEntidad)
+				this.entidadUsuario = null;
+			this.usuario.rolUsuario[0] = usuarioRol;
+		}
 		this.usuario.idEntidad = this.entidadUsuario
 
 		if (!this.editar) {
 			this.usuario.contrasena = md5(this.usuario.contrasena);
 			this.unsubscribeOndestroy(this.seguridadService.guardarUsuario(this.upper(this.usuario)).subscribe((result) => {
 				this.appService.success("Usuario guardado exitosamente");
+				this.route.navigate(['/']);
 			}, (error) => {
 				this.appService.error('Se produjo un error al guardar el usuario, intente nuevamente mas tarde.');
 				console.error(error);

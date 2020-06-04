@@ -4,6 +4,7 @@ import { IDRolNavigation, IDUsuarioNavigation, RolUsuario } from 'src/app/modelo
 import { ActivatedRoute } from '@angular/router';
 import { Base } from 'src/app/shared/base';
 import { AppService } from 'src/app/services/app.service';
+import { md5 } from 'src/app/shared/md5';
 @Component({
 	selector: 'usuario',
 	templateUrl: './usuario.component.html',
@@ -96,6 +97,7 @@ export class UsuarioComponent extends Base {
 		this.usuario.idEntidad = this.entidadUsuario
 
 		if (!this.editar) {
+			this.usuario.contrasena = md5(this.usuario.contrasena);
 			this.unsubscribeOndestroy(this.seguridadService.guardarUsuario(this.upper(this.usuario)).subscribe((result) => {
 				this.appService.success("Usuario guardado exitosamente");
 			}, (error) => {
@@ -104,6 +106,7 @@ export class UsuarioComponent extends Base {
 			}));
 			return;
 		}
+		this.usuario.contrasena = md5(this.usuario.contrasena);
 		this.usuario.rolUsuario[0].idUsuario = this.usuario.idUsuario;
 		this.unsubscribeOndestroy(this.seguridadService.actualizarUsuario(this.usuario).subscribe(response => {
 			this.appService.success("usuario actualizado exitosamente");

@@ -4,6 +4,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { AppService } from 'src/app/services/app.service';
 import { IDUsuarioNavigation } from 'src/app/modelos/Seguridad';
 import { Base } from 'src/app/shared/base';
+import { md5 } from 'src/app/shared/md5';
 
 @Component({
     selector: 'login',
@@ -23,7 +24,7 @@ export class LoginComponent extends Base {
         this.mensajeError = '';
         this.error = false;
         // TODO remove nested observables
-        this.unsubscribeOndestroy(this.loginService.getLogin(data.usuario.toUpperCase(), data.contrasena).subscribe(result => {
+        this.unsubscribeOndestroy(this.loginService.getLogin(data.usuario.toUpperCase(), md5(data.contrasena)).subscribe(result => {
             this.usuario = result;
             sessionStorage.setItem('usuario', JSON.stringify(this.usuario));
             this.appService.checkUserInfo.emit(this.usuario);
@@ -50,7 +51,7 @@ export class LoginComponent extends Base {
     }
 
     obtenerToken = (data: any) => {
-        this.unsubscribeOndestroy(this.loginService.getToken(data.usuario, data.contrasena).subscribe(res => {
+        this.unsubscribeOndestroy(this.loginService.getToken(data.usuario, md5(data.contrasena)).subscribe(res => {
             sessionStorage.setItem('token', res.token);
             this.router.navigate(['/home']);
         }, error => {

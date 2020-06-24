@@ -22,7 +22,7 @@ export class OwlCarouselComponent implements OnInit {
   { imagen: '../../assets/PNG/Gobernacion.png', tamano: '75%' },
   { imagen: '../../assets/PNG/Alcaldia.png', tamano: '85%' },
   { imagen: '../../assets/PNG/Min_Ambiente.png', tamano: '85%' },
-  { imagen: '../../assets/PNG/car.png', tamano: '60%' },
+  { imagen: '../../assets/PNG/car.png', tamano: '30%' },
   { imagen: '../../assets/PNG/DNP.png', tamano: '85%' }];
 
   public opcionesResBaja: Object = {

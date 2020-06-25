@@ -34,7 +34,7 @@ export class AgregarComponent implements OnInit {
   ngOnInit() {
     this.seguridadService.getModulos().subscribe((result) => {
       this.modulos = result.filter((data) => {
-        return data.idMicrositio !== 23 && data.idMicrositio !== 87;
+        return data.idMicrositio !== 23;
       });
       this.modulo = this.modulos[0];
       this.precargarSeleccionados();

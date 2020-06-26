@@ -15,9 +15,12 @@
   <hr>
   <div>
     <h4>Lista Opciones Menú</h4>
+    <span style="width: 25rem; margin-right: 3rem;">
+      <input type="text" placeholder="Filtrar por nombre" class="form-control" name="searchnombre" [(ngModel)]="searchNombre">
+    </span>
     <div class="row">
-      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let opcion of opciones">
-        <div [title]="opcion.nombre">{{opcion.nombre | limitTo: 18}}</div>
+      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let opcion of opciones | filter:searchNombre:'nombre'">
+        <div [title]="opcion.nombre">{{opcion.nombre}}</div>
         <app-switch title='sitio' (seleccion)="seleccionarValores($event, opcion)" 
         [modelo]="opcion.seleccionado">
         </app-switch>
@@ -27,9 +30,12 @@
   <hr>
   <div *ngIf="rol.apruebaDocumentos">
     <h4>Lista Micrositios</h4>
+    <span style="width: 25rem; margin-right: 3rem;">
+      <input type="text" placeholder="Filtrar por nombre" class="form-control" name="searchtext" [(ngModel)]="searchText">
+    </span>
     <div class="row">
-      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let sitio of modulos">
-        <div [title]="sitio.descripcion">{{sitio.descripcion | limitTo: 18}}</div>
+      <span class="col-xs-6 col-sm-6 col-md-3 col-lg-3" *ngFor="let sitio of modulos | filter:searchText:'descripcion'">
+        <div [title]="sitio.descripcion">{{sitio.descripcion}}</div>
         <app-switch title='sitio' (seleccion)="seleccionarValores($event, sitio)" [modelo]="sitio.seleccionado">
         </app-switch>
       </span>

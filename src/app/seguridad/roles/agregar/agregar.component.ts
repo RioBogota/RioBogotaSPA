@@ -20,8 +20,8 @@ export class AgregarComponent implements OnInit {
     opcionRol?: any[],
     rolMicrositio: any[],
     rolUsuario?: any[]
-    }
-  public opciones:any;
+  }
+  public opciones: any;
 
   constructor(private seguridadService: TokenInterceptorService, private appService: AppService) {
     this.rol = {
@@ -29,19 +29,35 @@ export class AgregarComponent implements OnInit {
       apruebaDocumentos: false,
       rolMicrositio: []
     }
-   }
+  }
 
   ngOnInit() {
     this.seguridadService.getModulos().subscribe((result) => {
       this.modulos = result.filter((data) => {
         return data.idMicrositio !== 23;
+      }).sort((a, b) => {
+        if (a.descripcion > b.descripcion) {
+          return 1;
+        }
+        if (a.descripcion < b.descripcion) {
+          return -1;
+        }
+        return 0;
       });
       this.modulo = this.modulos[0];
       this.precargarSeleccionados();
-    });    
+    });
 
     this.seguridadService.getTodasOpciones().subscribe(result => {
-      this.opciones = result.filter(x => x.idOpcionPadre != null);
+      this.opciones = result.filter(x => x.idOpcionPadre != null).sort((a, b) => {
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        return 0;
+      });
     })
   }
 
@@ -62,7 +78,7 @@ export class AgregarComponent implements OnInit {
     });
   }
 
-  guardar(){
+  guardar() {
     this.modulos.forEach(micrositio => {
       if (micrositio.seleccionado) {
         this.rol.rolMicrositio.push({ idMicrositio: micrositio.idMicrositio })
@@ -76,10 +92,10 @@ export class AgregarComponent implements OnInit {
     this.seguridadService.saveRol(this.rol).subscribe(result => {
       this.appService.success('Rol guardado exitosamente')
     },
-    error => {
-      this.appService.error('Se produjo un error al guardar el rol');
-      console.error(error)
-    })    
+      error => {
+        this.appService.error('Se produjo un error al guardar el rol');
+        console.error(error)
+      })
   }
 
   seleccionarValores(event, propiedad) {

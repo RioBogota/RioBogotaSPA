@@ -23,6 +23,7 @@ import { AdminInfoComponent } from '../../seguridad/admin-info/admin-info.compon
 import { CommonRioBogModule } from '../common/common.module';
 import { TruncatePipe } from 'src/app/pipes/truncate_text.pipe';
 import { AgregarComponent } from '../../seguridad/roles/agregar/agregar.component';
+import { FilterPipe } from '../../pipes/filter.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +66,8 @@ import { AgregarComponent } from '../../seguridad/roles/agregar/agregar.componen
     ModulosComponent,
     AdminInfoComponent,
     TruncatePipe,
-    AgregarComponent
+    AgregarComponent,
+    FilterPipe
   ]
 })
 export class SeguridadModule { }

@@ -13,6 +13,8 @@ export class AgregarComponent implements OnInit {
   public modulo: any = {};
   public idUsuario: number;
   public esAdmin: any;
+  public searchnombre: string;
+  public searchText: string;
   public rol: {
     idRol?: number,
     nombre: string,

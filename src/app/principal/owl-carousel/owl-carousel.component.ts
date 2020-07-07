@@ -19,7 +19,7 @@ export class OwlCarouselComponent implements OnInit {
   ];
 
   public tamanos = [{ imagen: '../../assets/PNG/acueducto_bogota.png', tamano: '100%' },
-  { imagen: '../../assets/PNG/Gobernacion.png', tamano: '75%' },
+  { imagen: '../../assets/PNG/Gobernacion.png', tamano: '60%' },
   { imagen: '../../assets/PNG/Alcaldia.png', tamano: '85%' },
   { imagen: '../../assets/PNG/Min_Ambiente.png', tamano: '85%' },
   { imagen: '../../assets/PNG/car.png', tamano: '30%' },

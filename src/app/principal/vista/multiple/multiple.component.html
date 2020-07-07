@@ -1,8 +1,7 @@
 <div class="row" id="Cuenca" style="margin-left: 0.5rem; margin-right: 0.5rem;">
   <div class="col-md-12 col-lg-12">
     <h2>{{modulo.titulo}}</h2>
-    <p class="text-justify">
-      {{modulo.texto}}
+    <p class="text-justify" [innerHtml]="modulo.texto">
     </p>
   </div>
   <div class="row col-md-12 justify-content-center" *ngIf="urlMapa2">

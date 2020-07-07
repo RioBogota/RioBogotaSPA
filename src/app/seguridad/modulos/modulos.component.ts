@@ -3,6 +3,7 @@ import { TokenInterceptorService } from 'src/app/services/auth/token-interceptor
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { Base } from 'src/app/shared/base';
 import { AppService } from 'src/app/services/app.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-modulos',
@@ -16,6 +17,7 @@ export class ModulosComponent extends Base implements OnInit {
   public sitio: any = {};
   public hijos: boolean;
   public adminSitio: boolean;
+  public Editor = ClassicEditor;
   constructor(private seguridadService: TokenInterceptorService, private principalService: PrincipalService, private appService: AppService) {
     super();
    }

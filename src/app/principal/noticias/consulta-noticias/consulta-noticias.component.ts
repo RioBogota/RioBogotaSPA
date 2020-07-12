@@ -11,6 +11,7 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class ConsultaNoticiasComponent extends Base implements OnInit {
   public noticias: any = [];
+  p: number = 1;
   constructor(private servicioPrincipal: PrincipalService, private router: Router, private appService: AppService) {
     super();
   }

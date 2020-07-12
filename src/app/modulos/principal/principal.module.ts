@@ -31,10 +31,12 @@ import { IrcaComponent } from 'src/app/hidrico/indicadores/irca/irca.component';
 import { FinancieroComponent } from '../../cech/indicadores/financiero/financiero.component';
 import { ConsultarContactoComponent } from '../../principal/contacto/consultar-contacto/consultar-contacto.component';
 import { FacebookComponent } from '../../principal/facebook/facebook.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxPaginationModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,

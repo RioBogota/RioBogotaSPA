@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrincipalService } from 'src/app/services/principal/principal.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -19,7 +19,7 @@ export class EditarNoticiaComponent extends Base implements OnInit {
   public editar: Boolean;
   public Editor = ClassicEditor;
   public texto: any;
-  constructor(private router: ActivatedRoute, private servicionoticias: PrincipalService, private sanitizer: DomSanitizer, private appService: AppService) {
+  constructor(private route: Router, private router: ActivatedRoute, private servicionoticias: PrincipalService, private sanitizer: DomSanitizer, private appService: AppService) {
     super();
     this.noticia = {
       "titulo": null,
@@ -77,6 +77,7 @@ export class EditarNoticiaComponent extends Base implements OnInit {
     if (this.editar) {
       this.unsubscribeOndestroy(this.servicionoticias.editarNoticia(this.noticia).subscribe(response => {
         this.appService.success('Noticia guardada correctamente');
+        this.route.navigate(['/noticias/consulta']);
       }, error => {
         this.appService.error('Se produjo un error al guardar la noticia');
         console.error(error);
@@ -85,6 +86,7 @@ export class EditarNoticiaComponent extends Base implements OnInit {
     }
     this.unsubscribeOndestroy(this.servicionoticias.guardarNoticia(this.noticia).subscribe(response => {
       this.appService.success('Noticia guardada correctamente');
+      this.route.navigate(['/noticias/consulta']);
     }, error => {
       this.appService.error('Se produjo un error al guardar la noticia');
       console.error(error);

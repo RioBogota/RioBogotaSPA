@@ -96,6 +96,11 @@ export class PrincipalService {
     return this.http.post(this.baseUrl+ uri, data);
   }
 
+  refrescarToken = (token: string) => {
+    const uri = `api/Principal/documentos/token?token=${token}`;
+    return this.http.post(this.baseUrl+ uri, {});
+  }
+
   verDocumentos = (): Observable<any> => {
     const uri = `api/Seguridad/documentos/all`;
     return this.http.get(this.baseUrl + uri);

@@ -32,5 +32,5 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 export class AppModule { }
 
 export function getBaseUrl() {
-  return 'http://siriobogotaapi.car.gov.co:5000/';
+  return 'http://localhost:64513/';
 }

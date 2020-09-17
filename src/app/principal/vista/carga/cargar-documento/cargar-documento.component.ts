@@ -39,7 +39,7 @@ export class CargarDocumentoComponent extends Base implements OnInit {
     formData.append(this.documento.nombreDocumento, event.target.files[0], event.target.files[0].name);
     //TODO remove nested observables
     this.unsubscribeOndestroy(this.principalService.guardarDocumento(formData, this.documento.descripcionDocumento, this.sitio.idCarpeta).subscribe((result: any) => {
-      this.documento.idDrive = result.id;
+      this.documento.idDrive = result;
       this.documento.idUsuario = this.usuario.idUsuario;
       this.documento.fecha = new Date();
       this.documento.idEstado = 1;

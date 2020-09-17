@@ -24,6 +24,7 @@ import { CommonRioBogModule } from '../common/common.module';
 import { TruncatePipe } from 'src/app/pipes/truncate_text.pipe';
 import { AgregarComponent } from '../../seguridad/roles/agregar/agregar.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { TokenComponent } from '../../seguridad/token/token.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +52,8 @@ import { FilterPipe } from '../../pipes/filter.pipe';
       {path: 'usuario/cambiar/correo', component: CorreoComponent },
       {path: 'modulos', component: ModulosComponent},
       { path: 'admin/info', component: AdminInfoComponent },
-      { path: 'agregar/rol', component: AgregarComponent }
+      { path: 'agregar/rol', component: AgregarComponent },
+      { path: 'auth', component: TokenComponent }
     ])
   ],
   declarations: [
@@ -67,7 +69,8 @@ import { FilterPipe } from '../../pipes/filter.pipe';
     AdminInfoComponent,
     TruncatePipe,
     AgregarComponent,
-    FilterPipe
+    FilterPipe,
+    TokenComponent
   ]
 })
 export class SeguridadModule { }

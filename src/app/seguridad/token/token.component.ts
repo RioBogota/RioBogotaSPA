@@ -14,7 +14,6 @@ export class TokenComponent implements OnInit {
     private principalService: PrincipalService,
     private notification: AppService
   ) {
-    debugger;
     this.route.queryParams.subscribe(params => {
       if(params.code) {
         this.principalService.refrescarToken(params.code).subscribe(result => {

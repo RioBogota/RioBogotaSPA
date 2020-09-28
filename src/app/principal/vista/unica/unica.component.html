@@ -79,7 +79,7 @@
                 [src]="modulo.mapaMicrositio[0].urlMapa"
                 width="100%" height="500px" frameborder="0" class="frame-mapa"> </iframe>
             </mat-tab>
-            <mat-tab label="DISTRITO" *ngIf="modulo?.mapaMicrositio?.length > 1">
+            <mat-tab label="DISTRITO" *ngIf="modulo.mapaMicrositio[1].urlMapa">
               <iframe scrolling="no"
                 [src]="modulo.mapaMicrositio[1].urlMapa"
                 width="100%" height="500px" frameborder="0" class="frame-mapa"> </iframe>

@@ -38,6 +38,11 @@ export class AppService {
     this.message(text);
   }
 
+  warning(text: string) {
+    this.color = '#FF7152';
+    this.message(text);
+  }
+
   message(text: string) {
     let division = document.createElement('div');
     division.setAttribute('style', this.getStyle());

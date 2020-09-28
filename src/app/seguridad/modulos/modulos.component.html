@@ -106,8 +106,10 @@
           <textarea [(ngModel)]="sitio.texto"></textarea>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="sitio?.mapaMicrositio?.length">
-          <label>URL del Mapa</label>
-          <input type="text" [(ngModel)]="sitio.mapaMicrositio[0].urlMapa">
+          <div *ngFor="let sit of sitio.mapaMicrositio">
+            <label>URL del Mapa</label>
+            <input type="text" [(ngModel)]="sit.urlMapa">
+          </div>
         </div>
       </div>
     </div>

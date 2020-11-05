@@ -32,6 +32,7 @@ import { OwlCarouselComponent } from './principal/owl-carousel/owl-carousel.comp
 import { OwlModule } from 'ngx-owl-carousel';
 import { CechModule } from './modulos/cech/cech.module';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { OrdenModule } from './modulos/orden/orden/orden.module';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatTableModule,
         OwlModule,
         CechModule,
+        OrdenModule,
         MatExpansionModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },

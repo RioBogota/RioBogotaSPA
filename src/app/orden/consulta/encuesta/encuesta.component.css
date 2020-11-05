@@ -1,0 +1,16 @@
+.componente {
+    width: 25rem;
+    margin: 2rem;
+    flex: auto;
+    align-self: flex-end;
+}
+
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.orden {
+    width: 10rem;
+}

@@ -30,6 +30,10 @@ export class EncuestaComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
+    if(!JSON.parse(sessionStorage.getItem("usuario")) || !JSON.parse(sessionStorage.getItem("usuario")).usuario1) {
+      this.appService.error('Para ingresar a esta pagina debe iniciar sesion primero');
+      return;
+    }
     this.ordenService.getOrdenes().subscribe(
       (res) => (this.ordenes = res),
       (err) =>
@@ -91,6 +95,16 @@ export class EncuestaComponent extends Base implements OnInit {
                 idPregunta: parseInt(key),
               });
               break;
+            case "archivo":
+              respuestas.push({
+                texto: element.toString().split("\\")[
+                  element.toString().split("\\").length - 1
+                ],
+                usuario: JSON.parse(sessionStorage.usuario).usuario1,
+                fechaAud: new Date().toLocaleDateString(),
+                idPregunta: parseInt(key),
+              });
+              break;
             case "moneda":
               respuestas.push({
                 moneda: element.toString(),
@@ -129,7 +143,11 @@ export class EncuestaComponent extends Base implements OnInit {
         }
       }
     }
-    this.ordenService.postRespuestas(respuestas).subscribe(suc => this.appService.success('Preguntas guardadas correctamente'), err => this.appService.error('Se produjo un error al guardar las preguntas'));
+    this.ordenService.postRespuestas(respuestas).subscribe(
+      (suc) => this.appService.success("Preguntas guardadas correctamente"),
+      (err) =>
+        this.appService.error("Se produjo un error al guardar las preguntas")
+    );
     if (this.formData) {
       this.unsubscribeOndestroy(
         this.principalService

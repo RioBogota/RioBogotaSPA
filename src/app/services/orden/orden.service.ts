@@ -32,11 +32,13 @@ export class OrdenService {
 
   toFormGroup(questions: QuestionBase<string>[]) {
     const group: any = {};
-
     questions.forEach((question) => {
       group[question.key] = question.required
-        ? new FormControl(question.value || "", Validators.required)
-        : new FormControl(question.value || "");
+        ? new FormControl(question.value || "", Validators.compose([
+            Validators.required,
+            Validators.maxLength(question.max),
+          ]))
+        : new FormControl(question.value || "", Validators.maxLength(question.max));
     });
     return new FormGroup(group);
   }
@@ -83,6 +85,7 @@ export class OrdenService {
                 pregunta.idTipoPreguntaNavigation.descripcion
               ),
               required: pregunta.requerido,
+              max: pregunta.longitud,
               order: pregunta.idPregunta,
             })
           );

@@ -1,20 +1,31 @@
-<h3>Seguimiento municipios Sentencia Rio Bogotá</h3>
-<div *ngIf="ordenes && ordenes.length" class="orden">
+<div class="form">
+  <h3>Seguimiento municipios Sentencia Rio Bogotá</h3>
+  <div *ngIf="ordenes && ordenes.length" class="orden">
     <label>Seleccione una orden</label>
-  <select class="form-control" id="ordenes" [(ngModel)]="ordenSeleccionada" (change)="seleccionarOrden()">
-    <option *ngFor="let orden of ordenes" [ngValue]="orden">
-     Orden - {{ orden.nombre }}
-    </option>
-  </select>
-</div>
-<div *ngIf="questions && questions.length">
-  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formulario">
-    <div *ngFor="let question of questions" class="componente">
-      <app-pregunta [question]="question" [form]="form" (archivoCargado)="obtenerArchivo($event)"></app-pregunta>
-    </div>
+    <select
+      class="form-control"
+      id="ordenes"
+      [(ngModel)]="ordenSeleccionada"
+      (change)="seleccionarOrden()"
+    >
+      <option *ngFor="let orden of ordenes" [ngValue]="orden">
+        Orden - {{ orden.nombre }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="questions && questions.length">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formulario">
+      <div *ngFor="let question of questions" class="componente">
+        <app-pregunta
+          [question]="question"
+          [form]="form"
+          (archivoCargado)="obtenerArchivo($event)"
+        ></app-pregunta>
+      </div>
 
-    <div class="form-row">
-      <button type="submit" [disabled]="!form.valid">Guardar</button>
-    </div>
-  </form>
+      <div class="save-button">
+        <button class="btn btn-default mr-5" type="submit" [disabled]="!form.valid">Guardar</button>
+      </div>
+    </form>
+  </div>
 </div>

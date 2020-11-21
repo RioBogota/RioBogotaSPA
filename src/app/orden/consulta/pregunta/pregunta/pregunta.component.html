@@ -1,6 +1,7 @@
 <div [formGroup]="form">
   <div>
-    <span class="errorMessage" *ngIf="!isValid">*</span>
+    <span class="errorMessage" *ngIf="hasErrors?.required">* Campo requerido </span>
+    <span class="errorMessage" *ngIf="hasErrors?.maxlength">Maxima longitud permitida {{question.max}} caracteres</span>
     <label [attr.for]="question.key">{{ question.label }}</label>
   </div>
 

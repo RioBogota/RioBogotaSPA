@@ -3,6 +3,7 @@ export class QuestionBase<T> {
   key: string;
   label: string;
   required: boolean;
+  max?: number;
   order: number;
   controlType: string;
   type: string;
@@ -13,6 +14,7 @@ export class QuestionBase<T> {
       key?: string;
       label?: string;
       required?: boolean;
+      max?: number;
       order?: number;
       controlType?: string;
       type?: string;
@@ -22,6 +24,7 @@ export class QuestionBase<T> {
     this.key = options.key || '';
     this.label = options.label || '';
     this.required = !!options.required;
+    this.max = options.max || Number.MAX_VALUE;
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
     this.type = options.type || '';

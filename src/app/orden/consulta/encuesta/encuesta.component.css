@@ -14,3 +14,12 @@
 .orden {
     width: 10rem;
 }
+
+.form {
+    min-height: 20rem;
+}
+
+.save-button {
+    width: 100%;
+    margin: 1rem;
+}

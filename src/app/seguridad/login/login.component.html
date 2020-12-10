@@ -8,7 +8,7 @@
         </div>
         <div class="file-field input-field" style="display: flex;">
           <input matInput placeholder="Ingrese su contraseña" [type]="hide ? 'password' : 'text'"
-            pattern="^[a-zA-Z0-9_.]*$" required name="contrasena" maxlength="20" ngModel>
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required name="contrasena" maxlength="20" ngModel>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </div>
         <div class="d-flex justify-content-center">

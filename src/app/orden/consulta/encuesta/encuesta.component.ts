@@ -98,7 +98,7 @@ export class EncuestaComponent extends Base implements OnInit {
               respuestas.push({
                 texto: element.toString(),
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -110,7 +110,7 @@ export class EncuestaComponent extends Base implements OnInit {
                   element.toString().split("\\").length - 1
                 ],
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -120,7 +120,7 @@ export class EncuestaComponent extends Base implements OnInit {
               respuestas.push({
                 moneda: element.toString(),
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -130,7 +130,7 @@ export class EncuestaComponent extends Base implements OnInit {
               respuestas.push({
                 fecha: element.toString(),
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -140,7 +140,7 @@ export class EncuestaComponent extends Base implements OnInit {
               respuestas.push({
                 numero: parseInt(element),
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -150,7 +150,7 @@ export class EncuestaComponent extends Base implements OnInit {
               respuestas.push({
                 idOpcionPregunta: parseInt(element),
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date().toLocaleDateString(),
+                fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
                 radicado: this.radicado
@@ -163,7 +163,13 @@ export class EncuestaComponent extends Base implements OnInit {
       }
     }
     this.ordenService.postRespuestas(respuestas).subscribe(
-      (suc) => this.appService.success(`Preguntas guardadas correctamente, numero de radicado ${this.radicado}`),
+      (suc) => {
+        if(!suc) {
+          this.appService.error("Se produjo un error al guardar las preguntas.")
+          return;
+        }
+        this.appService.success(`Preguntas guardadas correctamente, numero de radicado ${this.radicado}`);
+      },
       (err) =>
         this.appService.error("Se produjo un error al guardar las preguntas")
     );

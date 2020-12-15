@@ -20,6 +20,7 @@ export class EncuestaComponent extends Base implements OnInit {
   ordenSeleccionada: any;
   preguntas: any;
   formData: FormData;
+  radicado: string;
   public documento: any = {};
   constructor(
     private ordenService: OrdenService,
@@ -75,12 +76,18 @@ export class EncuestaComponent extends Base implements OnInit {
   onSubmit() {
     this.payLoad = this.form.getRawValue();
     let respuestas = [];
+    let municipio = 0;
+    this.radicado = `RBOG-${this.ordenSeleccionada.idOrden}-${new Date().toLocaleDateString().substr(0, 10).replace(/\//g, '-')}`;
     for (const key in this.payLoad) {
       if (Object.prototype.hasOwnProperty.call(this.payLoad, key)) {
         const element = this.payLoad[key];
         let pregunta = this.preguntas.find(
           (element) => element.idPregunta === parseInt(key)
         );
+        if(pregunta.longitud === -1) {
+          municipio = element;
+          this.radicado = `${this.radicado}-${element}-${JSON.parse(sessionStorage.usuario).usuario1}`
+        }
         if (
           pregunta &&
           pregunta.idTipoPreguntaNavigation &&
@@ -93,6 +100,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             case "archivo":
@@ -103,6 +112,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             case "moneda":
@@ -111,6 +122,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             case "fecha":
@@ -119,6 +132,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             case "numero":
@@ -127,6 +142,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             case "multiple":
@@ -135,6 +152,8 @@ export class EncuestaComponent extends Base implements OnInit {
                 usuario: JSON.parse(sessionStorage.usuario).usuario1,
                 fechaAud: new Date().toLocaleDateString(),
                 idPregunta: parseInt(key),
+                municipio,
+                radicado: this.radicado
               });
               break;
             default:
@@ -144,7 +163,7 @@ export class EncuestaComponent extends Base implements OnInit {
       }
     }
     this.ordenService.postRespuestas(respuestas).subscribe(
-      (suc) => this.appService.success("Preguntas guardadas correctamente"),
+      (suc) => this.appService.success(`Preguntas guardadas correctamente, numero de radicado ${this.radicado}`),
       (err) =>
         this.appService.error("Se produjo un error al guardar las preguntas")
     );

@@ -49,7 +49,7 @@ export class AppService {
     let textNode = document.createTextNode(text);
     division.appendChild(textNode);
     document.body.appendChild(division);
-    setTimeout(() => { document.body.removeChild(division); }, 5000);
+    setTimeout(() => { document.body.removeChild(division); }, 20000);
   }
 
 

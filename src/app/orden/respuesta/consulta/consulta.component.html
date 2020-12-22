@@ -1,0 +1,59 @@
+<span style="margin-right: 2rem">
+  <mat-form-field>
+    <mat-select placeholder="seleccione una orden" [(ngModel)]="selectedOrden">
+      <mat-option *ngFor="let orden of ordenes" [value]="orden.idOrden">
+        {{ orden.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select
+      placeholder="seleccione un municipio"
+      [(ngModel)]="selectedMunicipio"
+    >
+      <mat-option
+        *ngFor="let municipio of municipios"
+        [value]="municipio.idOpcion"
+      >
+        {{ municipio.descripcion }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button
+    (click)="consultar()"
+    style="margin-left: 1rem"
+    class="btn btn-default"
+  >
+    Consultar
+  </button>
+</span>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Pregunta</th>
+        <th scope="col">Respuesta</th>
+        <th scope="col">Fecha Respuesta</th>
+        <th scope="col">Usuario Respuesta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let respuesta of respuestas">
+        <td>{{ respuesta.idPreguntaNavigation.descripcion }}</td>
+        <td *ngIf="respuesta.texto">{{ respuesta.texto }}</td>
+        <td *ngIf="respuesta.numero">{{ respuesta.numero }}</td>
+        <td *ngIf="respuesta.moneda">{{ respuesta.moneda | currency }}</td>
+        <td *ngIf="respuesta.idOpcionPreguntaNavigation.idOpcionNavigation">
+          {{
+            respuesta.idOpcionPreguntaNavigation.idOpcionNavigation.descripcion
+          }}
+        </td>
+        <td *ngIf="!respuesta.idOpcionPreguntaNavigation.idOpcionNavigation && !respuesta.moneda && !respuesta.numero && !respuesta.texto">
+          N/A
+        </td>
+        <td>{{ respuesta.fechaAud }}</td>
+        <td>{{ respuesta.usuario }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

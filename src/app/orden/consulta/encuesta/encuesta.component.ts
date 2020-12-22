@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { forkJoin } from "rxjs";
@@ -21,18 +22,25 @@ export class EncuestaComponent extends Base implements OnInit {
   preguntas: any;
   formData: FormData;
   radicado: string;
+  guardando = false;
   public documento: any = {};
   constructor(
     private ordenService: OrdenService,
     private principalService: PrincipalService,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {
     super();
   }
 
   ngOnInit() {
-    if(!JSON.parse(sessionStorage.getItem("usuario")) || !JSON.parse(sessionStorage.getItem("usuario")).usuario1) {
-      this.appService.error('Para ingresar a esta pagina debe iniciar sesion primero');
+    if (
+      !JSON.parse(sessionStorage.getItem("usuario")) ||
+      !JSON.parse(sessionStorage.getItem("usuario")).usuario1
+    ) {
+      this.appService.error(
+        "Para ingresar a esta pagina debe iniciar sesion primero"
+      );
       return;
     }
     this.ordenService.getOrdenes().subscribe(
@@ -74,19 +82,24 @@ export class EncuestaComponent extends Base implements OnInit {
   }
 
   onSubmit() {
+    this.guardando = true;
     this.payLoad = this.form.getRawValue();
     let respuestas = [];
     let municipio = 0;
-    this.radicado = `RBOG-${this.ordenSeleccionada.idOrden}-${new Date().toLocaleDateString().substr(0, 10).replace(/\//g, '-')}`;
+    this.radicado = `RBOG-${
+      this.ordenSeleccionada.idOrden
+    }-${new Date().toLocaleDateString().substr(0, 10).replace(/\//g, "-")}`;
     for (const key in this.payLoad) {
       if (Object.prototype.hasOwnProperty.call(this.payLoad, key)) {
         const element = this.payLoad[key];
         let pregunta = this.preguntas.find(
           (element) => element.idPregunta === parseInt(key)
         );
-        if(pregunta.longitud === -1) {
+        if (pregunta.longitud === -1) {
           municipio = element;
-          this.radicado = `${this.radicado}-${element}-${JSON.parse(sessionStorage.usuario).usuario1}`
+          this.radicado = `${this.radicado}-${element}-${
+            JSON.parse(sessionStorage.usuario).usuario1
+          }`;
         }
         if (
           pregunta &&
@@ -101,7 +114,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             case "archivo":
@@ -113,7 +126,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             case "moneda":
@@ -123,7 +136,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             case "fecha":
@@ -133,7 +146,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             case "numero":
@@ -143,7 +156,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             case "multiple":
@@ -153,7 +166,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
-                radicado: this.radicado
+                radicado: this.radicado,
               });
               break;
             default:
@@ -164,16 +177,26 @@ export class EncuestaComponent extends Base implements OnInit {
     }
     this.ordenService.postRespuestas(respuestas).subscribe(
       (suc) => {
-        if(!suc) {
-          this.appService.error("Se produjo un error al guardar las preguntas.")
+        if (!suc) {
+          this.appService.error(
+            "Se produjo un error al guardar las preguntas."
+          );
+          this.guardando = false;
           return;
         }
-        this.appService.success(`Preguntas guardadas correctamente, numero de radicado ${this.radicado}`);
+        this.guardando = false;
+        this.appService.success(
+          `Preguntas guardadas correctamente, numero de radicado ${this.radicado}`
+        );
+        this.router.navigate(["/"]);
       },
-      (err) =>
-        this.appService.error("Se produjo un error al guardar las preguntas")
+      (err) => {
+        this.appService.error("Se produjo un error al guardar las preguntas");
+        this.guardando = false;
+      }
     );
     if (this.formData) {
+      this.guardando = true;
       this.unsubscribeOndestroy(
         this.principalService
           .guardarDocumento(
@@ -184,12 +207,14 @@ export class EncuestaComponent extends Base implements OnInit {
           .subscribe(
             (result: any) => {
               this.appService.success("Se cargo el archivo correctamente");
+              this.guardando = false;
             },
             (error) => {
               console.error(error);
               this.appService.error(
                 "Se produjo un error al cargar el archivo."
               );
+              this.guardando = false;
             }
           )
       );

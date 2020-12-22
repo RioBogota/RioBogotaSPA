@@ -24,7 +24,7 @@
       </div>
 
       <div class="save-button">
-        <button class="btn btn-default mr-5" type="submit" [disabled]="!form.valid">Guardar</button>
+        <button class="btn btn-default mr-5" type="submit" [disabled]="!form.valid || guardando">Guardar</button>
       </div>
     </form>
   </div>

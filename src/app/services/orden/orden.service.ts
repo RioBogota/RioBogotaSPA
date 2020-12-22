@@ -20,6 +20,16 @@ export class OrdenService {
     return this.http.get(this.baseUrl + uri);
   }
 
+  getMunicipios(): Observable<any> {
+    const uri = `api/Orden/municipios`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
+  getRespuestas(idMunicipio: number, idOrden: number): Observable<any> {
+    const uri = `api/Orden/respuestas/${idMunicipio}/${idOrden}`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
   postRespuestas(respuestas: any) {
     const uri = `api/Orden/respuestas`;
     return this.http.post(this.baseUrl + uri, respuestas);

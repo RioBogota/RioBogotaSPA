@@ -25,10 +25,12 @@ import { TruncatePipe } from 'src/app/pipes/truncate_text.pipe';
 import { AgregarComponent } from '../../seguridad/roles/agregar/agregar.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { TokenComponent } from '../../seguridad/token/token.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    NgxPaginationModule,
     MatFormFieldModule,
     MatInputModule, 
     MatButtonModule, 

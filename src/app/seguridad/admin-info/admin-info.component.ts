@@ -12,6 +12,7 @@ export class AdminInfoComponent extends Base implements OnInit {
 	public documentos: any;
 	private documentosCopia: any;
 	public estado: any;
+	p: number = 1;
 	constructor(private principalService: PrincipalService) {
 		super();
 		this.unsubscribeOndestroy(this.principalService.verDocumentos().subscribe(result => {

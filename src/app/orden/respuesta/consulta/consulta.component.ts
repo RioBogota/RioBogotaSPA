@@ -14,6 +14,8 @@ export class ConsultaComponent extends Base implements OnInit {
   selectedOrden: number;
   respuestas = [];
   ordenes = [];
+  cargando = false;
+  p: number = 1;
   constructor(
     private ordenService: OrdenService,
     private appService: AppService
@@ -22,6 +24,8 @@ export class ConsultaComponent extends Base implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedMunicipio = -1;
+    this.selectedOrden = -1;
     this.unsubscribeOndestroy(
       this.ordenService.getMunicipios().subscribe(
         (data) => (this.municipios = data),
@@ -41,10 +45,16 @@ export class ConsultaComponent extends Base implements OnInit {
   }
 
   consultar() {
+    this.cargando = true;
     this.unsubscribeOndestroy(
       this.ordenService
         .getRespuestas(this.selectedMunicipio, this.selectedOrden)
-        .subscribe((data) => (this.respuestas = data))
+        .subscribe((data) => {
+          this.cargando = false;
+          this.respuestas = data.map(respuesta => {
+          respuesta.orden = this.ordenes.find(orden => orden.idOrden === respuesta.idPreguntaNavigation.idOrden)
+          return respuesta;
+        })})
     );
   }
 }

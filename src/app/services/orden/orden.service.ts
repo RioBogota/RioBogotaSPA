@@ -102,6 +102,6 @@ export class OrdenService {
           break;
       }
     });
-    return of(questions.sort((a, b) => a.order - b.order));
+    return of(questions);
   }
 }

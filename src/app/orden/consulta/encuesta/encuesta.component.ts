@@ -21,6 +21,7 @@ export class EncuestaComponent extends Base implements OnInit {
   ordenSeleccionada: any;
   preguntas: any;
   formData: FormData;
+  fileId = "";
   radicado: string;
   guardando = false;
   public documento: any = {};
@@ -83,6 +84,60 @@ export class EncuestaComponent extends Base implements OnInit {
 
   onSubmit() {
     this.guardando = true;
+    if (!this.formData) {
+      let respuestas = this.formatQuestion();
+      this.saveQuestions(respuestas);
+    } else {
+      this.guardando = true;
+      this.unsubscribeOndestroy(
+        this.principalService
+          .guardarDocumento(
+            this.formData,
+            this.documento.descripcionDocumento,
+            this.ordenSeleccionada.idCarpetaDrive
+          )
+          .subscribe(
+            (result: any) => {
+              this.fileId = result;
+              let respuestas = this.formatQuestion();
+              this.saveQuestions(respuestas);
+            },
+            (error) => {
+              console.error(error);
+              this.appService.error(
+                "Se produjo un error al cargar el archivo."
+              );
+              this.guardando = false;
+            }
+          )
+      );
+    }
+  }
+
+  private saveQuestions(respuestas: any[]) {
+    this.ordenService.postRespuestas(respuestas).subscribe(
+      (suc) => {
+        if (!suc) {
+          this.appService.error(
+            "Se produjo un error al guardar las preguntas."
+          );
+          this.guardando = false;
+          return;
+        }
+        this.guardando = false;
+        this.appService.success(
+          `Preguntas guardadas correctamente, numero de radicado ${this.radicado}`
+        );
+        this.router.navigate(["/"]);
+      },
+      (err) => {
+        this.appService.error("Se produjo un error al guardar las preguntas");
+        this.guardando = false;
+      }
+    );
+  }
+
+  private formatQuestion() {
     this.payLoad = this.form.getRawValue();
     let respuestas = [];
     let municipio = 0;
@@ -126,6 +181,7 @@ export class EncuestaComponent extends Base implements OnInit {
                 fechaAud: new Date(),
                 idPregunta: parseInt(key),
                 municipio,
+                archivo: this.fileId,
                 radicado: this.radicado,
               });
               break;
@@ -175,49 +231,6 @@ export class EncuestaComponent extends Base implements OnInit {
         }
       }
     }
-    this.ordenService.postRespuestas(respuestas).subscribe(
-      (suc) => {
-        if (!suc) {
-          this.appService.error(
-            "Se produjo un error al guardar las preguntas."
-          );
-          this.guardando = false;
-          return;
-        }
-        this.guardando = false;
-        this.appService.success(
-          `Preguntas guardadas correctamente, numero de radicado ${this.radicado}`
-        );
-        this.router.navigate(["/"]);
-      },
-      (err) => {
-        this.appService.error("Se produjo un error al guardar las preguntas");
-        this.guardando = false;
-      }
-    );
-    if (this.formData) {
-      this.guardando = true;
-      this.unsubscribeOndestroy(
-        this.principalService
-          .guardarDocumento(
-            this.formData,
-            this.documento.descripcionDocumento,
-            this.ordenSeleccionada.idCarpetaDrive
-          )
-          .subscribe(
-            (result: any) => {
-              this.appService.success("Se cargo el archivo correctamente");
-              this.guardando = false;
-            },
-            (error) => {
-              console.error(error);
-              this.appService.error(
-                "Se produjo un error al cargar el archivo."
-              );
-              this.guardando = false;
-            }
-          )
-      );
-    }
+    return respuestas;
   }
 }

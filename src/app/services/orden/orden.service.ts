@@ -30,6 +30,11 @@ export class OrdenService {
     return this.http.get(this.baseUrl + uri);
   }
 
+  putArchivo(nombreArchivo: string, idArchivo: string, idRespuesta: number) {
+    const uri = `api/Orden/respuesta/archivo?nombreArchivo=${encodeURI(nombreArchivo)}&idArchivo=${idArchivo}&idRespuesta=${idRespuesta}`;
+    return this.http.post(this.baseUrl + uri, null);
+  }
+
   postRespuestas(respuestas: any) {
     const uri = `api/Orden/respuestas`;
     return this.http.post(this.baseUrl + uri, respuestas);

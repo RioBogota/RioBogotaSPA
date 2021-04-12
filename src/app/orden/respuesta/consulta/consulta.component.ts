@@ -1,3 +1,4 @@
+import { PrincipalService } from './../../../services/principal/principal.service';
 import { AppService } from "./../../../services/app.service";
 import { OrdenService } from "src/app/services/orden/orden.service";
 import { Component, OnInit } from "@angular/core";
@@ -18,7 +19,8 @@ export class ConsultaComponent extends Base implements OnInit {
   p: number = 1;
   constructor(
     private ordenService: OrdenService,
-    private appService: AppService
+    private appService: AppService,
+    private principalService: PrincipalService
   ) {
     super();
   }
@@ -56,5 +58,38 @@ export class ConsultaComponent extends Base implements OnInit {
           return respuesta;
         })})
     );
+  }
+
+  seleccionarArchivo(event, respuesta) {
+    const formData = new FormData();
+    formData.append(event.target.files[0].name, event.target.files[0], event.target.files[0].name);
+    let orden = this.ordenes.find(orden => orden.idOrden === this.selectedOrden);
+    this.unsubscribeOndestroy(
+      this.principalService
+        .guardarDocumento(
+          formData,
+          event.target.files[0].name,
+          orden.idCarpetaDrive
+        )
+        .subscribe(
+          (result: any) => {
+            this.ordenService.putArchivo( event.target.files[0].name, result, respuesta.idRespuesta)
+            .subscribe(res => {
+              respuesta.texto = event.target.files[0].name;
+              respuesta.archivo = result;
+              this.appService.success('Se cargo el archivo exitosamente.');
+            }, err => {
+              this.appService.error('Se produjo un arror al cargar el archivo');
+            });
+          },
+          (error) => {
+            console.error(error);
+            this.appService.error(
+              "Se produjo un error al cargar el archivo."
+            );
+          }
+        )
+    );
+  
   }
 }

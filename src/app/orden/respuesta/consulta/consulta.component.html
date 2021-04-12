@@ -53,13 +53,15 @@
         <th scope="col">Respuesta</th>
         <th scope="col">Fecha Respuesta</th>
         <th scope="col">Usuario Respuesta</th>
+        <th scope="col">Cargar Archivo</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let respuesta of respuestas | paginate: { itemsPerPage: 20, currentPage: p }">
         <td>{{ respuesta.orden.nombre }}</td>
         <td>{{ respuesta.idPreguntaNavigation.descripcion }}</td>
-        <td *ngIf="respuesta.texto">{{ respuesta.texto }}</td>
+        <td *ngIf="respuesta.texto && !respuesta.archivo">{{ respuesta.texto }}</td>
+        <td *ngIf="respuesta.texto && respuesta.archivo"><a target="__blank" [href]="'https://drive.google.com/file/d/' + respuesta.archivo + '/view?usp=sharing'">{{ respuesta.texto }}</a></td>
         <td *ngIf="respuesta.numero">{{ respuesta.numero }}</td>
         <td *ngIf="respuesta.moneda">{{ respuesta.moneda | currency }}</td>
         <td *ngIf="respuesta.idOpcionPreguntaNavigation.idOpcionNavigation">
@@ -72,6 +74,9 @@
         </td>
         <td>{{ respuesta.fechaAud | date: 'dd/MM/yyyy hh:mm' }}</td>
         <td>{{ respuesta.usuario }}</td>
+        <td >
+          <input *ngIf="respuesta.idPreguntaNavigation.descripcion.indexOf('Se adjunta Resumen Ejecutivo de Actividades Realizadas') !== -1 && !respuesta.archivo" (change)="seleccionarArchivo($event, respuesta)"  type="file" value="Cargar Archivo">
+        </td>
       </tr>
     </tbody>
   </table>

@@ -74,10 +74,10 @@ import { OrdenModule } from './modulos/orden/orden/orden.module';
         OrdenModule,
         MatExpansionModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'noticias/detalle/:id', component: DetalleComponent }
-        ])
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'noticias/detalle/:id', component: DetalleComponent }
+], { relativeLinkResolution: 'legacy' })
     ],
     exports:[]
 })

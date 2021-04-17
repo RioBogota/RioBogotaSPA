@@ -1,6 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+// TODO: Add Angular decorator.
 export class Base implements OnDestroy {
     subscriptions: Subscription[];
     ngOnDestroy(): void {

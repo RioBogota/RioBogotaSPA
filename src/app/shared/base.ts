@@ -1,7 +1,9 @@
-import { OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-// TODO: Add Angular decorator.
+@Component({
+    template: ''
+  })
 export class Base implements OnDestroy {
     subscriptions: Subscription[];
     ngOnDestroy(): void {

@@ -34,7 +34,9 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/materialize-css/dist/js/materialize.min.js",
-              "node_modules/owl.carousel/dist/owl.carousel.js"
+              "node_modules/owl.carousel/dist/owl.carousel.js",
+              "node_modules/html2canvas/dist/html2canvas.min.js",
+              "node_modules/jspdf/dist/jspdf.min.js"
             ]
           },
           "configurations": {
@@ -96,7 +98,9 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/materialize-css/dist/js/materialize.min.js",
-              "node_modules/owl.carousel/dist/owl.carousel.js"
+              "node_modules/owl.carousel/dist/owl.carousel.js",
+              "node_modules/html2canvas/dist/html2canvas.min.js",
+              "node_modules/jspdf/dist/jspdf.min.js"
             ],
             "assets": [
               "src/assets/favicon.ico",

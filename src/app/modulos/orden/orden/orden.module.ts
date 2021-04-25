@@ -8,7 +8,8 @@ import { PreguntaComponent } from '../../../orden/consulta/pregunta/pregunta/pre
 import { ConsultaComponent } from '../../../orden/respuesta/consulta/consulta.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,6 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatSelectModule,
     MatProgressSpinnerModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
     RouterModule.forChild([
       { path: 'orden/formulario', component: EncuestaComponent },
       { path: 'orden/respuestas', component: ConsultaComponent }

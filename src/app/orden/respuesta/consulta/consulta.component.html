@@ -1,87 +1,90 @@
-<span style="margin-right: 2rem">
-  <mat-form-field>
-    <mat-select placeholder="seleccione una orden" [(ngModel)]="selectedOrden">
+<span *ngIf="acceso">
+  <span style="margin-right: 2rem">
+    <mat-form-field>
+      <mat-select placeholder="seleccione una orden" [(ngModel)]="selectedOrden">
+        <mat-option
+        [value]="-1"
+      >
+        Todas las ordenes
+      </mat-option>
+        <mat-option *ngFor="let orden of ordenes" [value]="orden.idOrden">
+          {{ orden.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="tipoUsuario === 1">
+      <mat-select
+        placeholder="seleccione un municipio"
+        [(ngModel)]="selectedMunicipio"
+      >
       <mat-option
       [value]="-1"
     >
-      Todas las ordenes
+      Todos los municipios
     </mat-option>
-      <mat-option *ngFor="let orden of ordenes" [value]="orden.idOrden">
-        {{ orden.nombre }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select
-      placeholder="seleccione un municipio"
-      [(ngModel)]="selectedMunicipio"
+        <mat-option
+          *ngFor="let municipio of municipios"
+          [value]="municipio.idOpcion"
+        >
+          {{ municipio.descripcion }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      (click)="consultar()"
+      style="margin-left: 1rem"
+      class="btn btn-default"
     >
-    <mat-option
-    [value]="-1"
-  >
-    Todos los municipios
-  </mat-option>
-      <mat-option
-        *ngFor="let municipio of municipios"
-        [value]="municipio.idOpcion"
-      >
-        {{ municipio.descripcion }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button
-    (click)="consultar()"
-    style="margin-left: 1rem"
-    class="btn btn-default"
-  >
-    Consultar
-  </button>
+      Consultar
+    </button>
+  </span>
+  <div>
+    <mat-spinner *ngIf="cargando"></mat-spinner>
+  </div>
+  <div>
+    <ul class="pagination">
+      <pagination-controls (pageChange)="p = $event"  previousLabel="Anterior"
+      nextLabel="Siguiente"></pagination-controls>
+    </ul>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Orden</th>
+          <th scope="col">Pregunta</th>
+          <th scope="col">Respuesta</th>
+          <th scope="col">Fecha Respuesta</th>
+          <th scope="col">Usuario Respuesta</th>
+          <th scope="col">Cargar Archivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let respuesta of respuestas | paginate: { itemsPerPage: 20, currentPage: p }">
+          <td>{{ respuesta.orden.nombre }}</td>
+          <td>{{ respuesta.idPreguntaNavigation.descripcion }}</td>
+          <td *ngIf="respuesta.texto && !respuesta.archivo">{{ respuesta.texto }}</td>
+          <td *ngIf="respuesta.texto && respuesta.archivo"><a target="__blank" [href]="'https://drive.google.com/file/d/' + respuesta.archivo + '/view?usp=sharing'">{{ respuesta.texto }}</a></td>
+          <td *ngIf="respuesta.numero">{{ respuesta.numero }}</td>
+          <td *ngIf="respuesta.moneda">{{ respuesta.moneda | currency }}</td>
+          <td *ngIf="respuesta.idOpcionPreguntaNavigation.idOpcionNavigation">
+            {{
+              respuesta.idOpcionPreguntaNavigation.idOpcionNavigation.descripcion
+            }}
+          </td>
+          <td *ngIf="!respuesta.idOpcionPreguntaNavigation.idOpcionNavigation && !respuesta.moneda && !respuesta.numero && !respuesta.texto">
+            N/A
+          </td>
+          <td>{{ respuesta.fechaAud | date: 'dd/MM/yyyy hh:mm' }}</td>
+          <td>{{ respuesta.usuario }}</td>
+          <td >
+            <input *ngIf="respuesta.idPreguntaNavigation.descripcion.indexOf('Se adjunta Resumen Ejecutivo de Actividades Realizadas') !== -1 && !respuesta.archivo" (change)="seleccionarArchivo($event, respuesta)"  type="file" value="Cargar Archivo">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="pagination">
+      <pagination-controls (pageChange)="p = $event"  previousLabel="Anterior"
+      nextLabel="Siguiente"></pagination-controls>
+    </ul>
+  </div>
 </span>
-<div>
-  <mat-spinner *ngIf="cargando"></mat-spinner>
-</div>
-<div>
-  <ul class="pagination">
-    <pagination-controls (pageChange)="p = $event"  previousLabel="Anterior"
-    nextLabel="Siguiente"></pagination-controls>
-  </ul>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Orden</th>
-        <th scope="col">Pregunta</th>
-        <th scope="col">Respuesta</th>
-        <th scope="col">Fecha Respuesta</th>
-        <th scope="col">Usuario Respuesta</th>
-        <th scope="col">Cargar Archivo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let respuesta of respuestas | paginate: { itemsPerPage: 20, currentPage: p }">
-        <td>{{ respuesta.orden.nombre }}</td>
-        <td>{{ respuesta.idPreguntaNavigation.descripcion }}</td>
-        <td *ngIf="respuesta.texto && !respuesta.archivo">{{ respuesta.texto }}</td>
-        <td *ngIf="respuesta.texto && respuesta.archivo"><a target="__blank" [href]="'https://drive.google.com/file/d/' + respuesta.archivo + '/view?usp=sharing'">{{ respuesta.texto }}</a></td>
-        <td *ngIf="respuesta.numero">{{ respuesta.numero }}</td>
-        <td *ngIf="respuesta.moneda">{{ respuesta.moneda | currency }}</td>
-        <td *ngIf="respuesta.idOpcionPreguntaNavigation.idOpcionNavigation">
-          {{
-            respuesta.idOpcionPreguntaNavigation.idOpcionNavigation.descripcion
-          }}
-        </td>
-        <td *ngIf="!respuesta.idOpcionPreguntaNavigation.idOpcionNavigation && !respuesta.moneda && !respuesta.numero && !respuesta.texto">
-          N/A
-        </td>
-        <td>{{ respuesta.fechaAud | date: 'dd/MM/yyyy hh:mm' }}</td>
-        <td>{{ respuesta.usuario }}</td>
-        <td >
-          <input *ngIf="respuesta.idPreguntaNavigation.descripcion.indexOf('Se adjunta Resumen Ejecutivo de Actividades Realizadas') !== -1 && !respuesta.archivo" (change)="seleccionarArchivo($event, respuesta)"  type="file" value="Cargar Archivo">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <ul class="pagination">
-    <pagination-controls (pageChange)="p = $event"  previousLabel="Anterior"
-    nextLabel="Siguiente"></pagination-controls>
-  </ul>
-</div>
+

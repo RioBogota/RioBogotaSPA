@@ -25,8 +25,13 @@ export class OrdenService {
     return this.http.get(this.baseUrl + uri);
   }
 
-  getRespuestas(idMunicipio: number, idOrden: number): Observable<any> {
-    const uri = `api/Orden/respuestas/${idMunicipio}/${idOrden}`;
+  getRespuestas(idMunicipio: number, idOrden: number, usuario: string): Observable<any> {
+    const uri = `api/Orden/respuestas/${idMunicipio}/${idOrden}/${usuario}`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
+  isValidUser(usuario) {
+    const uri = `api/Orden/respuestas/valido/${usuario}`;
     return this.http.get(this.baseUrl + uri);
   }
 

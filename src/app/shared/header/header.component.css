@@ -1,6 +1,11 @@
 ﻿.tarjetas-transmitiendo {
   top: 4.6rem;
 }
+
+.blue-title {
+  color: #4A8A9C;
+}
+
 .emitiendo {
   width: 15px;
   height: 15px;

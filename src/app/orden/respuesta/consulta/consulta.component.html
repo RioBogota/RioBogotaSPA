@@ -65,12 +65,13 @@
           <td *ngIf="respuesta.texto && respuesta.archivo"><a target="__blank" [href]="'https://drive.google.com/file/d/' + respuesta.archivo + '/view?usp=sharing'">{{ respuesta.texto }}</a></td>
           <td *ngIf="respuesta.numero">{{ respuesta.numero }}</td>
           <td *ngIf="respuesta.moneda">{{ respuesta.moneda | currency }}</td>
+          <td *ngIf="respuesta.fecha">{{ respuesta.fecha | date: 'dd/MM/yyyy' }}</td>
           <td *ngIf="respuesta.idOpcionPreguntaNavigation.idOpcionNavigation">
             {{
               respuesta.idOpcionPreguntaNavigation.idOpcionNavigation.descripcion
             }}
           </td>
-          <td *ngIf="!respuesta.idOpcionPreguntaNavigation.idOpcionNavigation && !respuesta.moneda && !respuesta.numero && !respuesta.texto">
+          <td *ngIf="!respuesta.idOpcionPreguntaNavigation.idOpcionNavigation && !respuesta.moneda && !respuesta.numero && !respuesta.texto && !respuesta.fecha">
             N/A
           </td>
           <td>{{ respuesta.fechaAud | date: 'dd/MM/yyyy hh:mm' }}</td>

@@ -57,6 +57,7 @@ export class OrdenService {
         ? new FormControl(question.value || "", Validators.compose([
             Validators.required,
             Validators.maxLength(question.max),
+            Validators.minLength(question.minlength)
           ]))
         : new FormControl(question.value || "", Validators.maxLength(question.max));
     });
@@ -89,7 +90,17 @@ export class OrdenService {
             new DropdownQuestion({
               key: pregunta.idPregunta,
               label: pregunta.descripcion,
-              options: pregunta.opcionPregunta,
+              options: pregunta.opcionPregunta.sort((a, b) => {
+                if(a.idOpcionNavigation.descripcion > b.idOpcionNavigation.descripcion) {
+                  return 1;
+                }
+                if(a.idOpcionNavigation.descripcion < b.idOpcionNavigation.descripcion) {
+                  return -1;
+                }
+                if(a.idOpcionNavigation.descripcion === b.idOpcionNavigation.descripcion) {
+                  return 0;
+                }
+              }),
               order: pregunta.idPregunta,
             })
           );
@@ -105,6 +116,7 @@ export class OrdenService {
                 pregunta.idTipoPreguntaNavigation.descripcion
               ),
               required: pregunta.requerido,
+              minlength: pregunta.idTipoPreguntaNavigation.descripcion === 'moneda' ? 7 : 0,
               max: pregunta.longitud,
               order: pregunta.idPregunta,
             })

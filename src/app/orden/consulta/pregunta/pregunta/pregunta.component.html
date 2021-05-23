@@ -2,6 +2,7 @@
   <div>
     <span class="errorMessage" *ngIf="hasErrors?.required">* Campo requerido </span>
     <span class="errorMessage" *ngIf="hasErrors?.maxlength">Maxima longitud permitida {{question.max}} caracteres</span>
+    <span class="errorMessage" *ngIf="hasErrors?.minlength">Minima longitud permitida {{question.minlength}} caracteres</span>
     <label [attr.for]="question.key">{{ question.label }}</label>
   </div>
 

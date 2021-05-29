@@ -5,6 +5,22 @@
     align-self: flex-end;
 }
 
+fieldset {
+  border: 1px solid gray;
+  padding: 0.35em 2.625em 0.75em;
+}
+
+.adicional {
+    width: 11rem;
+    margin: 2rem;
+    flex: auto;
+    align-self: flex-end;
+}
+
+.fila {
+  width: 100%;
+}
+
 .formulario {
     display: flex;
     flex-wrap: wrap;

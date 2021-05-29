@@ -50,7 +50,7 @@ export class OrdenService {
     return this.http.get(this.baseUrl + uri);
   }
 
-  toFormGroup(questions: QuestionBase<string>[]) {
+  toFormGroup(questions: QuestionBase<any>[]) {
     const group: any = {};
     questions.forEach((question) => {
       group[question.key] = question.required
@@ -82,7 +82,7 @@ export class OrdenService {
   }
 
   getQuestions(preguntas) {
-    const questions: QuestionBase<string>[] = [];
+    const questions: QuestionBase<any>[] = [];
     preguntas.forEach((pregunta) => {
       switch (pregunta.idTipoPreguntaNavigation.descripcion) {
         case "multiple":

@@ -15,7 +15,7 @@ export class PreguntaComponent implements OnInit {
   archivoCargado = new EventEmitter<any>();
 
   get isValid() { return this.form.controls[this.question.key].valid; }
-  get hasErrors() { return this.form.controls[this.question.key].errors; }
+  get hasErrors() { return this.form.controls[this.question.key]?.errors; }
 
   constructor() { }
 

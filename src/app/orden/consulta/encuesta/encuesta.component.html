@@ -14,18 +14,106 @@
     </select>
   </div>
   <div *ngIf="questions && questions.length">
-    <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formulario">
-      <div *ngFor="let question of questions" class="componente">
-        <app-pregunta
-          [question]="question"
-          [form]="form"
-          (archivoCargado)="obtenerArchivo($event)"
-        ></app-pregunta>
-      </div>
-
-      <div class="save-button">
-        <button class="btn btn-default mr-5" type="submit" [disabled]="!form.valid || guardando">Guardar</button>
-      </div>
-    </form>
+    <fieldset>
+      <legend>Preguntas de la orden</legend>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formulario">
+        <div *ngFor="let question of questions" class="componente">
+          <app-pregunta
+            [question]="question"
+            [form]="form"
+            (archivoCargado)="obtenerArchivo($event)"
+          ></app-pregunta>
+        </div>
+        <br>
+        <fieldset style="width: 100%;" *ngIf="[4, 6, 7].includes(ordenSeleccionada.idOrden)">
+          <legend>Preguntas adicionales</legend>
+          <div *ngFor="let question of adicionales" style="width: 100%;">
+            <app-pregunta
+              [question]="question"
+              [form]="formAdicional"
+              (archivoCargado)="obtenerArchivo($event)"
+            ></app-pregunta>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 4">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="agregarAdicional('PSMV', ordenSeleccionada.idOrden)"
+            >
+              Agregar PSMV
+            </button>
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="agregarAdicional('REPORTE', ordenSeleccionada.idOrden)"
+            >
+              Agregar reporte contaminante
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+              class="btn btn-danger mr-5"
+              type="button"
+              (click)="resetPreguntasAdicionales()"
+            >
+              Eliminar preguntas adicionales
+            </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 6">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('MANEJO_ESPECIAL', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Area de Manejo Especial
+            </button>
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('PROTECCION_ESPECIAL', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Area de Protección Especial
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+              class="btn btn-danger mr-5"
+              type="button"
+              (click)="resetPreguntasAdicionales()"
+            >
+              Eliminar preguntas adicionales
+            </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 7">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="agregarAdicional('RESTAURACION', ordenSeleccionada.idOrden)"
+            >
+              Agregar Area Restauración
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+              class="btn btn-danger mr-5"
+              type="button"
+              (click)="resetPreguntasAdicionales()"
+            >
+              Eliminar preguntas adicionales
+            </button>
+          </div>
+        </fieldset>
+        <div class="save-button">
+          <button
+            class="btn btn-default mr-5"
+            type="submit"
+            [disabled]="!form.valid || (formAdicional && !formAdicional?.valid) || guardando"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </fieldset>
   </div>
 </div>

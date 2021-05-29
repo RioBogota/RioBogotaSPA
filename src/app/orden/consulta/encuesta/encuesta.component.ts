@@ -7,15 +7,17 @@ import { OrdenService } from "src/app/services/orden/orden.service";
 import { PrincipalService } from "src/app/services/principal/principal.service";
 import { Base } from "src/app/shared/base";
 import { QuestionBase } from "./encuesta.model";
-
+import { md5 } from 'src/app/shared/md5';
 @Component({
   selector: "app-encuesta",
   templateUrl: "./encuesta.component.html",
   styleUrls: ["./encuesta.component.css"],
 })
 export class EncuestaComponent extends Base implements OnInit {
-  questions: QuestionBase<string>[] = [];
+  questions: QuestionBase<any>[] = [];
+  adicionales: QuestionBase<any>[] = [];
   form: FormGroup;
+  formAdicional: FormGroup;
   payLoad: any;
   ordenes = [];
   ordenSeleccionada: any;
@@ -68,10 +70,93 @@ export class EncuestaComponent extends Base implements OnInit {
       (res) => {
         this.questions = res;
         this.form = this.ordenService.toFormGroup(this.questions);
+        if (this.formAdicional) {
+          this.formAdicional.reset();
+        }
       },
       (err) =>
         this.appService.error("Se produjo un error al obtener las preguntas")
     );
+  }
+
+  resetPreguntasAdicionales() {
+    this.adicionales = [];
+    this.formAdicional.reset();
+  }
+
+  agregarAdicional(boton: string, orden: number) {
+    if (orden === 4 && boton === "PSMV") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([67, 68, 69, 70, 71].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 4 && boton === "REPORTE") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([77].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 6 && boton === "MANEJO_ESPECIAL") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([114, 115, 116, 117].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 6 && boton === "PROTECCION_ESPECIAL") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([118, 119, 120, 121, 122, 123].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 7 && boton === "RESTAURACION") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          x.keyAdd = x.key;
+          x.key = x.key / Math.random();
+          return [137, 138, 139, 140].includes(x.key);
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
   }
 
   seleccionarOrden() {
@@ -137,13 +222,30 @@ export class EncuestaComponent extends Base implements OnInit {
     );
   }
 
+  getAdicionalValue(rawValue, respuestas, municipio) {
+    let retorno = [];
+    for (const key in rawValue) {
+      if (Object.prototype.hasOwnProperty.call(rawValue, key)) {
+        let elemento = this.adicionales.find(adicional => adicional.key.toString() === key);
+        if(elemento) {
+          let pregunta = this.preguntas.find(
+            (element) => element.idPregunta === parseInt(elemento.keyAdd)
+          );
+          this.getRespuestaFinal(pregunta, respuestas, rawValue[key], elemento.keyAdd, municipio)
+        }
+      }
+    }
+    return retorno;
+  }
+
   private formatQuestion() {
-    this.payLoad = this.form.getRawValue();
     let respuestas = [];
     let municipio = 0;
-    this.radicado = `RBOG-${
-      this.ordenSeleccionada.idOrden
-    }-${new Date().toLocaleDateString().substr(0, 10).replace(/\//g, "-")}`;
+    this.payLoad = this.form.getRawValue();
+    this.radicado = md5(`RBOG-${this.ordenSeleccionada.idOrden}-${new Date()
+      .toLocaleDateString()
+      .substr(0, 10)
+      .replace(/\//g, "-")}-${Math.random()}`);
     for (const key in this.payLoad) {
       if (Object.prototype.hasOwnProperty.call(this.payLoad, key)) {
         const element = this.payLoad[key];
@@ -152,85 +254,91 @@ export class EncuestaComponent extends Base implements OnInit {
         );
         if (pregunta.longitud === -1) {
           municipio = element;
-          this.radicado = `${this.radicado}-${element}-${
+          this.radicado = md5(`${this.radicado}-${element}-${
             JSON.parse(sessionStorage.usuario).usuario1
-          }`;
+          }-${Math.random()}`);
         }
         if (
           pregunta &&
           pregunta.idTipoPreguntaNavigation &&
           pregunta.idTipoPreguntaNavigation.descripcion
         ) {
-          switch (pregunta.idTipoPreguntaNavigation.descripcion) {
-            case "texto":
-              respuestas.push({
-                texto: element.toString(),
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                radicado: this.radicado,
-              });
-              break;
-            case "archivo":
-              respuestas.push({
-                texto: element.toString().split("\\")[
-                  element.toString().split("\\").length - 1
-                ],
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                archivo: this.fileId,
-                radicado: this.radicado,
-              });
-              break;
-            case "moneda":
-              respuestas.push({
-                moneda: element.toString(),
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                radicado: this.radicado,
-              });
-              break;
-            case "fecha":
-              respuestas.push({
-                fecha: element.toString(),
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                radicado: this.radicado,
-              });
-              break;
-            case "numero":
-              respuestas.push({
-                numero: parseInt(element),
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                radicado: this.radicado,
-              });
-              break;
-            case "multiple":
-              respuestas.push({
-                idOpcionPregunta: parseInt(element),
-                usuario: JSON.parse(sessionStorage.usuario).usuario1,
-                fechaAud: new Date(),
-                idPregunta: parseInt(key),
-                municipio,
-                radicado: this.radicado,
-              });
-              break;
-            default:
-              break;
-          }
+          this.getRespuestaFinal(pregunta, respuestas, element, key, municipio);
         }
       }
     }
+    if (this.formAdicional) {
+      let valued = this.formAdicional.getRawValue();
+      this.getAdicionalValue(valued, respuestas, municipio);
+    }
     return respuestas;
+  }
+
+  private getRespuestaFinal(pregunta: any, respuestas: any[], element: any, key: string, municipio: number) {
+    switch (pregunta.idTipoPreguntaNavigation.descripcion) {
+      case "texto":
+        respuestas.push({
+          texto: element.toString(),
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          radicado: this.radicado,
+        });
+        break;
+      case "archivo":
+        respuestas.push({
+          texto: element.toString().split("\\")[element.toString().split("\\").length - 1],
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          archivo: this.fileId,
+          radicado: this.radicado,
+        });
+        break;
+      case "moneda":
+        respuestas.push({
+          moneda: element.toString(),
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          radicado: this.radicado,
+        });
+        break;
+      case "fecha":
+        respuestas.push({
+          fecha: element.toString(),
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          radicado: this.radicado,
+        });
+        break;
+      case "numero":
+        respuestas.push({
+          numero: parseInt(element),
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          radicado: this.radicado,
+        });
+        break;
+      case "multiple":
+        respuestas.push({
+          idOpcionPregunta: parseInt(element),
+          usuario: JSON.parse(sessionStorage.usuario).usuario1,
+          fechaAud: new Date(),
+          idPregunta: parseInt(key),
+          municipio,
+          radicado: this.radicado,
+        });
+        break;
+      default:
+        break;
+    }
   }
 }

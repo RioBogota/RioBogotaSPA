@@ -1,6 +1,7 @@
 export class QuestionBase<T> {
   value: T;
-  key: string;
+  key: any;
+  keyAdd: any;
   label: string;
   required: boolean;
   max?: number;
@@ -13,6 +14,7 @@ export class QuestionBase<T> {
   constructor(options: {
       value?: T;
       key?: string;
+      keyAdd?: any;
       label?: string;
       required?: boolean;
       max?: number;

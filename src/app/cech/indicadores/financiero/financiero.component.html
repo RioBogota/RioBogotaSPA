@@ -2,18 +2,16 @@
 
 <mat-tab-group (selectedTabChange)="cambioDatos($event.index + 1)">
   <mat-tab *ngFor="let entidad of entidades" [label]="entidad.descripcion">
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let cabecera of cabeceras">{{ cabecera }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dato of datos">
-          <td *ngFor="let fila of dato">{{ fila.valor }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
+    <div class="card" *ngFor="let orden of ordenes; let i = index">
+      <span
+        *ngFor="let dato of orden"
+        [class]="dato.valor ? 'card-content' : ''"
+      >
+        <span *ngIf="dato.valor" class="card-text">
+          <p>{{ dato.idDetalleIndicadorNavigation.descripcion }}</p>
+          <span>{{ dato.valor }}</span>
+        </span>
+      </span>
+    </div>
   </mat-tab>
 </mat-tab-group>

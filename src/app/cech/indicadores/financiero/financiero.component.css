@@ -1,0 +1,17 @@
+.card {
+  border: 1px solid gray;
+  border-radius: 0.5%;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-text {
+  margin-top: 1rem;
+}
+
+p {
+  text-transform: uppercase;
+  font-weight: bold;
+}

@@ -11,7 +11,8 @@ export class FinancieroComponent extends Base implements OnInit {
   public entidades = []
   public datos: any;
   public cabeceras: any;
-
+  public ordenes = [];
+  public tarjetas = [];
   constructor(private securityService: TokenInterceptorService) {
     super();
   }
@@ -27,13 +28,21 @@ export class FinancieroComponent extends Base implements OnInit {
   }
 
   cambioDatos(idEntidad) {
-    let objeto = new Set()
+    let objeto = new Set();
+    let newGroup = [];
     this.unsubscribeOndestroy(this.securityService.getEconomy(idEntidad).subscribe(result => {
-      this.datos = this.convertirMatriz(result);
-      console.log(this.datos)
-      result.forEach(element => {
-        this.cabeceras = objeto.add(element.idDetalleIndicadorNavigation.descripcion)
+      result.map(datos => {
+        if (datos.idDetalleIndicadorNavigation.idDetalleIndicador === 15) {
+          newGroup = [];
+        }
+        if (datos.idDetalleIndicadorNavigation.idDetalleIndicador <= 46) {
+          newGroup.push(datos);
+        }
+        if (datos.idDetalleIndicadorNavigation.idDetalleIndicador === 46) {
+          this.ordenes.push(newGroup);
+        }
       });
+      this.tarjetas = Array(result.length / 32).fill(0);
     }));
   }
 

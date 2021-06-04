@@ -7,7 +7,7 @@ import { OrdenService } from "src/app/services/orden/orden.service";
 import { PrincipalService } from "src/app/services/principal/principal.service";
 import { Base } from "src/app/shared/base";
 import { QuestionBase } from "./encuesta.model";
-import { md5 } from 'src/app/shared/md5';
+import { md5 } from "src/app/shared/md5";
 @Component({
   selector: "app-encuesta",
   templateUrl: "./encuesta.component.html",
@@ -85,6 +85,12 @@ export class EncuestaComponent extends Base implements OnInit {
   }
 
   agregarAdicional(boton: string, orden: number) {
+    if (this.formAdicional) {
+      let valores = this.formAdicional.getRawValue();
+      this.adicionales.forEach(element => {
+        element.value = valores[element.key];
+      });
+    }
     if (orden === 4 && boton === "PSMV") {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {
@@ -226,12 +232,20 @@ export class EncuestaComponent extends Base implements OnInit {
     let retorno = [];
     for (const key in rawValue) {
       if (Object.prototype.hasOwnProperty.call(rawValue, key)) {
-        let elemento = this.adicionales.find(adicional => adicional.key.toString() === key);
-        if(elemento) {
+        let elemento = this.adicionales.find(
+          (adicional) => adicional.key.toString() === key
+        );
+        if (elemento) {
           let pregunta = this.preguntas.find(
             (element) => element.idPregunta === parseInt(elemento.keyAdd)
           );
-          this.getRespuestaFinal(pregunta, respuestas, rawValue[key], elemento.keyAdd, municipio)
+          this.getRespuestaFinal(
+            pregunta,
+            respuestas,
+            rawValue[key],
+            elemento.keyAdd,
+            municipio
+          );
         }
       }
     }
@@ -242,10 +256,12 @@ export class EncuestaComponent extends Base implements OnInit {
     let respuestas = [];
     let municipio = 0;
     this.payLoad = this.form.getRawValue();
-    this.radicado = md5(`RBOG-${this.ordenSeleccionada.idOrden}-${new Date()
-      .toLocaleDateString()
-      .substr(0, 10)
-      .replace(/\//g, "-")}-${Math.random()}`);
+    this.radicado = md5(
+      `RBOG-${this.ordenSeleccionada.idOrden}-${new Date()
+        .toLocaleDateString()
+        .substr(0, 10)
+        .replace(/\//g, "-")}-${Math.random()}`
+    );
     for (const key in this.payLoad) {
       if (Object.prototype.hasOwnProperty.call(this.payLoad, key)) {
         const element = this.payLoad[key];
@@ -254,9 +270,11 @@ export class EncuestaComponent extends Base implements OnInit {
         );
         if (pregunta.longitud === -1) {
           municipio = element;
-          this.radicado = md5(`${this.radicado}-${element}-${
-            JSON.parse(sessionStorage.usuario).usuario1
-          }-${Math.random()}`);
+          this.radicado = md5(
+            `${this.radicado}-${element}-${
+              JSON.parse(sessionStorage.usuario).usuario1
+            }-${Math.random()}`
+          );
         }
         if (
           pregunta &&
@@ -274,7 +292,13 @@ export class EncuestaComponent extends Base implements OnInit {
     return respuestas;
   }
 
-  private getRespuestaFinal(pregunta: any, respuestas: any[], element: any, key: string, municipio: number) {
+  private getRespuestaFinal(
+    pregunta: any,
+    respuestas: any[],
+    element: any,
+    key: string,
+    municipio: number
+  ) {
     switch (pregunta.idTipoPreguntaNavigation.descripcion) {
       case "texto":
         respuestas.push({
@@ -288,7 +312,9 @@ export class EncuestaComponent extends Base implements OnInit {
         break;
       case "archivo":
         respuestas.push({
-          texto: element.toString().split("\\")[element.toString().split("\\").length - 1],
+          texto: element.toString().split("\\")[
+            element.toString().split("\\").length - 1
+          ],
           usuario: JSON.parse(sessionStorage.usuario).usuario1,
           fechaAud: new Date(),
           idPregunta: parseInt(key),

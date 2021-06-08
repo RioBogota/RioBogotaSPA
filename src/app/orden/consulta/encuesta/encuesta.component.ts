@@ -124,7 +124,7 @@ export class EncuestaComponent extends Base implements OnInit {
     if (orden === 6 && boton === "MANEJO_ESPECIAL") {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {
-          if ([114, 115, 116, 117].includes(x.key)) {
+          if ([114, 115, 116, 117, 421].includes(x.key)) {
             x.keyAdd = x.key;
             x.key = x.key / Math.random();
             return true;

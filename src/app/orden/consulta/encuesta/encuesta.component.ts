@@ -154,9 +154,12 @@ export class EncuestaComponent extends Base implements OnInit {
     if (orden === 7 && boton === "RESTAURACION") {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {
-          x.keyAdd = x.key;
-          x.key = x.key / Math.random();
-          return [137, 138, 139, 140].includes(x.key);
+          if ([137, 138, 139, 140].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
         })
       );
       this.formAdicional = this.ordenService.toFormGroup(adicionales);

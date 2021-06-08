@@ -66,6 +66,7 @@ export class EncuestaComponent extends Base implements OnInit {
 
   formatearPreguntas(preguntas) {
     this.preguntas = preguntas;
+    this.resetPreguntasAdicionales();
     this.ordenService.getQuestions(preguntas).subscribe(
       (res) => {
         this.questions = res;

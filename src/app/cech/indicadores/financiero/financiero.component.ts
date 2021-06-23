@@ -30,6 +30,7 @@ export class FinancieroComponent extends Base implements OnInit {
   cambioDatos(idEntidad) {
     let objeto = new Set();
     let newGroup = [];
+    this.ordenes = [];
     this.unsubscribeOndestroy(this.securityService.getEconomy(idEntidad).subscribe(result => {
       result.map(datos => {
         if (datos.idDetalleIndicadorNavigation.idDetalleIndicador === 15) {

@@ -26,6 +26,13 @@ export class EncuestaComponent extends Base implements OnInit {
   fileId = "";
   radicado: string;
   guardando = false;
+  ordenMunicipio = [
+    { idOrden: 11, municipios: [{ idMunicipio: 8 }] },
+    { idOrden: 17, municipios: [{ idMunicipio: 10 }, { idMunicipio: 44 }] },
+    { idOrden: 18, municipios: [{ idMunicipio: 10 }, { idMunicipio: 44 }] }
+  ];
+  esOrdenExclusiva = false;
+  esUsuarioValidoOrden = true;
   public documento: any = {};
   constructor(
     private ordenService: OrdenService,
@@ -90,9 +97,54 @@ export class EncuestaComponent extends Base implements OnInit {
   agregarAdicional(boton: string, orden: number) {
     if (this.formAdicional) {
       let valores = this.formAdicional.getRawValue();
-      this.adicionales.forEach(element => {
+      this.adicionales.forEach((element) => {
         element.value = valores[element.key];
       });
+    }
+    if (orden === 2 && boton === "MICROCUENCAS") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([27].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 2 && boton === "ACCION_CUMPLIMIENTO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([30].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 2 && boton === "INFORMACION_CUMPLIMIENTO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([32].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
     }
     if (orden === 4 && boton === "PSMV") {
       let adicionales = this.adicionales.concat(
@@ -113,6 +165,21 @@ export class EncuestaComponent extends Base implements OnInit {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {
           if ([77, 420].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 6 && boton === "CONSERVACION") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([123].includes(x.key)) {
             x.keyAdd = x.key;
             x.key = x.key / Math.random();
             return true;
@@ -169,9 +236,183 @@ export class EncuestaComponent extends Base implements OnInit {
       this.adicionales = adicionales;
       return;
     }
+    if (orden === 8 && boton === "CONSERVACION") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([160, 161, 162].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 9 && boton === "MARCO_EJECUCION") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([185, 186].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 10 && boton === "ACCION_MINISTERIO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([196].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 10 && boton === "ACCION_EJECUCION") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([200, 201].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 12 && boton === "AGREGAR_PROYECTO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([227].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 12 && boton === "ABASTECIMIENTO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([228].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 13 && boton === "RIESGO_DESABASTECIMIENTO") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([250, 251].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 16 && boton === "CONTROL") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([324].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 16 && boton === "ADMINISTRATIVA") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([326].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 19 && boton === "RECICLAJE") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([368].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
+    if (orden === 19 && boton === "EDUCATIVA") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([370].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
   }
 
   seleccionarOrden() {
+    this.esOrdenExclusiva = this.ordenMunicipio.some(orden => orden.idOrden === this.ordenSeleccionada.idOrden);
+    if (this.esOrdenExclusiva) {
+      this.esUsuarioValidoOrden = this.ordenMunicipio.some(orden => orden.idOrden === this.ordenSeleccionada.idOrden && orden.municipios.some(x =>x.idMunicipio === JSON.parse(sessionStorage.getItem("usuario")).idMunicipio))
+    }
+    if (this.esOrdenExclusiva && !this.esUsuarioValidoOrden) {
+      this.questions = [];
+      this.appService.error('No pertenece al municipio para la orden seleccionada.');
+      return;
+    }
     this.ordenService.getPreguntas(this.ordenSeleccionada.idOrden).subscribe(
       (res) => this.formatearPreguntas(res),
       (err) =>

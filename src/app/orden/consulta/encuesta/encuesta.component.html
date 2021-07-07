@@ -24,15 +24,61 @@
             (archivoCargado)="obtenerArchivo($event)"
           ></app-pregunta>
         </div>
-        <br>
-        <fieldset style="width: 100%;" *ngIf="[4, 6, 7].includes(ordenSeleccionada.idOrden)">
+        <br />
+        <fieldset
+          style="width: 100%"
+          *ngIf="[2, 4, 6, 7,8, 9, 10, 12, 13, 16, 19].includes(ordenSeleccionada.idOrden)"
+        >
           <legend>Preguntas adicionales</legend>
-          <div *ngFor="let question of adicionales" style="width: 100%;">
+          <div *ngFor="let question of adicionales" style="width: 100%">
             <app-pregunta
               [question]="question"
               [form]="formAdicional"
               (archivoCargado)="obtenerArchivo($event)"
             ></app-pregunta>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 2">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('MICROCUENCAS', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar microcuenca
+            </button>
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional(
+                  'ACCION_CUMPLIMIENTO',
+                  ordenSeleccionada.idOrden
+                )
+              "
+            >
+              Agregar microcuenca municipio
+            </button>
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional(
+                  'INFORMACION_CUMPLIMIENTO',
+                  ordenSeleccionada.idOrden
+                )
+              "
+            >
+              Agregar información de cumplimiento
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+            class="btn btn-danger mr-5"
+            type="button"
+            (click)="resetPreguntasAdicionales()"
+          >
+            Eliminar preguntas adicionales
+          </button>
           </div>
           <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 4">
             <button
@@ -50,7 +96,7 @@
               Agregar reporte contaminante
             </button>
             <button
-            *ngIf="adicionales && adicionales.length"
+              *ngIf="adicionales && adicionales.length"
               class="btn btn-danger mr-5"
               type="button"
               (click)="resetPreguntasAdicionales()"
@@ -72,13 +118,25 @@
               class="btn btn-success mr-5"
               type="button"
               (click)="
-                agregarAdicional('PROTECCION_ESPECIAL', ordenSeleccionada.idOrden)
+                agregarAdicional(
+                  'PROTECCION_ESPECIAL',
+                  ordenSeleccionada.idOrden
+                )
               "
             >
               Agregar Area de Protección Especial
             </button>
             <button
-            *ngIf="adicionales && adicionales.length"
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('CONSERVACION', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Area de conservación
+            </button>
+            <button
+              *ngIf="adicionales && adicionales.length"
               class="btn btn-danger mr-5"
               type="button"
               (click)="resetPreguntasAdicionales()"
@@ -90,12 +148,14 @@
             <button
               class="btn btn-success mr-5"
               type="button"
-              (click)="agregarAdicional('RESTAURACION', ordenSeleccionada.idOrden)"
+              (click)="
+                agregarAdicional('RESTAURACION', ordenSeleccionada.idOrden)
+              "
             >
               Agregar Area Restauración
             </button>
             <button
-            *ngIf="adicionales && adicionales.length"
+              *ngIf="adicionales && adicionales.length"
               class="btn btn-danger mr-5"
               type="button"
               (click)="resetPreguntasAdicionales()"
@@ -103,12 +163,185 @@
               Eliminar preguntas adicionales
             </button>
           </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 8">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('CONSERVACION', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Area Conservación
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+            class="btn btn-danger mr-5"
+            type="button"
+            (click)="resetPreguntasAdicionales()"
+          >
+            Eliminar preguntas adicionales
+          </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 9">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('MARCO_EJECUCION', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Marco de Ejecución
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+            class="btn btn-danger mr-5"
+            type="button"
+            (click)="resetPreguntasAdicionales()"
+          >
+            Eliminar preguntas adicionales
+          </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 10">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('ACCION_MINISTERIO', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Accion Ministerio de Cultura
+            </button>
+            <button
+            class="btn btn-success mr-5"
+            type="button"
+            (click)="
+              agregarAdicional('ACCION_EJECUCION', ordenSeleccionada.idOrden)
+            "
+          >
+            Agregar Accion de Ejecución
+          </button>
+          <button
+          *ngIf="adicionales && adicionales.length"
+          class="btn btn-danger mr-5"
+          type="button"
+          (click)="resetPreguntasAdicionales()"
+        >
+          Eliminar preguntas adicionales
+        </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 12">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('AGREGAR_PROYECTO', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Marco de Ejecución
+            </button>
+            <button
+            class="btn btn-success mr-5"
+            type="button"
+            (click)="
+              agregarAdicional('ABASTECIMIENTO', ordenSeleccionada.idOrden)
+            "
+          >
+            Agregar plan de Abastecimiento
+          </button>
+          <button
+          *ngIf="adicionales && adicionales.length"
+          class="btn btn-danger mr-5"
+          type="button"
+          (click)="resetPreguntasAdicionales()"
+        >
+          Eliminar preguntas adicionales
+        </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 13">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('RIESGO_DESABASTECIMIENTO', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar Riesgo Desabastecimiento
+            </button>
+            <button
+            *ngIf="adicionales && adicionales.length"
+            class="btn btn-danger mr-5"
+            type="button"
+            (click)="resetPreguntasAdicionales()"
+          >
+            Eliminar preguntas adicionales
+          </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 16">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('CONTROL', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar control
+            </button>
+            <button
+            class="btn btn-success mr-5"
+            type="button"
+            (click)="
+              agregarAdicional('ADMINISTRATIVA', ordenSeleccionada.idOrden)
+            "
+          >
+            Agregar medida administrativa
+          </button>
+          <button
+          *ngIf="adicionales && adicionales.length"
+          class="btn btn-danger mr-5"
+          type="button"
+          (click)="resetPreguntasAdicionales()"
+        >
+          Eliminar preguntas adicionales
+        </button>
+          </div>
+          <div class="row save-button" *ngIf="ordenSeleccionada.idOrden === 19">
+            <button
+              class="btn btn-success mr-5"
+              type="button"
+              (click)="
+                agregarAdicional('RECICLAJE', ordenSeleccionada.idOrden)
+              "
+            >
+              Agregar actividad reciclaje
+            </button>
+            <button
+            class="btn btn-success mr-5"
+            type="button"
+            (click)="
+              agregarAdicional('EDUCATIVA', ordenSeleccionada.idOrden)
+            "
+          >
+            Agregar actividad educativa
+          </button>
+          <button
+          *ngIf="adicionales && adicionales.length"
+          class="btn btn-danger mr-5"
+          type="button"
+          (click)="resetPreguntasAdicionales()"
+        >
+          Eliminar preguntas adicionales
+        </button>
+          </div>
         </fieldset>
         <div class="save-button">
           <button
             class="btn btn-default mr-5"
             type="submit"
-            [disabled]="!form.valid || (formAdicional && !formAdicional?.valid) || guardando"
+            [disabled]="
+              !form.valid ||
+              (formAdicional && !formAdicional?.valid) ||
+              guardando
+            "
           >
             Guardar
           </button>

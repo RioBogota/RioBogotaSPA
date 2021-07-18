@@ -341,6 +341,21 @@ export class EncuestaComponent extends Base implements OnInit {
       this.adicionales = adicionales;
       return;
     }
+    if (orden === 15 && boton === "AGREGAR_PTAR") {
+      let adicionales = this.adicionales.concat(
+        JSON.parse(JSON.stringify(this.questions)).filter((x) => {
+          if ([295,299,300,301,302,309].includes(x.key)) {
+            x.keyAdd = x.key;
+            x.key = x.key / Math.random();
+            return true;
+          }
+          return false;
+        })
+      );
+      this.formAdicional = this.ordenService.toFormGroup(adicionales);
+      this.adicionales = adicionales;
+      return;
+    }
     if (orden === 16 && boton === "CONTROL") {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {

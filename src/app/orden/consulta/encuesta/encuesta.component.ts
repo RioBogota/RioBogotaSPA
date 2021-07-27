@@ -314,7 +314,7 @@ export class EncuestaComponent extends Base implements OnInit {
     if (orden === 12 && boton === "ABASTECIMIENTO") {
       let adicionales = this.adicionales.concat(
         JSON.parse(JSON.stringify(this.questions)).filter((x) => {
-          if ([228].includes(x.key)) {
+          if ([228, 229].includes(x.key)) {
             x.keyAdd = x.key;
             x.key = x.key / Math.random();
             return true;

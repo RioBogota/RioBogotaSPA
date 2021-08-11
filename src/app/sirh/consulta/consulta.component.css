@@ -1,0 +1,16 @@
+p {
+  cursor: pointer;
+  text-decoration: underline;
+  color: maroon;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+pre {
+  border: 1px solid lightgray;
+  margin-left: 1rem;
+  width: 50rem;
+}

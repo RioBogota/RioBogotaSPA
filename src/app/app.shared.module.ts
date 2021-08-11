@@ -1,3 +1,4 @@
+import { SirhModule } from './modulos/sirh/sirh.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -37,8 +38,8 @@ import { OrdenModule } from './modulos/orden/orden/orden.module';
 
 @NgModule({
     declarations: [
-        
-        AppComponent,        
+
+        AppComponent,
         FooterComponent,
         HeaderComponent,
         NavMenuComponent,
@@ -53,12 +54,13 @@ import { OrdenModule } from './modulos/orden/orden/orden.module';
         HttpClientModule,
         FormsModule,
         SeguridadModule,
+        SirhModule,
         PrincipalModule,
         SaeModule,
         MatSidenavModule,
         MatListModule,
         MatIconModule,
-        MatPaginatorModule,    
+        MatPaginatorModule,
         MatFormFieldModule,
         MatProgressSpinnerModule,
         MatInputModule,

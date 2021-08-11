@@ -1,0 +1,18 @@
+<mat-spinner *ngIf="cargando"></mat-spinner>
+<div class="content">
+  <div>
+    <p *ngFor="let endpoint of endpoints">
+      <a (click)="invocar(endpoint)">{{ endpoint.identifier }}</a>
+    </p>
+  </div>
+  <div>
+    <code *ngIf="result">
+      <pre>
+        {{result | json}}
+      </pre>
+    </code>
+  </div>
+</div>
+<mat-spinner *ngIf="cargando"></mat-spinner>
+
+

@@ -19,7 +19,7 @@ export class FinancieroComponent extends Base implements OnInit {
 
   ngOnInit() {
     this.unsubscribeOndestroy(this.securityService.getEntities().subscribe(result => {
-      this.entidades = result;
+      this.entidades = result.filter(ent => ent.idEntidad !== 8);
     },
       error => {
         console.error(error)

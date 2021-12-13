@@ -56,6 +56,17 @@ export class OrdenService {
     return this.http.get(this.baseUrl + uri);
   }
 
+
+  getPreguntasMultiples(idOrden: number) {
+    const uri = `/api/Orden/preguntas/multiples/${idOrden}`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
+  getRespuestasGrafica(idPregunta: number) {
+    const uri = `/api/Orden/respuestas/grafica/${idPregunta}`;
+    return this.http.get(this.baseUrl + uri);
+  }
+
   toFormGroup(questions: QuestionBase<any>[]) {
     const group: any = {};
     questions.forEach((question) => {

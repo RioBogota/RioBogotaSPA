@@ -10,10 +10,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GraficoComponent } from '../../../orden/consulta/grafico/grafico.component';
 
 
 @NgModule({
-  declarations: [EncuestaComponent, PreguntaComponent, ConsultaComponent],
+  declarations: [EncuestaComponent, PreguntaComponent, ConsultaComponent, GraficoComponent],
   imports: [
     RouterModule,
     ReactiveFormsModule,
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxChartsModule,
     RouterModule.forChild([
       { path: 'orden/formulario', component: EncuestaComponent },
-      { path: 'orden/respuestas', component: ConsultaComponent }
+      { path: 'orden/respuestas', component: ConsultaComponent },
+      { path: 'orden/grafico', component: GraficoComponent }
     ])
   ]
 })

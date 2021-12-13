@@ -1,0 +1,51 @@
+<div style="height: 13rem;" *ngIf="acceso">
+  <span style="margin-right: 2rem">
+    <mat-form-field>
+      <mat-select placeholder="seleccione una orden" (selectionChange)="consultarPreguntas()" [(ngModel)]="selectedOrden">
+        <mat-option *ngFor="let orden of ordenes" [value]="orden.idOrden">
+          {{ orden.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+  <div>
+    <mat-form-field style="width: 100%;" *ngIf="preguntas && preguntas.length">
+      <mat-select placeholder="seleccione una pregunta" [(ngModel)]="selectedPregunta">
+        <mat-option *ngFor="let pregunta of preguntas" [value]="pregunta.idPregunta">
+          {{ pregunta.descripcion }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button
+    (click)="consultar()"
+    [disabled]="!preguntas || !preguntas.length"
+    style="margin-left: 1rem"
+    class="btn btn-default"
+  >
+    Consultar
+  </button>
+  </div>
+  <div>
+    <mat-spinner *ngIf="cargando"></mat-spinner>
+  </div>
+  <div>
+  </div>
+</div>
+<div style="height: 29rem;" *ngIf="showGrafica">
+  <ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="datos"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical>
+</div>

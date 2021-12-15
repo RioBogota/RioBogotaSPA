@@ -1,0 +1,7 @@
+.grafic-container
+{
+    height: 33rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #2F849E;
+}

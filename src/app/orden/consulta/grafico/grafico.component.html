@@ -1,9 +1,19 @@
-<div style="height: 13rem;" *ngIf="acceso">
+<div style="height: 17rem;" *ngIf="acceso">
   <span style="margin-right: 2rem">
     <mat-form-field>
       <mat-select placeholder="seleccione una orden" (selectionChange)="consultarPreguntas()" [(ngModel)]="selectedOrden">
         <mat-option *ngFor="let orden of ordenes" [value]="orden.idOrden">
           {{ orden.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="seleccione un tipo de grafica" [(ngModel)]="selectedGrafica">
+        <mat-option [value]="1">
+          Grafica de barras
+        </mat-option>
+        <mat-option [value]="2">
+          Grafica de pastel
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -24,7 +34,7 @@
     style="margin-left: 1rem"
     class="btn btn-default"
   >
-    Consultar
+    Ver grafica
   </button>
   </div>
   <div>
@@ -33,10 +43,10 @@
   <div>
   </div>
 </div>
-<div style="height: 29rem;" *ngIf="showGrafica">
+<div class="grafic-container" *ngIf="showGrafica">
   <ngx-charts-bar-vertical
+  *ngIf="selectedGrafica == 1"
   [view]="view"
-  [scheme]="colorScheme"
   [results]="datos"
   [gradient]="gradient"
   [xAxis]="showXAxis"
@@ -48,4 +58,18 @@
   [yAxisLabel]="yAxisLabel"
   (select)="onSelect($event)">
 </ngx-charts-bar-vertical>
+<ngx-charts-pie-chart
+*ngIf="selectedGrafica == 2"
+  [view]="view"
+  [results]="datos"
+  [gradient]="gradient"
+  [legend]="showLegend"
+  [legendPosition]="legendPosition"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  >
+</ngx-charts-pie-chart>
 </div>

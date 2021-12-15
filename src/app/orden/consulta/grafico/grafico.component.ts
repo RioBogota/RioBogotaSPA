@@ -24,9 +24,9 @@ export class GraficoComponent extends Base implements OnInit {
   showYAxisLabel = false;
   yAxisLabel = "Population";
 
-  colorScheme = {
-    domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"],
-  };
+  isDoughnut: boolean = false;
+  legendPosition: string = 'below';
+
 
   acceso: boolean;
   ordenes = [];
@@ -34,6 +34,7 @@ export class GraficoComponent extends Base implements OnInit {
   usuario: any;
   selectedOrden: number;
   selectedPregunta: number;
+  selectedGrafica: number;
   cargando = false;
   showGrafica = false;
   datos: any;
@@ -55,6 +56,7 @@ export class GraficoComponent extends Base implements OnInit {
       this.acceso = false;
       return;
     }
+    this.selectedGrafica = 1;
     this.unsubscribeOndestroy(
       this.ordenService.isValidUser(this.usuario.usuario1).subscribe(
         (data) => {
@@ -89,14 +91,21 @@ export class GraficoComponent extends Base implements OnInit {
     console.log(event);
   }
 
+  onActivate(data): void {
+    console.log("Activate", JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log("Deactivate", JSON.parse(JSON.stringify(data)));
+  }
+
   consultar() {
     this.showGrafica = false;
     this.cargando = true;
     this.unsubscribeOndestroy(
       this.ordenService
         .getRespuestasGrafica(this.selectedPregunta)
-        .subscribe((data) =>
-        {
+        .subscribe((data) => {
           this.cargando = false;
           this.datos = data;
           this.showGrafica = true;

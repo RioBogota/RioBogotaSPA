@@ -25,8 +25,7 @@ export class GraficoComponent extends Base implements OnInit {
   yAxisLabel = "Population";
 
   isDoughnut: boolean = false;
-  legendPosition: string = 'below';
-
+  legendPosition: string = "below";
 
   acceso: boolean;
   ordenes = [];
@@ -46,6 +45,7 @@ export class GraficoComponent extends Base implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargando = true;
     this.usuario = sessionStorage.usuario
       ? JSON.parse(sessionStorage.usuario)
       : undefined;
@@ -61,6 +61,7 @@ export class GraficoComponent extends Base implements OnInit {
       this.ordenService.isValidUser(this.usuario.usuario1).subscribe(
         (data) => {
           this.acceso = data > 0;
+          this.cargando = false;
           if (!this.acceso) {
             this.appService.error(
               "No tiene permisos para ingresar a la pantalla, consulte al adminstrador"
@@ -78,7 +79,10 @@ export class GraficoComponent extends Base implements OnInit {
 
     this.unsubscribeOndestroy(
       this.ordenService.getOrdenes().subscribe(
-        (res) => (this.ordenes = res),
+        (res) => {
+          this.cargando = false;
+          this.ordenes = res;
+        },
         (err) =>
           this.appService.error(
             "No se pueden obtener las ordenes, intente nuevamente mas tarde"

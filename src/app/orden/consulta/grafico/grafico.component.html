@@ -1,4 +1,7 @@
-<div style="height: 17rem;" *ngIf="acceso">
+<div class="center">
+  <mat-spinner *ngIf="cargando"></mat-spinner>
+</div>
+<div style="height: 13rem;" *ngIf="acceso">
   <span style="margin-right: 2rem">
     <mat-form-field>
       <mat-select placeholder="seleccione una orden" (selectionChange)="consultarPreguntas()" [(ngModel)]="selectedOrden">
@@ -36,9 +39,6 @@
   >
     Ver grafica
   </button>
-  </div>
-  <div>
-    <mat-spinner *ngIf="cargando"></mat-spinner>
   </div>
   <div>
   </div>
